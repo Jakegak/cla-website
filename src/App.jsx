@@ -8,21 +8,28 @@ import Footer from "./components/Footer";
 import ApplicationModal from "./components/ApplicationModal";
 
 export default function App() {
-  // Add state to track if the modal is open
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <main className="min-h-screen bg-slate-900 font-sans selection:bg-blue-500/30">
-      {/* Pass the function to open the modal down to the Navbar */}
       <Navbar onOpenModal={() => setIsModalOpen(true)} />
 
-      <HeroSection />
-      <AboutUs />
-      <ActivitiesGallery />
-      <AdmissionsAndFees />
-      <Footer />
+      <section id="home">
+        <HeroSection />
+      </section>
+      <section id="about">
+        <AboutUs />
+      </section>
+      <section id="gallery">
+        <ActivitiesGallery />
+      </section>
+      <section id="admissions">
+        <AdmissionsAndFees />
+      </section>
+      <section id="contact">
+        <Footer />
+      </section>
 
-      {/* Place the Modal outside the normal flow */}
       <ApplicationModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
