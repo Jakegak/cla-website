@@ -31,3 +31,16 @@
 **PR:** #14 — https://github.com/Jakegak/cla-website/pull/14
 **Files changed:** `src/components/Navbar.jsx`, `src/App.jsx`
 **Notes:** Key decisions: (1) Kept the existing Logo.jsx SVG component instead of importing a non-existent cla-logo.jpg file. (2) Used 'Programs' (not 'Programmes') to match the existing section naming convention. (3) Maintained dark theme consistency (bg-slate-950/90 backdrop-blur on scroll) rather than switching to white background, since the entire site uses a dark slate-900 theme. (4) Preserved the onOpenModal prop interface exactly as App.jsx passes it. (5) Used useScroll + useMotionValueEvent from framer-motion (already installed v12.35.0) instead of raw scroll event listeners. (6) Added wrapper <section> elements with IDs in App.jsx for smooth scroll targets since the child components may not have IDs themselves. (7) Added #programs link even though no standalone Programmes component exists — it can be added later; for now only sections that exist have wrapper IDs. (8) The hamburger icon uses three animated spans that morph into an X on open using Framer Motion. (9) Mobile menu uses AnimatePresence with height animation for smooth open/close. (10) No new npm packages added — framer-motion was already in dependencies. (11) App.css and index.html unchanged as no modifications were needed.
+
+## Issue #3 — feat(hero): full-width hero with school identity, tagline, and CTAs [IN PROGRESS]
+**Started:** 2026-05-09T20:33:48.227068+00:00
+**Branch:** `feat/full-width-hero-section`
+
+
+## Issue #3 — feat(hero): full-width hero with school identity, tagline, and CTAs
+**Date:** 2026-05-09 20:35 UTC
+**Status:** SUCCESS
+**Branch:** `feat/full-width-hero-section`
+**PR:** #16 — https://github.com/Jakegak/cla-website/pull/16
+**Files changed:** `src/App.css`, `src/components/HeroSection.jsx`, `src/App.jsx`
+**Notes:** Key decisions: (1) Removed max-width:1280px and padding:2rem from #root in App.css — these were Vite boilerplate constraints that prevented the hero (and other sections) from being full-width. The site layout relies on individual section components managing their own max-width containers. (2) Used Tailwind v4 @theme token-derived utility classes (bg-cla-purple, from-cla-purple, to-cla-red, text-cla-gold) as confirmed by the @theme --color-* naming convention. (3) The .hero-pattern CSS class uses an inline SVG data URI with a subtle repeating cross pattern at very low opacity (0.08) — kept minimal to avoid CSS bloat. (4) Framer Motion stagger animation uses containerVariants/childVariants pattern with staggerChildren:0.2 which is fully supported in framer-motion v12. (5) Two decorative SVG elements (cross motif and graduation cap) are positioned absolutely with pointer-events-none and opacity-10, hidden on screens smaller than sm breakpoint to avoid layout issues on mobile. (6) The Learn More button uses scrollIntoView({ behavior: 'smooth' }) consistent with the existing Navbar pattern — no offset compensation added to maintain consistency. (7) No new npm packages added — framer-motion was already a dependency. (8) The Navbar.jsx and index.html files did not require changes.

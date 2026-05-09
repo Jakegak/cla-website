@@ -1,95 +1,171 @@
 import { motion } from "framer-motion";
 
-export default function HeroSection() {
-  return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-slate-900">
-      {/* Background Image with Dark Glass Overlay */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=2622&auto=format&fit=crop"
-          alt="Students learning"
-          className="w-full h-full object-cover opacity-40"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-950/80 to-slate-900/95"></div>
-      </div>
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1,
+    },
+  },
+};
 
-      {/* Main Content Container */}
-      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto mt-16">
-        {/* Animated Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          <span className="inline-block py-1.5 px-4 rounded-full bg-blue-500/20 text-blue-200 border border-blue-400/30 text-sm md:text-base font-bold tracking-widest uppercase mb-6 backdrop-blur-md shadow-lg">
-            Admission In Progress {/*  */}
+const childVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
+};
+
+const floatVariants = {
+  initial: { y: 0 },
+  animate: {
+    y: [-12, 12, -12],
+    transition: {
+      duration: 6,
+      repeat: Infinity,
+      repeatType: "loop",
+      ease: "easeInOut",
+    },
+  },
+};
+
+function DecoativeCross() {
+  return (
+    <svg
+      width="120"
+      height="120"
+      viewBox="0 0 120 120"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <rect x="45" y="10" width="30" height="100" rx="4" fill="white" />
+      <rect x="10" y="45" width="100" height="30" rx="4" fill="white" />
+      <path
+        d="M60 5L65 15H55L60 5Z"
+        fill="white"
+      />
+    </svg>
+  );
+}
+
+function GraduationCap() {
+  return (
+    <svg
+      width="140"
+      height="100"
+      viewBox="0 0 140 100"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <polygon points="70,10 140,40 70,55 0,40" fill="white" />
+      <rect x="65" y="55" width="10" height="30" fill="white" />
+      <path
+        d="M30 45 L30 70 Q70 90 110 70 L110 45"
+        stroke="white"
+        strokeWidth="4"
+        fill="none"
+      />
+      <circle cx="130" cy="40" r="4" fill="white" />
+      <line x1="130" y1="44" x2="130" y2="75" stroke="white" strokeWidth="3" />
+      <rect x="125" y="75" width="10" height="6" rx="2" fill="white" />
+    </svg>
+  );
+}
+
+export default function HeroSection({ onOpenModal }) {
+  const handleLearnMore = () => {
+    const aboutSection = document.getElementById("about");
+    if (aboutSection) {
+      aboutSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  return (
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-cla-purple to-cla-red">
+      {/* Pattern overlay */}
+      <div className="hero-pattern absolute inset-0 z-0 pointer-events-none" />
+
+      {/* Decorative floating cross — top right */}
+      <motion.div
+        className="absolute top-20 right-8 sm:right-16 md:right-24 opacity-10 pointer-events-none hidden sm:block"
+        variants={floatVariants}
+        initial="initial"
+        animate="animate"
+      >
+        <DecoativeCross />
+      </motion.div>
+
+      {/* Decorative floating graduation cap — bottom left */}
+      <motion.div
+        className="absolute bottom-16 left-6 sm:left-16 md:left-24 opacity-10 pointer-events-none hidden sm:block"
+        variants={floatVariants}
+        initial="initial"
+        animate="animate"
+        style={{ animationDelay: "3s" }}
+      >
+        <GraduationCap />
+      </motion.div>
+
+      {/* Gradient edge fade at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-900 to-transparent z-0 pointer-events-none" />
+
+      {/* Main content */}
+      <motion.div
+        className="relative z-10 text-center px-6 max-w-5xl mx-auto"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {/* Animated badge */}
+        <motion.div variants={childVariants}>
+          <span className="inline-block py-1.5 px-5 rounded-full bg-white/10 text-white/80 border border-white/20 text-sm font-semibold tracking-widest uppercase mb-8 backdrop-blur-sm">
+            Admission In Progress
           </span>
         </motion.div>
 
-        {/* Animated Main Title */}
+        {/* School name */}
         <motion.h1
-          className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white mb-6 tracking-tight drop-shadow-lg"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold text-white mb-6 tracking-tight drop-shadow-lg"
+          variants={childVariants}
         >
-          Christian Living <br className="hidden md:block" />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
-            Academy {/*  */}
-          </span>
+          Christian Living Academy
         </motion.h1>
 
-        {/* Animated Subtitle */}
+        {/* Tagline */}
         <motion.p
-          className="text-xl md:text-2xl text-slate-300 mb-10 max-w-3xl mx-auto font-light leading-relaxed"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-cla-gold font-semibold mb-12 tracking-wide"
+          variants={childVariants}
         >
-          <strong className="text-white font-semibold">
-            The Brightest Future, Begins Here!
-          </strong>{" "}
-          {/*  */} <br />
-          Raising a God-fearing, Elite Generation. {/*  */}
+          Raising God Fearing Elite Generation
         </motion.p>
 
-        {/* Animated Buttons */}
+        {/* CTA buttons */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
+          variants={childVariants}
         >
-          {/* Changed button to 'a' tag and added href="#admissions" */}
-          <a
-            href="#admissions"
-            className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-full font-bold text-lg transition-all transform hover:scale-105 hover:shadow-[0_0_25px_rgba(59,130,246,0.6)] active:scale-95 flex items-center gap-2"
+          <button
+            type="button"
+            onClick={onOpenModal}
+            className="bg-cla-gold text-slate-900 font-bold px-8 py-3.5 rounded-lg text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer w-full sm:w-auto"
           >
-            Join Us Today
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2.5}
-                d="M14 5l7 7m0 0l-7 7m7-7H3"
-              />
-            </svg>
-          </a>
-
-          {/* Changed button to 'a' tag and added href="#programs" */}
-          <a
-            href="#programs"
-            className="px-8 py-4 bg-white/5 border border-white/20 hover:border-white/60 hover:bg-white/10 text-white rounded-full font-bold text-lg transition-all backdrop-blur-sm"
+            Apply Now
+          </button>
+          <button
+            type="button"
+            onClick={handleLearnMore}
+            className="border-2 border-white text-white font-bold px-8 py-3.5 rounded-lg text-lg hover:bg-white/10 hover:scale-105 transition-all duration-300 cursor-pointer w-full sm:w-auto"
           >
-            Explore Programs
-          </a>
+            Learn More
+          </button>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }
