@@ -20,6 +20,17 @@ export default function App() {
       <section id="about">
         <AboutUs />
       </section>
+      <section id="programmes">
+        <div className="py-16 px-4 text-center">
+          <h2 className="text-3xl font-heading font-bold text-white mb-4">
+            Our Programmes
+          </h2>
+          <p className="text-slate-300 max-w-2xl mx-auto">
+            Discover the range of academic and extracurricular programmes we
+            offer to nurture every child&apos;s potential.
+          </p>
+        </div>
+      </section>
       <section id="gallery">
         <ActivitiesGallery />
       </section>

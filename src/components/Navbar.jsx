@@ -1,14 +1,14 @@
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
-import Logo from "./Logo";
+import claLogo from "../assets/cla-logo.jpg";
 
 const NAV_LINKS = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
-  { label: "Programs", href: "#programs" },
+  { label: "Programmes", href: "#programmes" },
   { label: "Gallery", href: "#gallery" },
   { label: "Admissions", href: "#admissions" },
-  { label: "Contact", href: "#contact" }
+  { label: "Contact", href: "#contact" },
 ];
 
 export default function Navbar({ onOpenModal }) {
@@ -34,128 +34,134 @@ export default function Navbar({ onOpenModal }) {
     setMobileMenuOpen((prev) => !prev);
   }, []);
 
+  const headerClasses = isScrolled
+    ? "bg-white shadow-md py-3"
+    : "bg-transparent py-5";
+
+  const textColor = isScrolled ? "text-gray-800" : "text-white";
+  const linkColor = isScrolled
+    ? "text-gray-700 hover:text-cla-purple"
+    : "text-white hover:text-cyan-400";
+  const hamburgerBarColor = isScrolled ? "bg-gray-800" : "bg-white";
+
   return (
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-slate-950/90 backdrop-blur-md shadow-lg py-3 border-b border-slate-800/50"
-          : "bg-transparent py-5"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${headerClasses}`}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 flex justify-between items-center">
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Logo and School Name */}
         <a
           href="#home"
           onClick={(e) => handleNavClick(e, "#home")}
-          className="flex items-center gap-3 group"
+          className="flex items-center gap-3 shrink-0"
         >
-          <Logo
-            className="w-10 h-10 transition-transform group-hover:scale-110 drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]"
+          <img
+            src={claLogo}
+            alt="CLA Logo"
+            className="h-10 w-auto rounded"
+            width={40}
+            height={40}
           />
-          <span className="text-lg sm:text-xl font-extrabold text-white tracking-tight">
-            Christian Living{" "}
-            <span className="text-blue-400">Academy</span>
+          <span
+            className={`font-heading text-lg sm:text-xl font-bold transition-colors duration-200 ${textColor}`}
+          >
+            Christian Living Academy
           </span>
         </a>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-6">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className="text-slate-300 hover:text-cyan-400 transition-colors duration-200 text-sm font-medium"
+              className={`text-sm font-medium transition-colors duration-200 ${linkColor}`}
             >
               {link.label}
             </a>
           ))}
           <button
             onClick={onOpenModal}
-            className="ml-2 px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold rounded-lg transition-colors duration-200 shadow-md hover:shadow-blue-500/25"
+            className="bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold px-5 py-2 rounded-lg transition-colors duration-200"
           >
             Apply Now
           </button>
-        </nav>
+        </div>
 
         {/* Mobile Hamburger Button */}
         <button
           onClick={toggleMobileMenu}
           className="md:hidden relative w-8 h-8 flex flex-col items-center justify-center gap-1.5"
-          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+          aria-label="Toggle mobile menu"
           aria-expanded={mobileMenuOpen}
         >
           <motion.span
             animate={
               mobileMenuOpen
-                ? { rotate: 45, y: 6, backgroundColor: "#22d3ee" }
-                : { rotate: 0, y: 0, backgroundColor: "#e2e8f0" }
+                ? { rotate: 45, y: 6, width: 24 }
+                : { rotate: 0, y: 0, width: 24 }
             }
-            transition={{ duration: 0.25 }}
-            className="block w-6 h-0.5 rounded-full"
+            transition={{ duration: 0.3 }}
+            className={`block h-0.5 rounded-full transition-colors duration-200 ${hamburgerBarColor}`}
+            style={{ width: 24 }}
+          />
+          <motion.span
+            animate={
+              mobileMenuOpen ? { opacity: 0, width: 0 } : { opacity: 1, width: 24 }
+            }
+            transition={{ duration: 0.3 }}
+            className={`block h-0.5 rounded-full transition-colors duration-200 ${hamburgerBarColor}`}
+            style={{ width: 24 }}
           />
           <motion.span
             animate={
               mobileMenuOpen
-                ? { opacity: 0, scaleX: 0 }
-                : { opacity: 1, scaleX: 1 }
+                ? { rotate: -45, y: -6, width: 24 }
+                : { rotate: 0, y: 0, width: 24 }
             }
-            transition={{ duration: 0.2 }}
-            className="block w-6 h-0.5 rounded-full bg-slate-200"
-          />
-          <motion.span
-            animate={
-              mobileMenuOpen
-                ? { rotate: -45, y: -6, backgroundColor: "#22d3ee" }
-                : { rotate: 0, y: 0, backgroundColor: "#e2e8f0" }
-            }
-            transition={{ duration: 0.25 }}
-            className="block w-6 h-0.5 rounded-full"
+            transition={{ duration: 0.3 }}
+            className={`block h-0.5 rounded-full transition-colors duration-200 ${hamburgerBarColor}`}
+            style={{ width: 24 }}
           />
         </button>
-      </div>
+      </nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Dropdown */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.nav
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="md:hidden overflow-hidden bg-slate-950/95 backdrop-blur-md border-t border-slate-800/50"
+            className="md:hidden overflow-hidden bg-white shadow-lg"
           >
-            <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-1">
-              {NAV_LINKS.map((link, index) => (
-                <motion.a
+            <div className="px-4 py-4 flex flex-col gap-3">
+              {NAV_LINKS.map((link) => (
+                <a
                   key={link.href}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05, duration: 0.2 }}
-                  className="text-slate-300 hover:text-cyan-400 transition-colors duration-200 text-base font-medium py-3 px-2 rounded-lg hover:bg-slate-800/50"
+                  className="text-gray-700 hover:text-cla-purple text-base font-medium transition-colors duration-200 py-2"
                 >
                   {link.label}
-                </motion.a>
+                </a>
               ))}
-              <motion.button
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: NAV_LINKS.length * 0.05, duration: 0.2 }}
+              <button
                 onClick={() => {
                   setMobileMenuOpen(false);
                   onOpenModal();
                 }}
-                className="mt-2 w-full px-5 py-3 bg-blue-600 hover:bg-blue-500 text-white text-base font-semibold rounded-lg transition-colors duration-200 shadow-md"
+                className="bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors duration-200 mt-2"
               >
                 Apply Now
-              </motion.button>
+              </button>
             </div>
-          </motion.nav>
+          </motion.div>
         )}
       </AnimatePresence>
     </motion.header>

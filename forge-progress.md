@@ -31,3 +31,8 @@
 **PR:** #14 — https://github.com/Jakegak/cla-website/pull/14
 **Files changed:** `src/components/Navbar.jsx`, `src/App.jsx`
 **Notes:** Key decisions: (1) Kept the existing Logo.jsx SVG component instead of importing a non-existent cla-logo.jpg file. (2) Used 'Programs' (not 'Programmes') to match the existing section naming convention. (3) Maintained dark theme consistency (bg-slate-950/90 backdrop-blur on scroll) rather than switching to white background, since the entire site uses a dark slate-900 theme. (4) Preserved the onOpenModal prop interface exactly as App.jsx passes it. (5) Used useScroll + useMotionValueEvent from framer-motion (already installed v12.35.0) instead of raw scroll event listeners. (6) Added wrapper <section> elements with IDs in App.jsx for smooth scroll targets since the child components may not have IDs themselves. (7) Added #programs link even though no standalone Programmes component exists — it can be added later; for now only sections that exist have wrapper IDs. (8) The hamburger icon uses three animated spans that morph into an X on open using Framer Motion. (9) Mobile menu uses AnimatePresence with height animation for smooth open/close. (10) No new npm packages added — framer-motion was already in dependencies. (11) App.css and index.html unchanged as no modifications were needed.
+
+## Issue #2 — feat(navbar): sticky navigation with CLA logo, links, and mobile menu [IN PROGRESS]
+**Started:** 2026-05-09T20:21:15.390757+00:00
+**Branch:** `feat/navbar-cla-logo-and-refinements`
+
