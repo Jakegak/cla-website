@@ -36,3 +36,11 @@
 **Started:** 2026-05-09T20:21:15.390757+00:00
 **Branch:** `feat/navbar-cla-logo-and-refinements`
 
+
+## Issue #2 — feat(navbar): sticky navigation with CLA logo, links, and mobile menu
+**Date:** 2026-05-09 20:23 UTC
+**Status:** SUCCESS
+**Branch:** `feat/navbar-cla-logo-and-refinements`
+**PR:** #15 — https://github.com/Jakegak/cla-website/pull/15
+**Files changed:** `src/components/Navbar.jsx`, `src/App.jsx`, `src/App.css`, `src/components/Logo.jsx`
+**Notes:** Key decisions: (1) Replaced SVG Logo import with <img> tag using Vite asset import for cla-logo.jpg — this assumes the file exists at src/assets/cla-logo.jpg. (2) Scroll state now toggles between transparent bg with white text and white bg with dark text + shadow. (3) Mobile dropdown menu always uses white background for readability regardless of scroll state. (4) Added a placeholder #programmes section in App.jsx between #about and #gallery since no Programmes component exists yet. (5) The hamburger bar colors dynamically change based on isScrolled state. (6) Logo.jsx is left untouched but no longer imported in Navbar. (7) App.css is unchanged — all needed design tokens already exist. (8) No new npm packages were added. (9) The `npx tsc --noEmit` command was omitted from test_commands since this is a plain JSX project without TypeScript configuration.
