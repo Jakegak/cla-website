@@ -15,7 +15,7 @@ export default function App() {
       <Navbar onOpenModal={() => setIsModalOpen(true)} />
 
       <section id="home">
-        <HeroSection />
+        <HeroSection onOpenModal={() => setIsModalOpen(true)} />
       </section>
       <section id="about">
         <AboutUs />
