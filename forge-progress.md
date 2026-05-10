@@ -429,3 +429,16 @@
 **PR:** #79 — https://github.com/Jakegak/cla-website/pull/79
 **Files changed:** `src/index.css`, `src/components/HeroSection.jsx`
 **Notes:** Key decisions: (1) No new npm packages needed — framer-motion and all fonts already available. (2) CountUpValue uses requestAnimationFrame with cubic ease-out for smooth counting animation, with proper cleanup on unmount. (3) The cross pattern SVG is a minimal inline data URI using simple cross lines at 40px intervals. (4) Stats bar uses grid-cols-2 on mobile, grid-cols-4 on md+ for responsive layout. (5) Kept the bottom fade gradient (from-slate-900) to blend smoothly into the App's bg-slate-900 background. (6) The Explore School button scrolls to #about section matching the old handleLearnMoreClick behavior. (7) Scroll indicator is keyboard-accessible with role=button and onKeyDown handler. (8) Used inline styles for brand-specific values (colors, font families, clamp sizes) rather than Tailwind arbitrary values to keep things explicit and maintainable. (9) App.css and App.jsx are NOT modified as instructed — they are already correct. (10) package.json is NOT modified — all dependencies are already present.
+
+## Issue #80 — fix(navbar): restore full school name, Apply Now button, and glass morphism on scroll [IN PROGRESS]
+**Started:** 2026-05-10T13:24:17.555390+00:00
+**Branch:** `fix/navbar-full-name-apply-glassmorphism`
+
+
+## Issue #80 — fix(navbar): restore full school name, Apply Now button, and glass morphism on scroll
+**Date:** 2026-05-10 13:26 UTC
+**Status:** SUCCESS
+**Branch:** `fix/navbar-full-name-apply-glassmorphism`
+**PR:** #81 — https://github.com/Jakegak/cla-website/pull/81
+**Files changed:** `src/components/Navbar.jsx`, `src/index.css`
+**Notes:** Key decisions: (1) Used inline styles for glass morphism properties (backdrop-filter, rgba backgrounds, box-shadow) and brand colors (#FFB800, #2D1B69) to avoid Tailwind arbitrary values per project rules. (2) Kept useScroll/useMotionValueEvent pattern from framer-motion instead of window.addEventListener for scroll detection. (3) Added .nav-link-gold class in index.css with ::after pseudo-element for the gold underline hover effect since pseudo-elements can't be done inline. (4) Mobile overlay uses position:fixed with inset:0 so it won't be clipped by the header's overflow-x-hidden. (5) Hamburger bars animate to X using framer-motion rotate/translate/opacity — top bar rotates 45deg and translates down 8px, bottom bar rotates -45deg and translates up 8px, middle bar fades out. (6) School name 'Christian Living Academy' is hidden on very small screens (hidden sm:inline) to prevent text overflow but visible on sm+ screens. (7) No new npm packages added. (8) Logo.jsx and App.jsx and package.json are unchanged — only Navbar.jsx and index.css were modified. (9) Playfair Display font was already imported in index.css — no changes needed there. (10) The hamburger button color switches to white when mobile menu is open (over the #2D1B69 overlay) for visibility.

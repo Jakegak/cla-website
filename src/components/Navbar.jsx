@@ -34,124 +34,174 @@ export default function Navbar({ onOpenModal }) {
     setMobileMenuOpen((prev) => !prev);
   }, []);
 
-  const headerBg = isScrolled
-    ? "bg-white shadow-md"
-    : "bg-transparent";
+  const headerStyle = isScrolled
+    ? {
+        backgroundColor: "rgba(255, 255, 255, 0.9)",
+        backdropFilter: "blur(20px)",
+        WebkitBackdropFilter: "blur(20px)",
+        boxShadow: "0 2px 20px rgba(0, 0, 0, 0.1)",
+        transition: "all 300ms ease",
+      }
+    : {
+        backgroundColor: "transparent",
+        backdropFilter: "none",
+        WebkitBackdropFilter: "none",
+        boxShadow: "none",
+        transition: "all 300ms ease",
+      };
 
-  const textColor = isScrolled ? "text-gray-800" : "text-white";
-  const linkColor = isScrolled
-    ? "text-gray-700 hover:text-cla-purple"
-    : "text-white hover:text-cyan-400";
-  const hamburgerBarColor = isScrolled ? "bg-gray-800" : "bg-white";
+  const textColor = isScrolled ? "#2D1B69" : "#ffffff";
+  const hamburgerBarBg = isScrolled ? "#2D1B69" : "#ffffff";
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 max-w-full overflow-x-hidden transition-all duration-300 ${headerBg}`}
+      className="fixed top-0 left-0 right-0 z-50 h-20 max-w-full overflow-x-hidden"
+      style={headerStyle}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <a
-            href="#home"
-            onClick={(e) => handleNavClick(e, "#home")}
-            className="flex items-center gap-3 flex-shrink-0 min-w-0"
+      <nav className="mx-auto flex h-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        {/* Logo and School Name */}
+        <a
+          href="#home"
+          onClick={(e) => handleNavClick(e, "#home")}
+          className="flex items-center gap-3"
+        >
+          <img
+            src={claLogo}
+            alt="Christian Living Academy Logo"
+            className="h-11 w-11 rounded-full object-cover"
+            style={{ border: "2px solid #FFB800" }}
+          />
+          <span
+            className="text-xl font-bold hidden sm:inline"
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              color: textColor,
+              transition: "color 300ms ease",
+            }}
           >
-            <img
-              src={claLogo}
-              alt="CLA Logo"
-              className="h-12 w-12 rounded-full object-cover"
-            />
-            <span
-              className={`text-xl font-bold whitespace-nowrap ${textColor}`}
-            >
-              CLA
-            </span>
-          </a>
+            Christian Living Academy
+          </span>
+        </a>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8 min-w-0">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className={`text-sm font-medium whitespace-nowrap transition-colors duration-200 ${linkColor}`}
-              >
-                {link.label}
-              </a>
-            ))}
-            <button
-              onClick={onOpenModal}
-              className="bg-cla-red text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-red-700 transition-colors duration-200 whitespace-nowrap flex-shrink-0"
+        {/* Desktop Navigation */}
+        <div className="hidden items-center gap-8 md:flex">
+          {NAV_LINKS.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={(e) => handleNavClick(e, link.href)}
+              className="nav-link-gold text-sm font-medium"
+              style={{
+                color: textColor,
+                transition: "color 300ms ease",
+              }}
             >
-              Apply Now
-            </button>
-          </nav>
-
-          {/* Hamburger Button */}
+              {link.label}
+            </a>
+          ))}
           <button
-            onClick={toggleMobileMenu}
-            className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 flex-shrink-0"
-            aria-label="Toggle mobile menu"
-            aria-expanded={mobileMenuOpen}
+            onClick={onOpenModal}
+            className="font-bold"
+            style={{
+              backgroundColor: "#FFB800",
+              color: "#2D1B69",
+              borderRadius: "9999px",
+              padding: "0.625rem 1.5rem",
+              transition: "filter 200ms ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.filter = "brightness(0.9)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.filter = "brightness(1)";
+            }}
           >
-            <motion.span
-              animate={
-                mobileMenuOpen
-                  ? { rotate: 45, y: 6 }
-                  : { rotate: 0, y: 0 }
-              }
-              className={`block w-6 h-0.5 ${hamburgerBarColor} transition-colors`}
-            />
-            <motion.span
-              animate={
-                mobileMenuOpen ? { opacity: 0 } : { opacity: 1 }
-              }
-              className={`block w-6 h-0.5 ${hamburgerBarColor} transition-colors`}
-            />
-            <motion.span
-              animate={
-                mobileMenuOpen
-                  ? { rotate: -45, y: -6 }
-                  : { rotate: 0, y: 0 }
-              }
-              className={`block w-6 h-0.5 ${hamburgerBarColor} transition-colors`}
-            />
+            Apply Now
           </button>
         </div>
-      </div>
 
-      {/* Mobile Menu */}
+        {/* Mobile Hamburger Button */}
+        <button
+          onClick={toggleMobileMenu}
+          className="relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
+          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileMenuOpen}
+        >
+          <motion.span
+            className="block h-0.5 w-6 rounded-full"
+            style={{ backgroundColor: mobileMenuOpen ? "#ffffff" : hamburgerBarBg }}
+            animate={
+              mobileMenuOpen
+                ? { rotate: 45, y: 8, transition: { duration: 0.3 } }
+                : { rotate: 0, y: 0, transition: { duration: 0.3 } }
+            }
+          />
+          <motion.span
+            className="block h-0.5 w-6 rounded-full"
+            style={{ backgroundColor: mobileMenuOpen ? "#ffffff" : hamburgerBarBg }}
+            animate={
+              mobileMenuOpen
+                ? { opacity: 0, transition: { duration: 0.2 } }
+                : { opacity: 1, transition: { duration: 0.2 } }
+            }
+          />
+          <motion.span
+            className="block h-0.5 w-6 rounded-full"
+            style={{ backgroundColor: mobileMenuOpen ? "#ffffff" : hamburgerBarBg }}
+            animate={
+              mobileMenuOpen
+                ? { rotate: -45, y: -8, transition: { duration: 0.3 } }
+                : { rotate: 0, y: 0, transition: { duration: 0.3 } }
+            }
+          />
+        </button>
+      </nav>
+
+      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden overflow-hidden bg-white shadow-lg"
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8"
+            style={{ backgroundColor: "#2D1B69" }}
           >
-            <nav className="flex flex-col px-4 py-4 gap-3">
-              {NAV_LINKS.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  className="text-gray-700 hover:text-cla-purple font-medium py-2 transition-colors duration-200"
-                >
-                  {link.label}
-                </a>
-              ))}
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenModal();
-                }}
-                className="w-full bg-cla-red text-white py-3 rounded-full font-semibold hover:bg-red-700 transition-colors duration-200 mt-2"
+            {NAV_LINKS.map((link, index) => (
+              <motion.a
+                key={link.href}
+                href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.07, duration: 0.3 }}
+                className="text-2xl font-semibold text-white nav-link-gold"
               >
-                Apply Now
-              </button>
-            </nav>
+                {link.label}
+              </motion.a>
+            ))}
+            <motion.button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                if (onOpenModal) {
+                  onOpenModal();
+                }
+              }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: NAV_LINKS.length * 0.07, duration: 0.3 }}
+              className="font-bold"
+              style={{
+                backgroundColor: "#FFB800",
+                color: "#2D1B69",
+                borderRadius: "9999px",
+                padding: "0.625rem 1.5rem",
+                fontSize: "1.125rem",
+              }}
+            >
+              Apply Now
+            </motion.button>
           </motion.div>
         )}
       </AnimatePresence>
