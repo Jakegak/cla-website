@@ -75,3 +75,11 @@
 **Started:** 2026-05-10T02:17:23.643769+00:00
 **Branch:** `feat/activities-gallery-filter-lightbox`
 
+
+## Issue #6 — feat(gallery): activities photo gallery with category filter
+**Date:** 2026-05-10 02:19 UTC
+**Status:** SUCCESS
+**Branch:** `feat/activities-gallery-filter-lightbox`
+**PR:** #19 — https://github.com/Jakegak/cla-website/pull/19
+**Files changed:** `src/components/ActivitiesGallery.jsx`, `src/App.jsx`
+**Notes:** Key decisions: (1) No new npm packages needed — framer-motion 12.35.0 already installed. (2) Used CSS columns (columns-1/sm:columns-2/lg:columns-3) for masonry layout instead of an external library. (3) Lightbox prev/next navigates only within the filtered array, and the lightbox index is reset when changing categories. (4) Added safety check: if lightboxIndex exceeds filteredImages.length after a filter change, it resets. (5) Used useCallback for lightbox handlers to avoid stale closures in the keyboard event useEffect. (6) Body scroll lock via document.body.style.overflow managed in useEffect with proper cleanup. (7) All SVG icons for close/prev/next are inline — no icon library needed. (8) This is JSX (not TSX) per the existing codebase — no TypeScript annotations used. (9) Theme tokens used: bg-cla-purple for active tab, bg-cla-gold for heading underline, font-heading class on h2. (10) The component owns its own <section id='gallery'> — App.jsx wrapper removed.
