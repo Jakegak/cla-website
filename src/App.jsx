@@ -4,6 +4,7 @@ import HeroSection from "./components/HeroSection";
 import AboutUs from "./components/AboutUs";
 import Programmes from "./components/Programmes";
 import ActivitiesGallery from "./components/ActivitiesGallery";
+import Testimonials from "./components/Testimonials";
 import AdmissionsAndFees from "./components/AdmissionsAndFees";
 import Footer from "./components/Footer";
 import ApplicationModal from "./components/ApplicationModal";
@@ -25,6 +26,8 @@ export default function App() {
       <Programmes />
 
       <ActivitiesGallery />
+
+      <Testimonials />
 
       <section id="admissions">
         <AdmissionsAndFees />
