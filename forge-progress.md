@@ -96,3 +96,16 @@
 **PR:** #20 — https://github.com/Jakegak/cla-website/pull/20
 **Files changed:** `src/components/Testimonials.jsx`, `src/App.jsx`
 **Notes:** No new npm packages added — framer-motion ^12.35.0 already in dependencies. The carousel uses a ref-based pause mechanism (isPausedRef) to avoid race conditions when clearing/restarting intervals on hover. The interval callback checks the ref each tick rather than being destroyed and recreated. A fixed min-h-64 container prevents layout shift when cards transition. Navigation dot clicks also restart the interval to avoid immediate auto-advance after manual selection. The component follows established codebase patterns: default function export, variants defined outside component, AnimatePresence mode='wait', Tailwind theme token classes only.
+
+## Issue #8 — feat(admissions): admissions process and fee structure [IN PROGRESS]
+**Started:** 2026-05-10T03:01:07.606124+00:00
+**Branch:** `feat/admissions-stepper-fee-table`
+
+
+## Issue #8 — feat(admissions): admissions process and fee structure
+**Date:** 2026-05-10 03:03 UTC
+**Status:** SUCCESS
+**Branch:** `feat/admissions-stepper-fee-table`
+**PR:** #21 — https://github.com/Jakegak/cla-website/pull/21
+**Files changed:** `src/components/AdmissionsAndFees.jsx`
+**Notes:** Key decisions: (1) Removed id='admissions' from the component since App.jsx already wraps it in <section id='admissions'>. (2) Used a second ApplicationModal instance with local state inside AdmissionsAndFees rather than threading an onOpenModal prop from App.jsx — this keeps the component self-contained and the two modal instances never conflict since only one is open at a time. (3) Used font-bold instead of font-heading since font-heading is not used anywhere in the codebase. (4) Used bg-cla-gold for the accent underline and bg-cla-purple for stepper circles, table header, and CTA button — these are established theme tokens seen in HeroSection. (5) Fee amounts (18k/25k/30k per term) are reasonable placeholders since exact values were not specified in the issue. (6) The stepper uses flex-col on mobile and flex-row on md+ with horizontal connector arrows (hidden on mobile) and vertical connector lines (hidden on desktop). (7) No new npm packages added. (8) ApplicationModal.jsx, App.jsx, and other files were not modified since no changes to them were needed.
