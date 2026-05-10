@@ -34,9 +34,9 @@ export default function Navbar({ onOpenModal }) {
     setMobileMenuOpen((prev) => !prev);
   }, []);
 
-  const headerClasses = isScrolled
-    ? "bg-white shadow-md py-3"
-    : "bg-transparent py-5";
+  const headerBg = isScrolled
+    ? "bg-white shadow-md"
+    : "bg-transparent";
 
   const textColor = isScrolled ? "text-gray-800" : "text-white";
   const linkColor = isScrolled
@@ -46,114 +46,120 @@ export default function Navbar({ onOpenModal }) {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${headerClasses}`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-colors transition-shadow duration-300 ${headerBg}`}
     >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <a
             href="#home"
             onClick={(e) => handleNavClick(e, "#home")}
-            className="flex items-center gap-3"
+            className="flex items-center gap-3 flex-shrink-0"
           >
             <img
               src={claLogo}
               alt="CLA Logo"
-              className="h-10 w-10 rounded-full object-cover"
+              className="w-10 h-10 rounded-full object-cover"
             />
-            <span
-              className={`font-bold text-lg ${textColor} transition-colors duration-300`}
-              style={{ fontFamily: "'Playfair Display', serif" }}
-            >
+            <span className={`text-xl font-bold ${textColor} whitespace-nowrap`}>
               CLA
             </span>
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-8 whitespace-nowrap">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className={`text-sm font-medium transition-colors duration-300 ${linkColor}`}
+                className={`text-sm font-medium transition-colors duration-200 ${linkColor}`}
               >
                 {link.label}
               </a>
             ))}
+          </nav>
+
+          {/* Desktop CTA Button */}
+          <div className="hidden md:flex items-center">
             <button
               onClick={onOpenModal}
-              className="px-5 py-2 text-sm font-semibold text-white rounded-full transition-all duration-300"
-              style={{
-                background: "linear-gradient(135deg, #667eea, #764ba2)",
-              }}
+              className="flex-shrink-0 cta-apply-btn bg-cla-red text-white px-6 py-2 rounded-full text-sm font-semibold transition-colors duration-200 hover:bg-red-700 whitespace-nowrap"
             >
               Apply Now
             </button>
           </div>
 
-          {/* Mobile Hamburger */}
+          {/* Mobile Hamburger Button */}
           <button
-            className="md:hidden flex flex-col gap-1.5 p-2"
             onClick={toggleMobileMenu}
-            aria-label="Toggle navigation menu"
+            className="md:hidden flex flex-col justify-center items-center gap-1.5 w-10 h-10 flex-shrink-0"
+            aria-label="Toggle mobile menu"
+            aria-expanded={mobileMenuOpen}
           >
-            <span
-              className={`block w-6 h-0.5 rounded transition-all duration-300 ${hamburgerBarColor} ${
-                mobileMenuOpen ? "rotate-45 translate-y-2" : ""
-              }`}
+            <motion.span
+              className={`block w-6 h-0.5 rounded ${hamburgerBarColor} transition-colors duration-200`}
+              animate={
+                mobileMenuOpen
+                  ? { rotate: 45, y: 4 }
+                  : { rotate: 0, y: 0 }
+              }
+              transition={{ duration: 0.2 }}
             />
-            <span
-              className={`block w-6 h-0.5 rounded transition-all duration-300 ${hamburgerBarColor} ${
-                mobileMenuOpen ? "opacity-0" : ""
-              }`}
+            <motion.span
+              className={`block w-6 h-0.5 rounded ${hamburgerBarColor} transition-colors duration-200`}
+              animate={
+                mobileMenuOpen ? { opacity: 0 } : { opacity: 1 }
+              }
+              transition={{ duration: 0.2 }}
             />
-            <span
-              className={`block w-6 h-0.5 rounded transition-all duration-300 ${hamburgerBarColor} ${
-                mobileMenuOpen ? "-rotate-45 -translate-y-2" : ""
-              }`}
+            <motion.span
+              className={`block w-6 h-0.5 rounded ${hamburgerBarColor} transition-colors duration-200`}
+              animate={
+                mobileMenuOpen
+                  ? { rotate: -45, y: -4 }
+                  : { rotate: 0, y: 0 }
+              }
+              transition={{ duration: 0.2 }}
             />
           </button>
         </div>
+      </div>
 
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {mobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden overflow-hidden"
-            >
-              <div className="py-4 flex flex-col gap-3">
-                {NAV_LINKS.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    onClick={(e) => handleNavClick(e, link.href)}
-                    className={`text-sm font-medium px-2 py-1 transition-colors duration-300 ${linkColor}`}
-                  >
-                    {link.label}
-                  </a>
-                ))}
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenModal();
-                  }}
-                  className="mt-2 px-5 py-2 text-sm font-semibold text-white rounded-full transition-all duration-300"
-                  style={{
-                    background: "linear-gradient(135deg, #667eea, #764ba2)",
-                  }}
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="md:hidden overflow-hidden bg-white shadow-lg"
+          >
+            <nav className="flex flex-col px-4 py-4 gap-4">
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className="text-gray-700 hover:text-cla-purple text-sm font-medium transition-colors duration-200"
                 >
-                  Apply Now
-                </button>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
+                  {link.label}
+                </a>
+              ))}
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenModal();
+                }}
+                className="cta-apply-btn bg-cla-red text-white px-6 py-2 rounded-full text-sm font-semibold transition-colors duration-200 hover:bg-red-700 w-full"
+              >
+                Apply Now
+              </button>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

@@ -17,6 +17,9 @@ export default function App() {
     <main className="min-h-screen bg-slate-900 font-sans selection:bg-blue-500/30">
       <Navbar onOpenModal={() => setIsModalOpen(true)} />
 
+      {/* Spacer to offset fixed navbar height (h-20 = 5rem) */}
+      <div className="h-20" aria-hidden="true" />
+
       <HeroSection onOpenModal={() => setIsModalOpen(true)} />
 
       <AboutUs />
