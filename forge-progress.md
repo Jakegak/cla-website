@@ -127,3 +127,11 @@
 **Started:** 2026-05-10T03:34:54.090424+00:00
 **Branch:** `feat/application-modal-upgrade`
 
+
+## Issue #11 — Upgrade ApplicationModal to a professional multi-field form.
+**Date:** 2026-05-10 03:36 UTC
+**Status:** SUCCESS
+**Branch:** `feat/application-modal-upgrade`
+**PR:** #24 — https://github.com/Jakegak/cla-website/pull/24
+**Files changed:** `src/components/ApplicationModal.jsx`
+**Notes:** No new npm packages added. The component remains fully self-contained with the same { isOpen, onClose } props interface, so both instances in App.jsx and AdmissionsAndFees.jsx work without changes. Programme names ('Early Years', 'Lower Primary', 'Upper Primary') are hardcoded in the modal since the Programmes.jsx array is not exported. Child's Age dropdown covers ages 3-12. AnimatePresence remains inside the component. Body scroll is locked when modal is open and restored on close/unmount. Form uses controlled state with useState, validation runs on submit, and errors clear on field change. The select elements use the same input styling pattern with red border on error. Max height is constrained to 90vh with overflow-y-auto for smaller screens. No files other than ApplicationModal.jsx needed changes since the props interface is unchanged.
