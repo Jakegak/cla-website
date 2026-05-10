@@ -63,10 +63,10 @@ const programmes = [
     ),
   },
   {
-    name: "Primary School",
+    name: "Primary",
     subtitle: "Ages 6–11",
     description:
-      "Building strong academic foundations with a balanced curriculum that develops critical thinking and creativity.",
+      "Building strong academic foundations with a balanced curriculum that nurtures curiosity and critical thinking.",
     icon: (
       <svg
         width="40"
@@ -76,19 +76,18 @@ const programmes = [
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        <rect x="8" y="10" width="24" height="22" rx="2" stroke="currentColor" strokeWidth="2" fill="none" />
-        <path d="M14 10V6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        <path d="M26 10V6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        <path d="M14 18H26" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        <path d="M14 24H22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        <rect x="6" y="8" width="28" height="24" rx="2" stroke="currentColor" strokeWidth="2" fill="none" />
+        <line x1="6" y1="14" x2="34" y2="14" stroke="currentColor" strokeWidth="2" />
+        <line x1="14" y1="14" x2="14" y2="32" stroke="currentColor" strokeWidth="2" />
+        <circle cx="24" cy="23" r="4" stroke="currentColor" strokeWidth="1.5" fill="none" />
       </svg>
     ),
   },
   {
-    name: "Junior Secondary",
-    subtitle: "Ages 12–14",
+    name: "Secondary",
+    subtitle: "Ages 12–16",
     description:
-      "Deepening knowledge and skills with specialized subjects and hands-on learning experiences.",
+      "Preparing students for academic excellence with rigorous coursework, mentorship, and personal development.",
     icon: (
       <svg
         width="40"
@@ -98,16 +97,17 @@ const programmes = [
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        <path d="M8 32L20 8L32 32" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" fill="none" />
-        <path d="M13 24H27" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        <path d="M20 6L34 14L20 22L6 14L20 6Z" stroke="currentColor" strokeWidth="2" fill="none" />
+        <path d="M6 14V26L20 34L34 26V14" stroke="currentColor" strokeWidth="2" fill="none" />
+        <line x1="20" y1="22" x2="20" y2="34" stroke="currentColor" strokeWidth="2" />
       </svg>
     ),
   },
   {
-    name: "Senior Secondary",
-    subtitle: "Ages 15–17",
+    name: "Sixth Form",
+    subtitle: "Ages 16–18",
     description:
-      "Preparing students for higher education and life with rigorous academics and leadership development.",
+      "Advanced studies and university preparation with A-Levels and enrichment programmes tailored to individual goals.",
     icon: (
       <svg
         width="40"
@@ -117,16 +117,18 @@ const programmes = [
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        <path d="M20 4L2 14L20 24L38 14L20 4Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" fill="none" />
-        <path d="M8 18V28C8 28 12 34 20 34C28 34 32 28 32 28V18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
+        <rect x="8" y="4" width="24" height="32" rx="2" stroke="currentColor" strokeWidth="2" fill="none" />
+        <line x1="14" y1="12" x2="26" y2="12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        <line x1="14" y1="18" x2="26" y2="18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        <line x1="14" y1="24" x2="22" y2="24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
       </svg>
     ),
   },
   {
-    name: "After-School Club",
+    name: "STEM Academy",
     subtitle: "All Ages",
     description:
-      "Enriching extracurricular activities including sports, arts, music, and academic support.",
+      "Specialist science, technology, engineering, and mathematics enrichment with hands-on projects and competitions.",
     icon: (
       <svg
         width="40"
@@ -137,15 +139,17 @@ const programmes = [
         aria-hidden="true"
       >
         <circle cx="20" cy="20" r="14" stroke="currentColor" strokeWidth="2" fill="none" />
-        <path d="M20 10V20L28 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <line x1="20" y1="6" x2="20" y2="34" stroke="currentColor" strokeWidth="1.5" />
+        <line x1="6" y1="20" x2="34" y2="20" stroke="currentColor" strokeWidth="1.5" />
+        <circle cx="20" cy="20" r="6" stroke="currentColor" strokeWidth="1.5" fill="none" />
       </svg>
     ),
   },
   {
-    name: "Summer Programme",
-    subtitle: "Seasonal",
+    name: "Arts & Culture",
+    subtitle: "All Ages",
     description:
-      "Fun-filled summer activities combining learning with adventure, creativity, and social development.",
+      "Creative expression through visual arts, music, drama, and cultural studies — nurturing the whole child.",
     icon: (
       <svg
         width="40"
@@ -155,15 +159,17 @@ const programmes = [
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        <circle cx="20" cy="20" r="8" stroke="currentColor" strokeWidth="2" fill="none" />
-        <path d="M20 6V10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        <path d="M20 30V34" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        <path d="M6 20H10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        <path d="M30 20H34" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        <path d="M10.1 10.1L12.9 12.9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        <path d="M27.1 27.1L29.9 29.9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        <path d="M10.1 29.9L12.9 27.1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        <path d="M27.1 12.9L29.9 10.1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        <path
+          d="M20 4C12 4 6 10 6 18C6 30 20 36 20 36C20 36 34 30 34 18C34 10 28 4 20 4Z"
+          stroke="currentColor"
+          strokeWidth="2"
+          fill="none"
+        />
+        <circle cx="16" cy="16" r="2" fill="currentColor" />
+        <circle cx="24" cy="16" r="2" fill="currentColor" />
+        <circle cx="20" cy="22" r="2" fill="currentColor" />
+        <circle cx="14" cy="22" r="1.5" fill="currentColor" />
+        <circle cx="26" cy="22" r="1.5" fill="currentColor" />
       </svg>
     ),
   },
@@ -171,57 +177,50 @@ const programmes = [
 
 export default function Programmes() {
   return (
-    <section
-      id="programmes"
-      className="py-20 px-4"
-      style={{ backgroundColor: "#F8F8F8" }}
-    >
-      <motion.div
-        className="max-w-6xl mx-auto"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-      >
-        <motion.div className="text-center mb-16" variants={childVariants}>
-          <span className="inline-block bg-purple-100 text-purple-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
-            Our Programmes
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            What We Offer
-          </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            From early years through senior secondary, our comprehensive
-            programmes are designed to meet the needs of every learner.
-          </p>
-        </motion.div>
-
+    <section id="programmes" className="py-20 px-4" style={{ backgroundColor: "#F8F8F8" }}>
+      <div className="max-w-6xl mx-auto">
         <motion.div
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
           variants={containerVariants}
         >
-          {programmes.map((programme) => (
-            <motion.div
-              key={programme.name}
-              className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 text-left"
-              variants={childVariants}
-              whileHover={{ y: -4 }}
-              transition={{ duration: 0.2 }}
-            >
-              <div className="text-purple-600 mb-4">{programme.icon}</div>
-              <h3 className="text-xl font-bold text-gray-900 mb-1">
-                {programme.name}
-              </h3>
-              <span className="text-sm text-purple-600 font-medium">
-                {programme.subtitle}
-              </span>
-              <p className="text-gray-600 mt-3 leading-relaxed">
-                {programme.description}
-              </p>
-            </motion.div>
-          ))}
+          <motion.h2
+            variants={childVariants}
+            className="text-4xl font-bold mb-4"
+          >
+            Our Programmes
+          </motion.h2>
+          <motion.p
+            variants={childVariants}
+            className="text-gray-600 mb-12 max-w-2xl mx-auto text-lg"
+          >
+            Comprehensive educational pathways designed to inspire and challenge every student.
+          </motion.p>
+
+          <motion.div
+            variants={containerVariants}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {programmes.map((prog) => (
+              <motion.div
+                key={prog.name}
+                variants={childVariants}
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.2 }}
+                className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 text-left h-full flex flex-col min-w-0 overflow-hidden"
+              >
+                <div className="text-purple-600 mb-4">{prog.icon}</div>
+                <h3 className="text-xl font-bold">{prog.name}</h3>
+                <span className="text-sm text-gray-500 mt-1 block">{prog.subtitle}</span>
+                <p className="text-gray-600 mt-3 leading-relaxed flex-1">
+                  {prog.description}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

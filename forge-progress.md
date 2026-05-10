@@ -368,3 +368,8 @@
 **PR:** #57 — https://github.com/Jakegak/cla-website/pull/57
 **Files changed:** `src/components/AboutUs.jsx`
 **Notes:** Only the AboutUs.jsx file needed changes — the stats cards layout was the sole target. Three specific changes were made: (1) Increased grid gap from `gap-4` to `gap-6` to match the spacing pattern used in the Programmes section and provide more consistent visual spacing between cards. (2) Added `overflow-hidden` to the stats cards container to prevent any potential horizontal overflow on very small screens. (3) Added `w-full` to each stat card to explicitly ensure equal sizing within grid cells, though grid children stretch by default this makes the intent explicit. The parent `grid md:grid-cols-2 gap-12 items-center` layout was intentionally left unchanged as it controls the mission/stats split, not the stats grid itself. All existing card visual styling (bg-white, rounded-2xl, p-6, shadow-sm, border, text colors, animations) was preserved. No new npm packages were added. HeroSection.jsx, Programmes.jsx, index.css, and App.css were not modified as they do not contain stats cards and required no changes.
+
+## Issue #58 — Issue 5 — Programme Cards Layout Stability [IN PROGRESS]
+**Started:** 2026-05-10T09:53:36.187891+00:00
+**Branch:** `fix/programme-cards-layout-stability`
+
