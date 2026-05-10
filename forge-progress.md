@@ -355,3 +355,8 @@
 **PR:** #55 — https://github.com/Jakegak/cla-website/pull/55
 **Files changed:** `src/components/Navbar.jsx`, `src/App.jsx`, `src/index.css`, `src/App.css`
 **Notes:** Key changes: (1) Replaced dynamic `py-3`/`py-5` scroll-toggled padding with a fixed `h-20` on the inner flex container, eliminating the 16px CLS on scroll. (2) Changed `transition-all` to `transition-colors transition-shadow` on the header element so only background color and shadow animate — no dimensional changes. (3) Added `whitespace-nowrap` to the desktop nav links container and logo text to prevent wrapping at intermediate viewport widths near the md breakpoint. (4) Added `flex-shrink-0` to the CTA button, logo container, and hamburger button so they never compress under flex pressure. (5) Added a `div.h-20` spacer in App.jsx below the Navbar to offset content that would otherwise be hidden behind the fixed-position navbar. (6) Added `scroll-margin-top: 5rem` on all `[id]` elements in index.css so smooth-scroll anchor navigation lands below the fixed navbar. The navbar height is now constant at 5rem (80px) regardless of scroll state. No new npm packages were added.
+
+## Issue #56 — Issue 4 — Stats Cards Alignment and Responsiveness [IN PROGRESS]
+**Started:** 2026-05-10T09:47:50.272876+00:00
+**Branch:** `fix/stats-cards-alignment-responsiveness`
+
