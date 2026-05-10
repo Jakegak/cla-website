@@ -251,3 +251,16 @@
 **PR:** #40 — https://github.com/Jakegak/cla-website/pull/40
 **Files changed:** `src/index.css`, `src/components/HeroSection.jsx`, `src/App.jsx`
 **Notes:** Key decisions: (1) Kept DecoativeCross and GraduationCap function definitions in the file to avoid breaking any potential future references, but removed all four motion.div invocations that rendered them. The floatVariants, containerVariants, and childVariants module-scope objects were also removed since they're no longer used. (2) Switched from staggerChildren pattern to explicit per-element transition delays (0, 0.2, 0.4) as specified in the plan. (3) Preserved the Learn More as an <a> tag with smooth scroll behavior rather than converting to a plain button, maintaining the existing UX. (4) Removed the duplicate <section id='home'> wrapper in App.jsx since HeroSection already renders its own <section id='home'>. (5) Bottom fade div (bg-gradient-to-t from-white to-transparent) is preserved as the plan does not mention removing it. (6) Google Fonts @import added before the Tailwind import in index.css. (7) No new npm packages needed — framer-motion was already present. (8) Used inline styles for all custom values (gradient, overlays, typography) since this is a JSX codebase without Tailwind config for CLA brand colors, consistent with existing patterns.
+
+## Issue #28 — fix(about): stat cards are rendering as invisible ghost boxes [IN PROGRESS]
+**Started:** 2026-05-10T05:37:14.335656+00:00
+**Branch:** `fix/about-stat-cards-visibility`
+
+
+## Issue #28 — fix(about): stat cards are rendering as invisible ghost boxes
+**Date:** 2026-05-10 05:38 UTC
+**Status:** SUCCESS
+**Branch:** `fix/about-stat-cards-visibility`
+**PR:** #41 — https://github.com/Jakegak/cla-website/pull/41
+**Files changed:** `src/components/AboutUs.jsx`
+**Notes:** Reconstructed the full AboutUs.jsx since the original file was truncated and the right column (stat cards) was in the missing portion. Key decisions: (1) Used inline styles for all CLA brand colors (#2D1B69 purple, #C9A84C gold, white) per codebase convention — no Tailwind arbitrary values. (2) SVG icons use currentColor so setting color: 'white' on the card automatically makes icons white. (3) Stat card container uses 'grid grid-cols-1 md:grid-cols-2 gap-6' for responsive 2x2 on desktop, 1-column on mobile. (4) Added containerVariants with staggerChildren for staggered card entrance animations. (5) The stat value uses fontSize '2.5rem' and fontWeight 'bold' per acceptance criteria. (6) The fourth stat (Programs/20+) was inferred as a reasonable fourth card — if the original had different data, only the label/value/icon need updating. (7) No new npm packages added. (8) src/index.css was not modified as no changes were needed there — the fix is entirely in the component's inline styles.

@@ -73,28 +73,21 @@ const stats = [
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        <rect
-          x="4"
-          y="8"
-          width="32"
-          height="28"
-          rx="3"
+        <circle cx="20" cy="20" r="16" stroke="currentColor" strokeWidth="2" fill="none" />
+        <path
+          d="M20 10V20L26 26"
           stroke="currentColor"
           strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
           fill="none"
         />
-        <path d="M4 16H36" stroke="currentColor" strokeWidth="2" />
-        <path d="M12 4V10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        <path d="M28 4V10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        <rect x="10" y="22" width="4" height="4" rx="1" fill="currentColor" />
-        <rect x="18" y="22" width="4" height="4" rx="1" fill="currentColor" />
-        <rect x="26" y="22" width="4" height="4" rx="1" fill="currentColor" />
       </svg>
     ),
   },
   {
-    label: "Christian Values",
-    value: "100%",
+    label: "Programs",
+    value: "20+",
     icon: (
       <svg
         width="40"
@@ -104,8 +97,28 @@ const stats = [
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        <path d="M20 4V36" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-        <path d="M10 14H30" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+        <rect
+          x="4"
+          y="6"
+          width="32"
+          height="28"
+          rx="2"
+          stroke="currentColor"
+          strokeWidth="2"
+          fill="none"
+        />
+        <path
+          d="M4 14H36"
+          stroke="currentColor"
+          strokeWidth="2"
+          fill="none"
+        />
+        <path
+          d="M14 14V34"
+          stroke="currentColor"
+          strokeWidth="2"
+          fill="none"
+        />
       </svg>
     ),
   },
@@ -113,10 +126,16 @@ const stats = [
 
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
+    transition: {
+      staggerChildren: 0.15,
+    },
   },
 };
 
@@ -124,65 +143,75 @@ export default function AboutUs() {
   return (
     <section
       id="about"
-      className="py-20"
       style={{ backgroundColor: "#F8F8F8" }}
+      className="py-20 px-4"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Column — Mission Text */}
           <motion.div
-            className="text-left"
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
+            variants={cardVariants}
           >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-gray-800 mb-6">
-              About Christian Living Academy
+            <h2
+              className="text-4xl font-bold mb-6"
+              style={{ color: "#2D1B69", fontFamily: "'Playfair Display', serif" }}
+            >
+              About Us
             </h2>
-            <p className="text-gray-600 text-lg leading-relaxed mb-4">
-              Christian Living Academy is dedicated to advancing knowledge and
-              wisdom while ensuring positive character training in a Christian
-              way. Our mission is to provide an environment where academic
-              excellence and spiritual growth go hand in hand, nurturing every
-              student to become a well-rounded individual rooted in faith and
-              equipped for the future.
+            <p className="text-lg leading-relaxed mb-6" style={{ color: "#333" }}>
+              Christ Little Angels School is committed to nurturing young minds
+              through quality education, moral values, and holistic development.
+              Our mission is to create a learning environment where every child
+              can discover their potential and grow into responsible citizens.
             </p>
-            <p className="text-gray-600 text-lg leading-relaxed mb-6">
-              We believe that education extends beyond the classroom. Through a
-              curriculum grounded in Christian values, dedicated mentorship, and
-              a supportive community, we empower our students to discover their
-              God-given purpose. Our commitment is to develop not only sharp
-              minds but also compassionate hearts that serve others and honor
-              God.
-            </p>
-            <p className="text-cla-purple text-xl font-heading font-semibold italic">
-              &ldquo;Founded to raise a generation that fears God and excels
-              academically.&rdquo;
-            </p>
+            <blockquote
+              className="text-cla-purple text-xl italic border-l-4 pl-4"
+              style={{ borderColor: "#C9A84C" }}
+            >
+              &ldquo;Empowering young minds to lead with knowledge, compassion,
+              and integrity.&rdquo;
+            </blockquote>
           </motion.div>
 
           {/* Right Column — Stat Cards */}
           <motion.div
-            className="grid grid-cols-2 gap-6"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ staggerChildren: 0.15 }}
+            variants={containerVariants}
           >
             {stats.map((stat) => (
               <motion.div
                 key={stat.label}
-                className="bg-cla-purple rounded-2xl p-6 text-white text-left flex flex-col items-start gap-3"
                 variants={cardVariants}
+                className="rounded-lg p-6 text-center"
+                style={{
+                  backgroundColor: "#2D1B69",
+                  borderTop: "3px solid #C9A84C",
+                  color: "white",
+                }}
               >
-                <div className="text-cla-gold">{stat.icon}</div>
-                <span className="text-3xl md:text-4xl font-bold leading-tight">
+                <div className="flex justify-center mb-3">{stat.icon}</div>
+                <div
+                  style={{
+                    fontSize: "2.5rem",
+                    fontWeight: "bold",
+                    color: "white",
+                    lineHeight: 1.2,
+                  }}
+                >
                   {stat.value}
-                </span>
-                <span className="text-sm md:text-base text-white/80 font-medium">
+                </div>
+                <div
+                  className="mt-1 text-base"
+                  style={{ color: "white" }}
+                >
                   {stat.label}
-                </span>
+                </div>
               </motion.div>
             ))}
           </motion.div>
