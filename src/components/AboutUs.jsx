@@ -164,8 +164,8 @@ const stats = [
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     transition: {
@@ -174,8 +174,8 @@ const containerVariants = {
   },
 };
 
-const childVariants = {
-  hidden: { opacity: 0, y: 30 },
+const staggerContainer = {
+  hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     y: 0,

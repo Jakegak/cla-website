@@ -11,119 +11,110 @@ const GALLERY_IMAGES = [
   { id: 5, src: "https://picsum.photos/seed/art1/400/300", fullSrc: "https://picsum.photos/seed/art1/800/600", alt: "Chapel worship service", category: "Worship" },
   { id: 6, src: "https://picsum.photos/seed/playground1/400/300", fullSrc: "https://picsum.photos/seed/playground1/800/600", alt: "Morning devotion assembly", category: "Worship" },
   { id: 7, src: "https://picsum.photos/seed/graduation1/400/300", fullSrc: "https://picsum.photos/seed/graduation1/800/600", alt: "Science laboratory experiment", category: "Academics" },
-  { id: 8, src: "https://picsum.photos/seed/science1/400/300", fullSrc: "https://picsum.photos/seed/science1/800/600", alt: "Library reading session", category: "Academics" },
-  { id: 9, src: "https://picsum.photos/seed/music1/400/300", fullSrc: "https://picsum.photos/seed/music1/800/600", alt: "Mathematics competition in classroom", category: "Academics" },
-  { id: 10, src: "https://picsum.photos/seed/garden1/400/300", fullSrc: "https://picsum.photos/seed/garden1/800/600", alt: "Annual sports day celebration", category: "Events" },
-  { id: 11, src: "https://picsum.photos/seed/teamwork1/400/300", fullSrc: "https://picsum.photos/seed/teamwork1/800/600", alt: "Graduation ceremony", category: "Events" },
-  { id: 12, src: "https://picsum.photos/seed/choir1/400/300", fullSrc: "https://picsum.photos/seed/choir1/800/600", alt: "Cultural day festivities", category: "Events" },
+  { id: 8, src: "https://picsum.photos/seed/science1/400/300", fullSrc: "https://picsum.photos/seed/science1/800/600", alt: "Mathematics competition winners", category: "Academics" },
+  { id: 9, src: "https://picsum.photos/seed/music1/400/300", fullSrc: "https://picsum.photos/seed/music1/800/600", alt: "Annual prize-giving ceremony", category: "Events" },
+  { id: 10, src: "https://picsum.photos/seed/dance1/400/300", fullSrc: "https://picsum.photos/seed/dance1/800/600", alt: "School cultural day celebration", category: "Events" },
+  { id: 11, src: "https://picsum.photos/seed/reading1/400/300", fullSrc: "https://picsum.photos/seed/reading1/800/600", alt: "Track and field athletics day", category: "Sports" },
+  { id: 12, src: "https://picsum.photos/seed/craft1/400/300", fullSrc: "https://picsum.photos/seed/craft1/800/600", alt: "Creative writing workshop", category: "Arts" },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
+const gridItemVariants = {
+  hidden: { opacity: 0, scale: 0.9 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
+    scale: 1,
+    transition: { duration: 0.4, ease: "easeOut" },
   },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5 },
+  exit: {
+    opacity: 0,
+    scale: 0.9,
+    transition: { duration: 0.2 },
   },
 };
 
 export default function ActivitiesGallery() {
   const [activeCategory, setActiveCategory] = useState("All");
-  const [lightboxIndex, setLightboxIndex] = useState(null);
+  const [lightboxIndex, setLightboxIndex] = useState(-1);
 
-  const filteredImages =
+  const filtered =
     activeCategory === "All"
       ? GALLERY_IMAGES
       : GALLERY_IMAGES.filter((img) => img.category === activeCategory);
 
-  const openLightbox = (index) => {
+  const openLightbox = useCallback((index) => {
     setLightboxIndex(index);
-  };
-
-  const closeLightbox = useCallback(() => {
-    setLightboxIndex(null);
   }, []);
 
-  const goToPrev = useCallback(() => {
-    setLightboxIndex((prev) =>
-      prev !== null && prev > 0 ? prev - 1 : filteredImages.length - 1
-    );
-  }, [filteredImages.length]);
+  const closeLightbox = useCallback(() => {
+    setLightboxIndex(-1);
+  }, []);
 
-  const goToNext = useCallback(() => {
-    setLightboxIndex((prev) =>
-      prev !== null && prev < filteredImages.length - 1 ? prev + 1 : 0
-    );
-  }, [filteredImages.length]);
+  const goNext = useCallback(() => {
+    setLightboxIndex((prev) => (prev + 1) % filtered.length);
+  }, [filtered.length]);
+
+  const goPrev = useCallback(() => {
+    setLightboxIndex((prev) => (prev - 1 + filtered.length) % filtered.length);
+  }, [filtered.length]);
 
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (lightboxIndex === null) return;
+    const handleKey = (e) => {
+      if (lightboxIndex < 0) return;
       if (e.key === "Escape") closeLightbox();
-      if (e.key === "ArrowLeft") goToPrev();
-      if (e.key === "ArrowRight") goToNext();
+      if (e.key === "ArrowRight") goNext();
+      if (e.key === "ArrowLeft") goPrev();
     };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [lightboxIndex, closeLightbox, goToPrev, goToNext]);
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [lightboxIndex, closeLightbox, goNext, goPrev]);
 
   return (
-    <section className="activities-gallery">
+    <section id="gallery" className="activities-gallery">
       <div className="gallery-container">
         <div className="gallery-header">
-          <h2 className="section-title">Activities Gallery</h2>
+          <h2 className="section-title">Activities &amp; Gallery</h2>
           <p className="section-subtitle">
-            Explore moments from our vibrant school community
+            Explore the vibrant life at Christ Legacy Academy through our activities and events.
           </p>
         </div>
 
         <div className="gallery-filters">
-          {CATEGORIES.map((category) => (
+          {CATEGORIES.map((cat) => (
             <button
-              key={category}
-              className={`filter-btn ${activeCategory === category ? "active" : ""}`}
-              onClick={() => setActiveCategory(category)}
+              key={cat}
+              className={`filter-btn${activeCategory === cat ? " active" : ""}`}
+              onClick={() => setActiveCategory(cat)}
             >
-              {category}
+              {cat}
             </button>
           ))}
         </div>
 
         <motion.div
           className="gallery-grid"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          key={activeCategory}
+          layout
         >
-          <AnimatePresence mode="wait">
-            {filteredImages.map((image, index) => (
+          <AnimatePresence mode="popLayout">
+            {filtered.map((img, index) => (
               <motion.div
-                key={image.id}
+                key={img.id}
                 className="gallery-item"
-                variants={itemVariants}
+                variants={gridItemVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
                 layout
                 onClick={() => openLightbox(index)}
               >
                 <img
                   className="gallery-image"
-                  src={image.src}
-                  alt={image.alt}
+                  src={img.src}
+                  alt={img.alt}
                   loading="lazy"
                 />
                 <div className="gallery-overlay">
-                  <span className="gallery-category">{image.category}</span>
-                  <span className="gallery-alt">{image.alt}</span>
+                  <span className="gallery-category">{img.category}</span>
+                  <span className="gallery-alt">{img.alt}</span>
                 </div>
               </motion.div>
             ))}
@@ -132,7 +123,7 @@ export default function ActivitiesGallery() {
       </div>
 
       <AnimatePresence>
-        {lightboxIndex !== null && filteredImages[lightboxIndex] && (
+        {lightboxIndex >= 0 && filtered[lightboxIndex] && (
           <motion.div
             className="lightbox-backdrop"
             initial={{ opacity: 0 }}
@@ -144,22 +135,34 @@ export default function ActivitiesGallery() {
               className="lightbox-content"
               onClick={(e) => e.stopPropagation()}
             >
-              <button className="lightbox-close" onClick={closeLightbox}>
-                &times;
+              <button
+                className="lightbox-close"
+                onClick={closeLightbox}
+                aria-label="Close lightbox"
+              >
+                ✕
               </button>
-              <button className="lightbox-prev" onClick={goToPrev}>
-                &#8249;
+              <button
+                className="lightbox-prev"
+                onClick={goPrev}
+                aria-label="Previous image"
+              >
+                ‹
               </button>
               <img
                 className="lightbox-image"
-                src={filteredImages[lightboxIndex].fullSrc}
-                alt={filteredImages[lightboxIndex].alt}
+                src={filtered[lightboxIndex].fullSrc}
+                alt={filtered[lightboxIndex].alt}
               />
-              <button className="lightbox-next" onClick={goToNext}>
-                &#8250;
+              <button
+                className="lightbox-next"
+                onClick={goNext}
+                aria-label="Next image"
+              >
+                ›
               </button>
               <p className="lightbox-caption">
-                {filteredImages[lightboxIndex].alt}
+                {filtered[lightboxIndex].alt}
               </p>
             </div>
           </motion.div>
