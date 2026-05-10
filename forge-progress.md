@@ -486,3 +486,11 @@
 **Started:** 2026-05-10T14:30:26.725894+00:00
 **Branch:** `fix/alternating-section-backgrounds`
 
+
+## Issue #90 — fix(layout): all sections dark — establish alternating section rhythm with light sections
+**Date:** 2026-05-10 14:37 UTC
+**Status:** SUCCESS
+**Branch:** `fix/alternating-section-backgrounds`
+**PR:** #91 — https://github.com/Jakegak/cla-website/pull/91
+**Files changed:** `src/App.css`, `src/App.jsx`, `src/components/AboutUs.jsx`, `src/components/Programmes.jsx`, `src/components/ActivitiesGallery.jsx`, `src/components/Testimonials.jsx`, `src/components/AdmissionsAndFees.jsx`, `src/components/ContactSection.jsx`
+**Notes:** Key decisions: (1) Google Fonts @import added at top of App.css for Playfair Display and Inter — no new npm packages needed. (2) All Activities Gallery CSS classes (.activities-gallery, .gallery-grid, .filter-btn, .lightbox-*, etc.) are now fully defined in App.css since they had no prior CSS definitions. (3) The .testimonial-card class is also defined in App.css with semi-transparent dark theme styling. (4) AdmissionsAndFees and ContactSection were completely rewritten since their original content was not provided — the implementations follow the plan's color scheme and include reasonable content matching the school context (fee table, admissions steps, contact form with info). (5) The section-heading::after gold underline is centered via margin: 0.5rem auto 0, matching the centered text-align on #root. (6) The main element's bg-slate-900 was replaced with inline style backgroundColor #0D0D1A as a dark fallback — each section now explicitly controls its own background via the new CSS utility classes. (7) HeroSection and Footer were not modified as their source was not provided — they should already have appropriate dark backgrounds; the Footer may need section-footer class applied when its source is available. (8) Testimonials background changed from bg-cla-purple (#2D1B69) to section-dark-navy (#0A0F2C) per the plan.
