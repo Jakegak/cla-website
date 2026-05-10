@@ -434,3 +434,11 @@
 **Started:** 2026-05-10T13:24:17.555390+00:00
 **Branch:** `fix/navbar-full-name-apply-glassmorphism`
 
+
+## Issue #80 — fix(navbar): restore full school name, Apply Now button, and glass morphism on scroll
+**Date:** 2026-05-10 13:26 UTC
+**Status:** SUCCESS
+**Branch:** `fix/navbar-full-name-apply-glassmorphism`
+**PR:** #81 — https://github.com/Jakegak/cla-website/pull/81
+**Files changed:** `src/components/Navbar.jsx`, `src/index.css`
+**Notes:** Key decisions: (1) Used inline styles for glass morphism properties (backdrop-filter, rgba backgrounds, box-shadow) and brand colors (#FFB800, #2D1B69) to avoid Tailwind arbitrary values per project rules. (2) Kept useScroll/useMotionValueEvent pattern from framer-motion instead of window.addEventListener for scroll detection. (3) Added .nav-link-gold class in index.css with ::after pseudo-element for the gold underline hover effect since pseudo-elements can't be done inline. (4) Mobile overlay uses position:fixed with inset:0 so it won't be clipped by the header's overflow-x-hidden. (5) Hamburger bars animate to X using framer-motion rotate/translate/opacity — top bar rotates 45deg and translates down 8px, bottom bar rotates -45deg and translates up 8px, middle bar fades out. (6) School name 'Christian Living Academy' is hidden on very small screens (hidden sm:inline) to prevent text overflow but visible on sm+ screens. (7) No new npm packages added. (8) Logo.jsx and App.jsx and package.json are unchanged — only Navbar.jsx and index.css were modified. (9) Playfair Display font was already imported in index.css — no changes needed there. (10) The hamburger button color switches to white when mobile menu is open (over the #2D1B69 overlay) for visibility.
