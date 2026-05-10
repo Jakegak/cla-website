@@ -122,3 +122,8 @@
 **PR:** #23 — https://github.com/Jakegak/cla-website/pull/23
 **Files changed:** `src/components/Footer.jsx`
 **Notes:** Only Footer.jsx was modified — App.jsx already imports and renders Footer so no changes needed there. Logo.jsx, HeroSection.jsx, and index.css are unchanged. The component uses the Logo SVG component (not an image file) with className='w-16 h-16'. Social media icons use minimal inline SVGs with no external icon library. Quick links use anchor hrefs (#home, #about, #programmes, #gallery, #admissions, #contact) matching expected section IDs. Contact details (address, phone, email) are consistent with the existing ContactSection component's placeholder data. Theme tokens bg-cla-purple and bg-cla-gold are used per established codebase patterns. No new npm packages were added.
+
+## Issue #11 — Upgrade ApplicationModal to a professional multi-field form. [IN PROGRESS]
+**Started:** 2026-05-10T03:34:54.090424+00:00
+**Branch:** `feat/application-modal-upgrade`
+
