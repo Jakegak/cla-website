@@ -32,113 +32,99 @@ const TESTIMONIALS = [
   },
 ];
 
-const cardVariants = {
-  hidden: { opacity: 0, x: 60 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" } },
-  exit: { opacity: 0, x: -60, transition: { duration: 0.3, ease: "easeIn" } },
+const slideVariants = {
+  enter: (direction) => ({
+    x: direction > 0 ? 200 : -200,
+    opacity: 0,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+  exit: (direction) => ({
+    x: direction > 0 ? -200 : 200,
+    opacity: 0,
+    transition: { duration: 0.3, ease: "easeIn" },
+  }),
 };
 
 export default function Testimonials() {
   const [current, setCurrent] = useState(0);
-  const isPaused = useRef(false);
+  const [direction, setDirection] = useState(1);
+  const [isPaused, setIsPaused] = useState(false);
   const intervalRef = useRef(null);
 
-  const advance = useCallback(() => {
-    if (!isPaused.current) {
-      setCurrent((prev) => (prev + 1) % TESTIMONIALS.length);
-    }
+  const goTo = useCallback(
+    (index) => {
+      setDirection(index > current ? 1 : -1);
+      setCurrent(index);
+    },
+    [current]
+  );
+
+  const goNext = useCallback(() => {
+    setDirection(1);
+    setCurrent((prev) => (prev + 1) % TESTIMONIALS.length);
   }, []);
 
   useEffect(() => {
-    intervalRef.current = setInterval(advance, 4000);
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [advance]);
-
-  const handleMouseEnter = () => {
-    isPaused.current = true;
-  };
-
-  const handleMouseLeave = () => {
-    isPaused.current = false;
-  };
-
-  const goTo = (index) => {
-    setCurrent(index);
-  };
+    if (isPaused) return;
+    intervalRef.current = setInterval(goNext, 6000);
+    return () => clearInterval(intervalRef.current);
+  }, [isPaused, goNext]);
 
   const testimonial = TESTIMONIALS[current];
 
   return (
     <section
       id="testimonials"
-      className="py-24 bg-cla-purple"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      className="section-dark-navy section-padding px-4"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section heading */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-heading text-white mb-4">
-            What Parents Say
-          </h2>
-          <div className="w-16 h-1 bg-cla-gold mx-auto" />
-        </div>
+      <div className="max-w-4xl mx-auto">
+        <h2 className="section-heading text-3xl sm:text-4xl font-heading text-white mb-12">
+          What Parents Say
+        </h2>
 
-        {/* Testimonial carousel */}
-        <div className="flex justify-center">
-          <AnimatePresence mode="wait">
+        <div className="relative min-h-[250px] flex items-center justify-center">
+          <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={testimonial.id}
-              variants={cardVariants}
-              initial="hidden"
-              animate="visible"
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
               exit="exit"
-              className="w-full max-w-2xl mx-auto px-6"
+              className="testimonial-card w-full"
             >
-              {/* Card container */}
-              <div className="testimonial-card relative rounded-2xl p-10">
-                {/* Decorative quote mark */}
-                <span
-                  className="absolute top-4 left-6 text-cla-gold font-heading leading-none select-none"
-                  style={{ fontSize: "4rem" }}
-                  aria-hidden="true"
-                >
-                  &ldquo;
-                </span>
-
-                {/* Quote text */}
-                <p className="text-white/90 text-lg leading-relaxed mt-10 mb-8 text-center">
-                  {testimonial.quote}
+              <blockquote className="text-lg sm:text-xl leading-relaxed mb-6" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
+                &ldquo;{testimonial.quote}&rdquo;
+              </blockquote>
+              <div>
+                <p className="text-white font-bold text-lg">
+                  {testimonial.name}
                 </p>
-
-                {/* Author info */}
-                <div className="text-center">
-                  <p className="text-white font-bold text-lg">
-                    {testimonial.name}
-                  </p>
-                  <p className="text-cla-gold text-sm mt-1">
-                    {testimonial.relationship}
-                  </p>
-                </div>
+                <p className="text-cla-gold text-sm">
+                  {testimonial.relationship}
+                </p>
               </div>
             </motion.div>
           </AnimatePresence>
         </div>
 
-        {/* Navigation dots */}
-        <div className="flex justify-center items-center gap-3 mt-10">
-          {TESTIMONIALS.map((t, index) => (
+        <div className="flex justify-center gap-2 mt-8">
+          {TESTIMONIALS.map((_, index) => (
             <button
-              key={t.id}
+              key={index}
               onClick={() => goTo(index)}
-              aria-label={`Go to testimonial ${index + 1}`}
-              className={`w-3 h-3 rounded-full cursor-pointer transition-all duration-300 ${
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
                 index === current
                   ? "bg-cla-gold scale-125"
-                  : "bg-white/40 hover:bg-white/60"
+                  : "bg-white/30 hover:bg-white/50"
               }`}
+              aria-label={`Go to testimonial ${index + 1}`}
             />
           ))}
         </div>

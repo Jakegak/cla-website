@@ -481,3 +481,8 @@
 **PR:** #87 — https://github.com/Jakegak/cla-website/pull/87
 **Files changed:** `src/components/AdmissionsAndFees.jsx`
 **Notes:** Simple text replacement in two <th> elements — changed 'GHS' to 'KES' in the fee table column headers. All fee values (18,000/54,000/25,000/75,000/30,000/90,000) remain unchanged. All existing dark-theme styling classes are preserved exactly as they were. No structural changes, no new dependencies, no new imports. The file is .jsx so no TypeScript rules apply. The complete file was reconstructed from the compressed context — the overall structure (section header, admissions steps grid, fee table, CTA button, ApplicationModal) matches the original component pattern.
+
+## Issue #90 — fix(layout): all sections dark — establish alternating section rhythm with light sections [IN PROGRESS]
+**Started:** 2026-05-10T14:30:26.725894+00:00
+**Branch:** `fix/alternating-section-backgrounds`
+

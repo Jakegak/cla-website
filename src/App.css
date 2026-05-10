@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap');
+
 @theme {
   --color-cla-purple: #2D1B69;
   --color-cla-red: #CC0000;
@@ -31,4 +33,276 @@ h6 {
   margin: 0 auto;
   text-align: center;
   width: 100%;
+}
+
+/* ===== Section Background Classes ===== */
+
+.section-light-white {
+  background-color: #FFFFFF;
+}
+
+.section-light-grey {
+  background-color: #F8F8F8;
+}
+
+.section-dark {
+  background-color: #0D0D1A;
+}
+
+.section-dark-navy {
+  background-color: #0A0F2C;
+}
+
+.section-footer {
+  background-color: #2D1B69;
+}
+
+/* ===== Section Text Color Utilities ===== */
+
+.text-dark-heading {
+  color: #2D1B69;
+}
+
+.text-dark-body {
+  color: #374151;
+}
+
+.text-light {
+  color: #FFFFFF;
+}
+
+/* ===== Section Padding ===== */
+
+.section-padding {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+/* ===== Section Heading with Gold Underline ===== */
+
+.section-heading {
+  font-family: var(--font-heading);
+  position: relative;
+  display: inline-block;
+  padding-bottom: 1rem;
+}
+
+.section-heading::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background-color: #FFB800;
+  margin: 0.5rem auto 0;
+}
+
+/* ===== Activities Gallery Styles ===== */
+
+.activities-gallery {
+  background-color: #0D0D1A;
+  color: #FFFFFF;
+  padding: 6rem 1rem;
+}
+
+.gallery-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gallery-header {
+  margin-bottom: 2.5rem;
+}
+
+.activities-gallery .section-title {
+  font-family: var(--font-heading);
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 0.5rem;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 1rem;
+}
+
+.activities-gallery .section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background-color: #FFB800;
+  margin: 0.5rem auto 0;
+}
+
+.activities-gallery .section-subtitle {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.gallery-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.filter-btn {
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-family: var(--font-body);
+  transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+  border-color: #FFB800;
+  color: #FFB800;
+}
+
+.filter-btn.active {
+  background-color: #FFB800;
+  border-color: #FFB800;
+  color: #0D0D1A;
+  font-weight: 600;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 4 / 3;
+}
+
+.gallery-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .gallery-image {
+  transform: scale(1.05);
+}
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+}
+
+.gallery-category {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #FFB800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.gallery-alt {
+  font-size: 0.875rem;
+  color: #FFFFFF;
+  margin-top: 0.25rem;
+}
+
+.lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -2.5rem;
+  right: 0;
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: #FFFFFF;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.75rem;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.lightbox-prev {
+  left: -3rem;
+}
+
+.lightbox-next {
+  right: -3rem;
+}
+
+.lightbox-image {
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 0.5rem;
+}
+
+.lightbox-caption {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 1rem;
+  font-size: 0.875rem;
+}
+
+/* ===== Testimonial Card ===== */
+
+.testimonial-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  padding: 2rem;
+  backdrop-filter: blur(8px);
 }
