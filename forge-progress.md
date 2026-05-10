@@ -277,3 +277,16 @@
 **PR:** #42 — https://github.com/Jakegak/cla-website/pull/42
 **Files changed:** `src/components/ActivitiesGallery.jsx`
 **Notes:** Replaced all 12 picsum.photos random image URLs with Unsplash Source API URLs using school-relevant search terms. Each URL was mapped to the most appropriate category: sports URLs for Sports items, art/drama for Arts, church/worship for Worship, science/library/classroom for Academics, and playground/graduation/students for Events. The id, category, and alt fields were preserved (alt text was only adjusted minimally where the original text already matched the new image theme). No new npm packages were added. The component logic, structure, and export remain completely unchanged — only the GALLERY_IMAGES array src fields were modified.
+
+## Issue #30 — fix(testimonials): testimonial text floats with no visual container [IN PROGRESS]
+**Started:** 2026-05-10T06:04:24.065379+00:00
+**Branch:** `fix/testimonials-card-container`
+
+
+## Issue #30 — fix(testimonials): testimonial text floats with no visual container
+**Date:** 2026-05-10 06:05 UTC
+**Status:** SUCCESS
+**Branch:** `fix/testimonials-card-container`
+**PR:** #43 — https://github.com/Jakegak/cla-website/pull/43
+**Files changed:** `src/components/Testimonials.jsx`, `src/index.css`
+**Notes:** Key decisions: (1) Used a custom CSS class `.testimonial-card` in index.css for the card background and border rather than Tailwind arbitrary values like `bg-[rgba(255,255,255,0.1)]` — this is cleaner and avoids potential Tailwind v4 arbitrary value parsing issues. (2) The border-radius (rounded-2xl = 16px) and padding (p-10 = 2.5rem) use standard Tailwind classes. (3) The decorative quote mark uses one inline style (`fontSize: '4rem'`) because Tailwind's `text-6xl` is 3.75rem, not exactly 4rem as specified — could alternatively use `text-7xl` (4.5rem) but 4rem is the exact spec. (4) The quote mark is positioned absolutely within the card (position relative on card container). (5) Section padding changed from py-20 to py-24 (6rem) per acceptance criteria. (6) No new npm packages added. (7) AnimatePresence structure preserved — the card div is inside the motion.div so animation continues to work correctly.

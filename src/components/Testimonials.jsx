@@ -28,80 +28,66 @@ const TESTIMONIALS = [
     name: "Pastor & Mrs. Eze",
     relationship: "Parents of Year 5 and Year 3 students",
     quote:
-      "Having two children at CLA, we can confidently say the school delivers on its promise of raising godly leaders. The curriculum is excellent, the moral foundation is strong, and our children are thriving in every area.",
+      "Having two children at CLA, we can confidently say the school delivers on its promise of raising godly leaders. The curriculum is excellent, the moral foundation is strong, and our children are thriving in every way.",
   },
 ];
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
-  },
-  exit: {
-    opacity: 0,
-    y: -30,
-    transition: { duration: 0.4, ease: "easeIn" },
-  },
+  hidden: { opacity: 0, x: 60 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  exit: { opacity: 0, x: -60, transition: { duration: 0.3, ease: "easeIn" } },
 };
 
-const INTERVAL_MS = 4000;
-
 export default function Testimonials() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const isPausedRef = useRef(false);
+  const [current, setCurrent] = useState(0);
+  const isPaused = useRef(false);
   const intervalRef = useRef(null);
 
-  const startInterval = useCallback(() => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
+  const advance = useCallback(() => {
+    if (!isPaused.current) {
+      setCurrent((prev) => (prev + 1) % TESTIMONIALS.length);
     }
-    intervalRef.current = setInterval(() => {
-      if (!isPausedRef.current) {
-        setActiveIndex((prev) => (prev + 1) % TESTIMONIALS.length);
-      }
-    }, INTERVAL_MS);
   }, []);
 
   useEffect(() => {
-    startInterval();
+    intervalRef.current = setInterval(advance, 4000);
     return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
+      if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [startInterval]);
+  }, [advance]);
 
-  function handleMouseEnter() {
-    isPausedRef.current = true;
-  }
+  const handleMouseEnter = () => {
+    isPaused.current = true;
+  };
 
-  function handleMouseLeave() {
-    isPausedRef.current = false;
-  }
+  const handleMouseLeave = () => {
+    isPaused.current = false;
+  };
 
-  function handleDotClick(index) {
-    setActiveIndex(index);
-    startInterval();
-  }
+  const goTo = (index) => {
+    setCurrent(index);
+  };
 
-  const testimonial = TESTIMONIALS[activeIndex];
+  const testimonial = TESTIMONIALS[current];
 
   return (
-    <section id="testimonials" className="bg-cla-purple py-20 px-4">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="font-heading text-3xl md:text-4xl text-white mb-4">
-          What Parents Say
-        </h2>
-        <div className="h-1 w-16 bg-cla-gold mx-auto mb-12 rounded-full" />
+    <section
+      id="testimonials"
+      className="py-24 bg-cla-purple"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section heading */}
+        <div className="text-center mb-16">
+          <h2 className="text-3xl sm:text-4xl font-heading text-white mb-4">
+            What Parents Say
+          </h2>
+          <div className="w-16 h-1 bg-cla-gold mx-auto" />
+        </div>
 
-        <div
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          aria-live="polite"
-          className="relative min-h-64 flex items-center justify-center"
-        >
+        {/* Testimonial carousel */}
+        <div className="flex justify-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={testimonial.id}
@@ -111,29 +97,45 @@ export default function Testimonials() {
               exit="exit"
               className="w-full max-w-2xl mx-auto px-6"
             >
-              <div className="text-cla-gold text-6xl leading-none mb-4 font-heading">
-                &ldquo;
+              {/* Card container */}
+              <div className="testimonial-card relative rounded-2xl p-10">
+                {/* Decorative quote mark */}
+                <span
+                  className="absolute top-4 left-6 text-cla-gold font-heading leading-none select-none"
+                  style={{ fontSize: "4rem" }}
+                  aria-hidden="true"
+                >
+                  &ldquo;
+                </span>
+
+                {/* Quote text */}
+                <p className="text-white/90 text-lg leading-relaxed mt-10 mb-8 text-center">
+                  {testimonial.quote}
+                </p>
+
+                {/* Author info */}
+                <div className="text-center">
+                  <p className="text-white font-bold text-lg">
+                    {testimonial.name}
+                  </p>
+                  <p className="text-cla-gold text-sm mt-1">
+                    {testimonial.relationship}
+                  </p>
+                </div>
               </div>
-              <p className="text-white/90 text-lg md:text-xl italic leading-relaxed mb-6">
-                {testimonial.quote}
-              </p>
-              <div className="h-px w-12 bg-cla-gold mx-auto mb-4" />
-              <p className="text-white font-bold text-lg">{testimonial.name}</p>
-              <p className="text-cla-gold text-sm mt-1">
-                {testimonial.relationship}
-              </p>
             </motion.div>
           </AnimatePresence>
         </div>
 
-        <div className="flex items-center justify-center gap-3 mt-8">
-          {TESTIMONIALS.map((item, index) => (
+        {/* Navigation dots */}
+        <div className="flex justify-center items-center gap-3 mt-10">
+          {TESTIMONIALS.map((t, index) => (
             <button
-              key={item.id}
-              onClick={() => handleDotClick(index)}
+              key={t.id}
+              onClick={() => goTo(index)}
               aria-label={`Go to testimonial ${index + 1}`}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === activeIndex
+              className={`w-3 h-3 rounded-full cursor-pointer transition-all duration-300 ${
+                index === current
                   ? "bg-cla-gold scale-125"
                   : "bg-white/40 hover:bg-white/60"
               }`}
