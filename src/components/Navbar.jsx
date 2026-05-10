@@ -46,7 +46,7 @@ export default function Navbar({ onOpenModal }) {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 max-w-full overflow-x-hidden transition-all duration-300 ${headerBg}`}
+      className={`fixed top-0 left-0 right-0 z-50 w-full max-w-full overflow-x-hidden relative transition-all duration-300 ${headerBg}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
@@ -61,15 +61,13 @@ export default function Navbar({ onOpenModal }) {
               alt="CLA Logo"
               className="h-12 w-12 rounded-full object-cover"
             />
-            <span
-              className={`text-xl font-bold whitespace-nowrap ${textColor}`}
-            >
+            <span className={`text-xl font-bold whitespace-nowrap ${textColor}`}>
               CLA
             </span>
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8 min-w-0">
+          <nav className="hidden md:flex items-center gap-8 min-w-0 flex-1 flex-wrap justify-end">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
@@ -98,24 +96,26 @@ export default function Navbar({ onOpenModal }) {
             <motion.span
               animate={
                 mobileMenuOpen
-                  ? { rotate: 45, y: 6 }
+                  ? { rotate: 45, y: 8 }
                   : { rotate: 0, y: 0 }
               }
-              className={`block w-6 h-0.5 ${hamburgerBarColor} transition-colors`}
-            />
-            <motion.span
-              animate={
-                mobileMenuOpen ? { opacity: 0 } : { opacity: 1 }
-              }
-              className={`block w-6 h-0.5 ${hamburgerBarColor} transition-colors`}
+              className={`block w-6 h-0.5 ${hamburgerBarColor}`}
             />
             <motion.span
               animate={
                 mobileMenuOpen
-                  ? { rotate: -45, y: -6 }
+                  ? { opacity: 0 }
+                  : { opacity: 1 }
+              }
+              className={`block w-6 h-0.5 ${hamburgerBarColor}`}
+            />
+            <motion.span
+              animate={
+                mobileMenuOpen
+                  ? { rotate: -45, y: -8 }
                   : { rotate: 0, y: 0 }
               }
-              className={`block w-6 h-0.5 ${hamburgerBarColor} transition-colors`}
+              className={`block w-6 h-0.5 ${hamburgerBarColor}`}
             />
           </button>
         </div>
@@ -129,15 +129,15 @@ export default function Navbar({ onOpenModal }) {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden overflow-hidden bg-white shadow-lg"
+            className="md:hidden overflow-hidden bg-white shadow-lg w-full"
           >
-            <nav className="flex flex-col px-4 py-4 gap-3">
+            <nav className="flex flex-col px-4 py-4 gap-3 overflow-y-auto max-h-[80vh]">
               {NAV_LINKS.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className="text-gray-700 hover:text-cla-purple font-medium py-2 transition-colors duration-200"
+                  className="text-gray-700 hover:text-cla-purple font-medium py-3 min-h-[44px] flex items-center transition-colors duration-200"
                 >
                   {link.label}
                 </a>
