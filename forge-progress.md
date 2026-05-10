@@ -277,3 +277,8 @@
 **PR:** #42 — https://github.com/Jakegak/cla-website/pull/42
 **Files changed:** `src/components/ActivitiesGallery.jsx`
 **Notes:** Replaced all 12 picsum.photos random image URLs with Unsplash Source API URLs using school-relevant search terms. Each URL was mapped to the most appropriate category: sports URLs for Sports items, art/drama for Arts, church/worship for Worship, science/library/classroom for Academics, and playground/graduation/students for Events. The id, category, and alt fields were preserved (alt text was only adjusted minimally where the original text already matched the new image theme). No new npm packages were added. The component logic, structure, and export remain completely unchanged — only the GALLERY_IMAGES array src fields were modified.
+
+## Issue #30 — fix(testimonials): testimonial text floats with no visual container [IN PROGRESS]
+**Started:** 2026-05-10T06:04:24.065379+00:00
+**Branch:** `fix/testimonials-card-container`
+
