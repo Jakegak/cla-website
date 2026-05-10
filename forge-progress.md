@@ -96,3 +96,8 @@
 **PR:** #20 — https://github.com/Jakegak/cla-website/pull/20
 **Files changed:** `src/components/Testimonials.jsx`, `src/App.jsx`
 **Notes:** No new npm packages added — framer-motion ^12.35.0 already in dependencies. The carousel uses a ref-based pause mechanism (isPausedRef) to avoid race conditions when clearing/restarting intervals on hover. The interval callback checks the ref each tick rather than being destroyed and recreated. A fixed min-h-64 container prevents layout shift when cards transition. Navigation dot clicks also restart the interval to avoid immediate auto-advance after manual selection. The component follows established codebase patterns: default function export, variants defined outside component, AnimatePresence mode='wait', Tailwind theme token classes only.
+
+## Issue #8 — feat(admissions): admissions process and fee structure [IN PROGRESS]
+**Started:** 2026-05-10T03:01:07.606124+00:00
+**Branch:** `feat/admissions-stepper-fee-table`
+

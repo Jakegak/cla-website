@@ -1,255 +1,209 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import ApplicationModal from "./ApplicationModal";
 
-// Fee data extracted from the brochure
-const feeStructure = {
-  Playgroup: {
-    admission: "3,000",
-    interview: "-",
-    tuition: "15,000",
-    books: "1,200",
-    diary: "200",
-    report: "400",
-    computer: "-",
-  },
-  "PP1 & PP2": {
-    admission: "3,000",
-    interview: "500",
-    tuition: "15,000",
-    books: "1,200",
-    diary: "200",
-    report: "400",
-    computer: "-",
-  },
-  "Grade 1-3": {
-    admission: "3,000",
-    interview: "1,000",
-    tuition: "18,500",
-    books: "2,000",
-    diary: "200",
-    report: "400",
-    computer: "1,000",
-  },
-  "Grade 4-5": {
-    admission: "3,000",
-    interview: "1,000",
-    tuition: "20,000",
-    books: "2,500",
-    diary: "200",
-    report: "400",
-    computer: "2,000",
-  },
-  "Grade 6": {
-    admission: "3,000",
-    interview: "1,000",
-    tuition: "22,000",
-    books: "2,500",
-    diary: "200",
-    report: "400",
-    computer: "2,000",
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    },
   },
 };
 
-// Helper function to turn strings like "15,000" into real numbers, and "-" into 0
-const parseFee = (feeStr) => {
-  if (!feeStr || feeStr === "-") return 0;
-  return parseInt(feeStr.replace(/,/g, ""), 10);
+const childVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
 };
+
+const steps = [
+  {
+    number: 1,
+    title: "Submit Application",
+    description:
+      "Complete and submit the online application form with all required documents.",
+  },
+  {
+    number: 2,
+    title: "Assessment",
+    description:
+      "Your child will undergo an age-appropriate assessment to determine readiness.",
+  },
+  {
+    number: 3,
+    title: "Interview",
+    description:
+      "A brief family interview with the admissions team to discuss expectations.",
+  },
+  {
+    number: 4,
+    title: "Enrolment",
+    description:
+      "Upon acceptance, complete fee payment and enrolment paperwork.",
+  },
+];
+
+const feeTiers = [
+  {
+    tier: "Early Years",
+    termFee: "18,000",
+    annualFee: "54,000",
+  },
+  {
+    tier: "Lower Primary",
+    termFee: "25,000",
+    annualFee: "75,000",
+  },
+  {
+    tier: "Upper Primary",
+    termFee: "30,000",
+    annualFee: "90,000",
+  },
+];
 
 export default function AdmissionsAndFees() {
-  const [selectedGrade, setSelectedGrade] = useState("Grade 1-3");
-  const activeFees = feeStructure[selectedGrade];
-
-  // Calculate the total dynamically based on the selected grade
-  const calculateTotal = (fees) => {
-    return Object.values(fees).reduce((sum, fee) => sum + parseFee(fee), 0);
-  };
-
-  const totalTermFee = calculateTotal(activeFees);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <section id="admissions" className="py-24 bg-slate-800 text-slate-200">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
+    <div className="py-24 bg-slate-900">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="max-w-7xl mx-auto px-6 lg:px-8"
+      >
+        {/* Section Heading */}
+        <motion.div variants={childVariants} className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
-            Admissions & Fees
+            Admissions
           </h2>
-          <div className="w-24 h-1 bg-green-500 mx-auto rounded-full mb-6"></div>
-          <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            Everything you need to know to join the Christian Living Academy
-            family. Admission is currently in progress!
-          </p>
-        </div>
+          <div className="w-24 h-1 bg-cla-gold mx-auto rounded-full" />
+        </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Left Column: Admission Requirements */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="bg-slate-700/40 p-8 rounded-3xl border border-slate-600 flex flex-col h-full"
-          >
-            <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-              <span className="p-2 bg-green-500/20 text-green-400 rounded-lg">
-                📋
-              </span>
-              Admission Requirements
-            </h3>
-            <ul className="space-y-4 mb-8 flex-grow">
-              {[
-                "A copy of birth certificate",
-                "2 Coloured passport photos",
-                "Assessment reports",
-                "Clearance letter from the previous school",
-              ].map((req, index) => (
-                <motion.li
-                  key={index}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex items-center gap-4 bg-slate-800/60 p-4 rounded-xl border border-slate-700/50"
-                >
-                  <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0 border border-green-500/30">
-                    <svg
-                      className="w-4 h-4 text-green-400"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={3}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
+        {/* 4-Step Process Stepper */}
+        <motion.div variants={childVariants} className="mb-20">
+          <h3 className="text-xl md:text-2xl font-bold text-white text-center mb-10">
+            Admission Process
+          </h3>
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-center gap-4 md:gap-0">
+            {steps.map((step, index) => (
+              <div key={step.number} className="flex flex-col md:flex-row items-center md:items-start w-full md:w-auto">
+                {/* Step Card */}
+                <div className="flex flex-row md:flex-col items-center md:items-center gap-4 md:gap-3 w-full md:w-48">
+                  {/* Numbered Circle */}
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-cla-purple text-white flex items-center justify-center text-lg font-bold shadow-lg shadow-cla-purple/25">
+                    {step.number}
                   </div>
-                  <span className="text-slate-300 font-medium">{req}</span>
-                </motion.li>
-              ))}
-            </ul>
+                  {/* Text */}
+                  <div className="md:text-center">
+                    <p className="text-white font-bold text-sm md:text-base">
+                      {step.title}
+                    </p>
+                    <p className="text-slate-400 text-xs md:text-sm mt-1 leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
 
-            {/* Note about Meals */}
-            <div className="bg-blue-900/30 border border-blue-500/30 p-5 rounded-2xl flex gap-4 items-start mt-auto">
-              <span className="text-3xl">🍽️</span>
-              <div>
-                <h4 className="text-blue-300 font-bold mb-1">Meals Included</h4>
-                <p className="text-slate-300 text-sm leading-relaxed">
-                  Tuition fee is inclusive of breaktea, Lunch & evening snacks
-                  for all students.
-                </p>
+                {/* Connector Line / Arrow */}
+                {index < steps.length - 1 && (
+                  <>
+                    {/* Horizontal connector — hidden on mobile */}
+                    <div className="hidden md:flex items-center mx-4 flex-shrink-0">
+                      <div className="w-12 lg:w-20 h-0.5 bg-slate-600" />
+                      <svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 12 12"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        className="flex-shrink-0 -ml-1"
+                      >
+                        <path d="M2 1L10 6L2 11" fill="#475569" />
+                      </svg>
+                    </div>
+                    {/* Vertical connector — visible only on mobile */}
+                    <div className="flex md:hidden items-center justify-center w-12 py-2">
+                      <div className="w-0.5 h-8 bg-slate-600" />
+                    </div>
+                  </>
+                )}
               </div>
-            </div>
-          </motion.div>
+            ))}
+          </div>
+        </motion.div>
 
-          {/* Right Column: Fee Structure Calculator */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="bg-slate-900 p-8 rounded-3xl border border-slate-700 shadow-2xl flex flex-col h-full"
+        {/* Fee Table */}
+        <motion.div variants={childVariants} className="mb-16">
+          <h3 className="text-xl md:text-2xl font-bold text-white text-center mb-8">
+            Fee Structure
+          </h3>
+          <div className="overflow-x-auto">
+            <table className="w-full max-w-2xl mx-auto border-collapse rounded-2xl overflow-hidden">
+              <thead>
+                <tr className="bg-cla-purple text-white">
+                  <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
+                    Tier
+                  </th>
+                  <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
+                    Term Fee (KES)
+                  </th>
+                  <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
+                    Annual Fee (KES)
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {feeTiers.map((row, index) => (
+                  <tr
+                    key={row.tier}
+                    className={index % 2 === 0 ? "bg-slate-800/70" : "bg-slate-800/40"}
+                  >
+                    <td className="px-6 py-4 text-white font-bold text-sm">
+                      {row.tier}
+                    </td>
+                    <td className="px-6 py-4 text-slate-300 text-sm">
+                      {row.termFee}
+                    </td>
+                    <td className="px-6 py-4 text-slate-300 text-sm">
+                      {row.annualFee}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-slate-500 text-xs text-center mt-4">
+            Fees are subject to review. Contact admissions for the latest schedule.
+          </p>
+        </motion.div>
+
+        {/* Apply Now CTA */}
+        <motion.div variants={childVariants} className="text-center">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setIsModalOpen(true)}
+            className="bg-cla-purple text-white rounded-lg px-8 py-3 font-bold text-lg shadow-lg shadow-cla-purple/25 transition-colors hover:brightness-110"
           >
-            <h3 className="text-2xl font-bold text-white mb-6">
-              Fee Structure (Ksh)
-            </h3>
+            Apply Now
+          </motion.button>
+        </motion.div>
+      </motion.div>
 
-            {/* Grade Selector Pills */}
-            <div className="flex flex-wrap gap-2 mb-8">
-              {Object.keys(feeStructure).map((grade) => (
-                <button
-                  key={grade}
-                  onClick={() => setSelectedGrade(grade)}
-                  className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-300 ${
-                    selectedGrade === grade
-                      ? "bg-green-500 text-slate-900 shadow-[0_0_10px_rgba(34,197,94,0.4)]"
-                      : "bg-slate-800 text-slate-400 hover:bg-slate-700 border border-slate-700"
-                  }`}
-                >
-                  {grade}
-                </button>
-              ))}
-            </div>
-
-            {/* Dynamic Fee Details */}
-            <div className="bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 flex flex-col">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={selectedGrade}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                  className="flex flex-col h-full"
-                >
-                  <div className="divide-y divide-slate-700/50 flex-grow">
-                    {/* Individual Fee Rows */}
-                    <div className="flex justify-between p-4 hover:bg-slate-700/30 transition-colors">
-                      <span className="text-slate-400">Admission Fee</span>
-                      <span className="text-white font-medium">
-                        {activeFees.admission}
-                      </span>
-                    </div>
-                    {activeFees.interview !== "-" && (
-                      <div className="flex justify-between p-4 hover:bg-slate-700/30 transition-colors">
-                        <span className="text-slate-400">Interview Fee</span>
-                        <span className="text-white font-medium">
-                          {activeFees.interview}
-                        </span>
-                      </div>
-                    )}
-                    <div className="flex justify-between p-4 bg-slate-700/20 hover:bg-slate-700/40 transition-colors">
-                      <span className="text-slate-300 font-semibold">
-                        Tuition Fee
-                      </span>
-                      <span className="text-green-400 font-bold">
-                        {activeFees.tuition}
-                      </span>
-                    </div>
-                    <div className="flex justify-between p-4 hover:bg-slate-700/30 transition-colors">
-                      <span className="text-slate-400">Exercise Books</span>
-                      <span className="text-white font-medium">
-                        {activeFees.books}
-                      </span>
-                    </div>
-                    <div className="flex justify-between p-4 hover:bg-slate-700/30 transition-colors">
-                      <span className="text-slate-400">
-                        School Diary & Report Book
-                      </span>
-                      <span className="text-white font-medium">
-                        {parseFee(activeFees.diary) +
-                          parseFee(activeFees.report)}
-                      </span>
-                    </div>
-                    {activeFees.computer !== "-" && (
-                      <div className="flex justify-between p-4 hover:bg-slate-700/30 transition-colors">
-                        <span className="text-slate-400">
-                          Computer / French
-                        </span>
-                        <span className="text-white font-medium">
-                          {activeFees.computer}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* TOTAL ROW */}
-                  <div className="bg-green-500/10 border-t-2 border-green-500/50 p-5 mt-auto">
-                    <div className="flex justify-between items-center">
-                      <span className="text-green-400 font-bold text-lg uppercase tracking-wider">
-                        Total Required
-                      </span>
-                      <span className="text-white font-extrabold text-2xl">
-                        Ksh {totalTermFee.toLocaleString()}
-                      </span>
-                    </div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-    </section>
+      {/* Local ApplicationModal instance */}
+      <ApplicationModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
+    </div>
   );
 }
