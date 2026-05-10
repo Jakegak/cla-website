@@ -140,3 +140,11 @@
 **Started:** 2026-05-10T03:44:47.923578+00:00
 **Branch:** `chore/seo-metadata-vercel-config`
 
+
+## Issue #12 — feat(deployment): SEO metadata, OG tags, and Vercel config
+**Date:** 2026-05-10 03:45 UTC
+**Status:** SUCCESS
+**Branch:** `chore/seo-metadata-vercel-config`
+**PR:** #25 — https://github.com/Jakegak/cla-website/pull/25
+**Files changed:** `index.html`, `vercel.json`, `public/robots.txt`
+**Notes:** The og:image path is set to '/src/assets/cla-logo.jpg' as specified in the plan. Note that this path will NOT resolve in production since Vite does not serve /src/ — only files in public/ or Vite-processed assets are available in the build output. A follow-up task should copy the logo to public/ and update the og:image path accordingly. The viewport meta tag was NOT duplicated since it already exists. The project uses plain JSX (not TypeScript), so 'npx tsc --noEmit' is not included in test commands as it would fail without a tsconfig. No new npm packages were added.
