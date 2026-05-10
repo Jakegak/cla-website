@@ -368,3 +368,16 @@
 **PR:** #57 — https://github.com/Jakegak/cla-website/pull/57
 **Files changed:** `src/components/AboutUs.jsx`
 **Notes:** Only the AboutUs.jsx file needed changes — the stats cards layout was the sole target. Three specific changes were made: (1) Increased grid gap from `gap-4` to `gap-6` to match the spacing pattern used in the Programmes section and provide more consistent visual spacing between cards. (2) Added `overflow-hidden` to the stats cards container to prevent any potential horizontal overflow on very small screens. (3) Added `w-full` to each stat card to explicitly ensure equal sizing within grid cells, though grid children stretch by default this makes the intent explicit. The parent `grid md:grid-cols-2 gap-12 items-center` layout was intentionally left unchanged as it controls the mission/stats split, not the stats grid itself. All existing card visual styling (bg-white, rounded-2xl, p-6, shadow-sm, border, text colors, animations) was preserved. No new npm packages were added. HeroSection.jsx, Programmes.jsx, index.css, and App.css were not modified as they do not contain stats cards and required no changes.
+
+## Issue #58 — Issue 5 — Programme Cards Layout Stability [IN PROGRESS]
+**Started:** 2026-05-10T09:53:36.187891+00:00
+**Branch:** `fix/programme-cards-layout-stability`
+
+
+## Issue #58 — Issue 5 — Programme Cards Layout Stability
+**Date:** 2026-05-10 09:55 UTC
+**Status:** SUCCESS
+**Branch:** `fix/programme-cards-layout-stability`
+**PR:** #59 — https://github.com/Jakegak/cla-website/pull/59
+**Files changed:** `src/components/Programmes.jsx`, `src/index.css`, `src/App.css`
+**Notes:** The fix is entirely in Programmes.jsx with CSS utility class additions to the existing markup. Key changes: (1) Added `grid-cols-1` explicitly to the grid container for clarity alongside the existing `sm:grid-cols-2 lg:grid-cols-3 gap-6`. (2) Added `h-full flex flex-col min-w-0 overflow-hidden` to each card's className — `h-full` ensures equal row heights in CSS Grid, `flex flex-col` enables vertical content distribution, `min-w-0` prevents long text from expanding cards beyond grid track width, `overflow-hidden` prevents content from clipping outside rounded corners. (3) Changed the description `<p>` to use `flex-1` so it absorbs remaining vertical space and pushes all cards to consistent visual weight. No Framer Motion props, typography, colors, icons, borders, shadows, or spacing were altered. No new npm packages added. CSS files (index.css, App.css) were audited and confirmed to have no conflicting rules — they are included as complete files with no modifications.
