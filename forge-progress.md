@@ -355,3 +355,16 @@
 **PR:** #55 — https://github.com/Jakegak/cla-website/pull/55
 **Files changed:** `src/components/Navbar.jsx`, `src/App.jsx`, `src/index.css`, `src/App.css`
 **Notes:** Key changes: (1) Replaced dynamic `py-3`/`py-5` scroll-toggled padding with a fixed `h-20` on the inner flex container, eliminating the 16px CLS on scroll. (2) Changed `transition-all` to `transition-colors transition-shadow` on the header element so only background color and shadow animate — no dimensional changes. (3) Added `whitespace-nowrap` to the desktop nav links container and logo text to prevent wrapping at intermediate viewport widths near the md breakpoint. (4) Added `flex-shrink-0` to the CTA button, logo container, and hamburger button so they never compress under flex pressure. (5) Added a `div.h-20` spacer in App.jsx below the Navbar to offset content that would otherwise be hidden behind the fixed-position navbar. (6) Added `scroll-margin-top: 5rem` on all `[id]` elements in index.css so smooth-scroll anchor navigation lands below the fixed navbar. The navbar height is now constant at 5rem (80px) regardless of scroll state. No new npm packages were added.
+
+## Issue #56 — Issue 4 — Stats Cards Alignment and Responsiveness [IN PROGRESS]
+**Started:** 2026-05-10T09:47:50.272876+00:00
+**Branch:** `fix/stats-cards-alignment-responsiveness`
+
+
+## Issue #56 — Issue 4 — Stats Cards Alignment and Responsiveness
+**Date:** 2026-05-10 09:49 UTC
+**Status:** SUCCESS
+**Branch:** `fix/stats-cards-alignment-responsiveness`
+**PR:** #57 — https://github.com/Jakegak/cla-website/pull/57
+**Files changed:** `src/components/AboutUs.jsx`
+**Notes:** Only the AboutUs.jsx file needed changes — the stats cards layout was the sole target. Three specific changes were made: (1) Increased grid gap from `gap-4` to `gap-6` to match the spacing pattern used in the Programmes section and provide more consistent visual spacing between cards. (2) Added `overflow-hidden` to the stats cards container to prevent any potential horizontal overflow on very small screens. (3) Added `w-full` to each stat card to explicitly ensure equal sizing within grid cells, though grid children stretch by default this makes the intent explicit. The parent `grid md:grid-cols-2 gap-12 items-center` layout was intentionally left unchanged as it controls the mission/stats split, not the stats grid itself. All existing card visual styling (bg-white, rounded-2xl, p-6, shadow-sm, border, text colors, animations) was preserved. No new npm packages were added. HeroSection.jsx, Programmes.jsx, index.css, and App.css were not modified as they do not contain stats cards and required no changes.

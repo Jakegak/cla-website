@@ -97,10 +97,10 @@ const stats = [
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        <rect x="6" y="8" width="28" height="24" rx="2" stroke="currentColor" strokeWidth="2" fill="none" />
-        <path d="M6 14H34" stroke="currentColor" strokeWidth="2" />
-        <path d="M14 8V14" stroke="currentColor" strokeWidth="2" />
-        <path d="M26 8V14" stroke="currentColor" strokeWidth="2" />
+        <rect x="4" y="6" width="14" height="12" rx="2" stroke="currentColor" strokeWidth="2" fill="none" />
+        <rect x="22" y="6" width="14" height="12" rx="2" stroke="currentColor" strokeWidth="2" fill="none" />
+        <rect x="4" y="22" width="14" height="12" rx="2" stroke="currentColor" strokeWidth="2" fill="none" />
+        <rect x="22" y="22" width="14" height="12" rx="2" stroke="currentColor" strokeWidth="2" fill="none" />
       </svg>
     ),
   },
@@ -130,68 +130,88 @@ export default function AboutUs() {
   return (
     <section
       id="about"
-      style={{ backgroundColor: "#F8F8F8" }}
       className="py-20 px-4"
+      style={{ backgroundColor: "#F8F8F8" }}
     >
-      <motion.div
-        className="max-w-6xl mx-auto"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-      >
-        <motion.div className="text-center mb-16" variants={childVariants}>
-          <span className="inline-block bg-purple-100 text-purple-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+      <div className="max-w-6xl mx-auto">
+        {/* Section Header */}
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2
+            className="text-4xl font-bold mb-4"
+            style={{ color: "#2D1B69" }}
+          >
             About Us
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Who We Are
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Christ Little Academy is a faith-based educational institution
-            dedicated to nurturing young minds through holistic learning
-            experiences. We combine academic excellence with moral values to
-            shape future leaders.
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Dedicated to nurturing young minds and building a strong foundation
+            for lifelong learning.
           </p>
         </motion.div>
 
+        {/* Mission & Stats Grid */}
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          <motion.div variants={childVariants}>
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+          {/* Mission & Vision */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h3
+              className="text-2xl font-bold mb-4"
+              style={{ color: "#2D1B69" }}
+            >
               Our Mission
             </h3>
-            <p className="text-gray-600 leading-relaxed mb-6">
-              To provide a nurturing environment where children grow
-              academically, spiritually, and socially. We believe every child is
-              uniquely gifted and deserves the opportunity to discover and
-              develop their full potential.
+            <p className="text-gray-600 mb-6 leading-relaxed">
+              To provide a world-class education that empowers every child to
+              discover their potential, develop critical thinking skills, and
+              become compassionate global citizens.
             </p>
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+            <h3
+              className="text-2xl font-bold mb-4"
+              style={{ color: "#2D1B69" }}
+            >
               Our Vision
             </h3>
             <p className="text-gray-600 leading-relaxed">
-              To be a leading institution that raises confident, compassionate,
-              and academically excellent individuals who will make positive
-              contributions to society.
+              To be a leading institution that transforms lives through
+              innovative education, fostering creativity, integrity, and
+              excellence in every student.
             </p>
           </motion.div>
 
+          {/* Stats Cards */}
           <motion.div
-            className="grid grid-cols-2 gap-4"
+            className="grid grid-cols-2 gap-6 overflow-hidden"
             variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
           >
             {stats.map((stat) => (
               <motion.div
                 key={stat.label}
-                className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 text-center"
+                className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 text-center w-full"
                 variants={childVariants}
                 whileHover={{ y: -4, shadow: "lg" }}
-                transition={{ duration: 0.2 }}
               >
-                <div className="text-purple-600 mb-3 flex justify-center">
+                <div
+                  className="flex justify-center mb-3"
+                  style={{ color: "#667eea" }}
+                >
                   {stat.icon}
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-1">
+                <div
+                  className="text-3xl font-bold mb-1"
+                  style={{ color: "#2D1B69" }}
+                >
                   {stat.value}
                 </div>
                 <div className="text-sm text-gray-500">{stat.label}</div>
@@ -199,7 +219,7 @@ export default function AboutUs() {
             ))}
           </motion.div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }
