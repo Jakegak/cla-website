@@ -460,3 +460,11 @@
 **Started:** 2026-05-10T14:08:15.495044+00:00
 **Branch:** `fix/footer-wrong-contact-data`
 
+
+## Issue #84 — fix(footer): wrong address and phone — update to real CLA contact data
+**Date:** 2026-05-10 14:10 UTC
+**Status:** SUCCESS
+**Branch:** `fix/footer-wrong-contact-data`
+**PR:** #85 — https://github.com/Jakegak/cla-website/pull/85
+**Files changed:** `src/components/Footer.jsx`
+**Notes:** The hours line uses the Unicode en-dash character (\u2013) to match the ContactSection exactly, not a regular hyphen. The email was already correct and was preserved as-is. The footer structure (SVG icons, quickLinks, social links, copyright) was kept identical. No new packages were added. The file is a .jsx file (not .tsx) matching the existing codebase convention. Note: The \u2013 in JSX string content will render as the literal text '\u2013' — in JSX you need either the actual Unicode character – or a JS expression. The content above uses the escaped form in the JSX string which will be interpreted correctly by the JSX compiler as the en-dash character.
