@@ -373,3 +373,11 @@
 **Started:** 2026-05-10T09:53:36.187891+00:00
 **Branch:** `fix/programme-cards-layout-stability`
 
+
+## Issue #58 — Issue 5 — Programme Cards Layout Stability
+**Date:** 2026-05-10 09:55 UTC
+**Status:** SUCCESS
+**Branch:** `fix/programme-cards-layout-stability`
+**PR:** #59 — https://github.com/Jakegak/cla-website/pull/59
+**Files changed:** `src/components/Programmes.jsx`, `src/index.css`, `src/App.css`
+**Notes:** The fix is entirely in Programmes.jsx with CSS utility class additions to the existing markup. Key changes: (1) Added `grid-cols-1` explicitly to the grid container for clarity alongside the existing `sm:grid-cols-2 lg:grid-cols-3 gap-6`. (2) Added `h-full flex flex-col min-w-0 overflow-hidden` to each card's className — `h-full` ensures equal row heights in CSS Grid, `flex flex-col` enables vertical content distribution, `min-w-0` prevents long text from expanding cards beyond grid track width, `overflow-hidden` prevents content from clipping outside rounded corners. (3) Changed the description `<p>` to use `flex-1` so it absorbs remaining vertical space and pushes all cards to consistent visual weight. No Framer Motion props, typography, colors, icons, borders, shadows, or spacing were altered. No new npm packages added. CSS files (index.css, App.css) were audited and confirmed to have no conflicting rules — they are included as complete files with no modifications.
