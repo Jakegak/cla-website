@@ -303,3 +303,8 @@
 **PR:** #44 — https://github.com/Jakegak/cla-website/pull/44
 **Files changed:** `src/components/AdmissionsAndFees.jsx`, `src/index.css`
 **Notes:** Key decisions: (1) Since the file content was truncated, I reconstructed the full AdmissionsAndFees.jsx based on the visible code context (imports, constants, component start) and the architectural notes describing the fee table, steps, and existing modal state. (2) The Apply Now button uses inline styles for backgroundColor '#FFB800' and color '#2D1B69' matching the Navbar pattern, but with larger sizing (text-lg font-bold px-10 py-4 rounded-lg) to make it more prominent than the compact navbar button. (3) Hover darkening uses a CSS class .cta-apply-btn with filter: brightness(0.9) to avoid needing onMouseEnter/onMouseLeave state — this is cleaner and avoids re-renders. (4) The button is centered via text-center on its parent motion.div wrapper. (5) ApplicationModal is rendered with exactly the isOpen/onClose props as documented. (6) No new npm packages added. (7) Only AdmissionsAndFees.jsx and index.css were modified — Navbar.jsx and ApplicationModal.jsx required no changes.
+
+## Issue #32 — fix(contact): contact section shows placeholder data,  footer shows real data — sync them [IN PROGRESS]
+**Started:** 2026-05-10T07:39:26.339219+00:00
+**Branch:** `fix/contact-section-sync-footer-data`
+
