@@ -421,3 +421,11 @@
 **Started:** 2026-05-10T13:04:53.323516+00:00
 **Branch:** `fix/hero-cla-brand-identity`
 
+
+## Issue #78 — fix(hero): restore CLA brand identity — correct gradient, school name, tagline, and gold CTAs
+**Date:** 2026-05-10 13:06 UTC
+**Status:** SUCCESS
+**Branch:** `fix/hero-cla-brand-identity`
+**PR:** #79 — https://github.com/Jakegak/cla-website/pull/79
+**Files changed:** `src/index.css`, `src/components/HeroSection.jsx`
+**Notes:** Key decisions: (1) No new npm packages needed — framer-motion and all fonts already available. (2) CountUpValue uses requestAnimationFrame with cubic ease-out for smooth counting animation, with proper cleanup on unmount. (3) The cross pattern SVG is a minimal inline data URI using simple cross lines at 40px intervals. (4) Stats bar uses grid-cols-2 on mobile, grid-cols-4 on md+ for responsive layout. (5) Kept the bottom fade gradient (from-slate-900) to blend smoothly into the App's bg-slate-900 background. (6) The Explore School button scrolls to #about section matching the old handleLearnMoreClick behavior. (7) Scroll indicator is keyboard-accessible with role=button and onKeyDown handler. (8) Used inline styles for brand-specific values (colors, font families, clamp sizes) rather than Tailwind arbitrary values to keep things explicit and maintainable. (9) App.css and App.jsx are NOT modified as instructed — they are already correct. (10) package.json is NOT modified — all dependencies are already present.
