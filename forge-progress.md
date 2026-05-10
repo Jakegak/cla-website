@@ -251,3 +251,8 @@
 **PR:** #40 — https://github.com/Jakegak/cla-website/pull/40
 **Files changed:** `src/index.css`, `src/components/HeroSection.jsx`, `src/App.jsx`
 **Notes:** Key decisions: (1) Kept DecoativeCross and GraduationCap function definitions in the file to avoid breaking any potential future references, but removed all four motion.div invocations that rendered them. The floatVariants, containerVariants, and childVariants module-scope objects were also removed since they're no longer used. (2) Switched from staggerChildren pattern to explicit per-element transition delays (0, 0.2, 0.4) as specified in the plan. (3) Preserved the Learn More as an <a> tag with smooth scroll behavior rather than converting to a plain button, maintaining the existing UX. (4) Removed the duplicate <section id='home'> wrapper in App.jsx since HeroSection already renders its own <section id='home'>. (5) Bottom fade div (bg-gradient-to-t from-white to-transparent) is preserved as the plan does not mention removing it. (6) Google Fonts @import added before the Tailwind import in index.css. (7) No new npm packages needed — framer-motion was already present. (8) Used inline styles for all custom values (gradient, overlays, typography) since this is a JSX codebase without Tailwind config for CLA brand colors, consistent with existing patterns.
+
+## Issue #28 — fix(about): stat cards are rendering as invisible ghost boxes [IN PROGRESS]
+**Started:** 2026-05-10T05:37:14.335656+00:00
+**Branch:** `fix/about-stat-cards-visibility`
+
