@@ -494,3 +494,16 @@
 **PR:** #89 — https://github.com/Jakegak/cla-website/pull/89
 **Files changed:** `src/components/AboutUs.jsx`
 **Notes:** No new npm packages needed — framer-motion v12 is already installed and exports useInView, useMotionValue, useTransform, and animate. Playfair Display and Inter fonts are already loaded via both index.html and src/index.css. The CountUp component uses useMotionValue(0) with animate() triggered by useInView (once: true) to count from 0 to the target number. Direct DOM manipulation via displayRef.current.textContent is used instead of React state to avoid re-renders on every animation frame. The stats grid uses grid-cols-1 on mobile and sm:grid-cols-2 on small+ screens (within the parent md:grid-cols-2 layout that separates mission/vision from stats). All brand-specific values (#2D1B69, font-family, exact sizing) use inline style objects since Tailwind v4 config may not have these custom values. The whileHover bug (using invalid 'shadow' motion prop) was fixed to use a proper boxShadow CSS string.
+
+## Issue #92 — fix(programmes): show only primary school programmes — remove Secondary and Sixth Form [IN PROGRESS]
+**Started:** 2026-05-10T14:54:49.234215+00:00
+**Branch:** `fix/programmes-primary-only`
+
+
+## Issue #92 — fix(programmes): show only primary school programmes — remove Secondary and Sixth Form
+**Date:** 2026-05-10 14:56 UTC
+**Status:** SUCCESS
+**Branch:** `fix/programmes-primary-only`
+**PR:** #93 — https://github.com/Jakegak/cla-website/pull/93
+**Files changed:** `src/components/Programmes.jsx`
+**Notes:** No new packages added. All icons are hand-crafted inline SVGs matching the existing 40x40 viewBox pattern with stroke='currentColor' and fill='none'. The accent colour bar uses a cycling array indexed by `index % 3` to alternate through the three brand colours. Card hover animation uses Framer Motion whileHover with spring transition — the old CSS hover:shadow-md and transition-shadow classes were removed since Framer Motion now handles the hover shadow effect. The card uses overflow-hidden on the rounded-2xl container so the 6px accent bar clips correctly to the card's rounded top corners. package.json and src/index.css did not require changes — framer-motion was already installed and no new CSS classes were needed.
