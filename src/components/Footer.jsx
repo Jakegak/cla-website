@@ -72,39 +72,75 @@ function YouTubeIcon() {
 export default function Footer() {
   const handleNavClick = (e, href) => {
     e.preventDefault();
-    const targetId = href.replace('#', '');
-    const element = document.getElementById(targetId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    const target = document.querySelector(href);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   return (
-    <footer className="w-full max-w-full overflow-hidden bg-cla-purple text-white py-16">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {/* Column 1: Logo & Tagline */}
-          <div className="min-w-0 text-center md:text-left">
-            <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
-              <Logo className="h-12 w-12" />
+    <footer className="bg-gray-900 text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Column 1: Branding */}
+          <div>
+            <div className="flex items-center space-x-3 mb-4">
+              <Logo />
               <span className="text-xl font-bold">Christian Living Academy</span>
             </div>
-            <p className="text-white/70 text-sm leading-relaxed">
-              Nurturing young minds and building bright futures through
-              faith-based education since our founding.
+            <p className="text-sm text-white/70">
+              Dedicated to academic excellence and raising a God-fearing generation of leaders.
             </p>
+            <div className="flex space-x-4 mt-6">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/60 hover:text-white transition-colors"
+                aria-label="Facebook"
+              >
+                <FacebookIcon />
+              </a>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/60 hover:text-white transition-colors"
+                aria-label="Twitter"
+              >
+                <TwitterIcon />
+              </a>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/60 hover:text-white transition-colors"
+                aria-label="Instagram"
+              >
+                <InstagramIcon />
+              </a>
+              <a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/60 hover:text-white transition-colors"
+                aria-label="YouTube"
+              >
+                <YouTubeIcon />
+              </a>
+            </div>
           </div>
 
           {/* Column 2: Quick Links */}
-          <div className="min-w-0 text-center md:text-left">
+          <div>
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
-                <li key={link.href}>
+                <li key={link.label}>
                   <a
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
-                    className="text-white/70 hover:text-white text-sm transition-colors duration-200"
+                    className="text-sm text-white/70 hover:text-white transition-colors"
                   >
                     {link.label}
                   </a>
@@ -113,78 +149,35 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Contact Info */}
-          <div className="min-w-0 text-center md:text-left">
+          {/* Column 3: Contact Us */}
+          <div>
             <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
             <div className="space-y-3 text-sm text-white/70">
-              <p>123 Academy Drive</p>
-              <p>Lagos, Nigeria</p>
+              <p>Along Kamiti Road, Near Kahawa West Junction, Nairobi</p>
               <p>
                 <a
-                  href="tel:+2341234567890"
-                  className="hover:text-white transition-colors duration-200"
+                  href="tel:0798767773"
+                  className="hover:text-white transition-colors"
                 >
-                  +234 123 456 7890
+                  0798 767 773
                 </a>
               </p>
-              <p className="break-all">
+              <p>
                 <a
                   href="mailto:info@christianlivingacademy.com"
-                  className="hover:text-white transition-colors duration-200"
+                  className="hover:text-white transition-colors"
                 >
                   info@christianlivingacademy.com
                 </a>
               </p>
+              <p>Mon \u2013 Fri: 7:30 AM \u2013 3:30 PM</p>
             </div>
           </div>
         </div>
 
-        {/* Social Icons */}
-        <div className="flex justify-center gap-6 mt-12 mb-8">
-          <a
-            href="https://facebook.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white/60 hover:text-white transition-colors duration-200"
-            aria-label="Facebook"
-          >
-            <FacebookIcon />
-          </a>
-          <a
-            href="https://twitter.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white/60 hover:text-white transition-colors duration-200"
-            aria-label="Twitter"
-          >
-            <TwitterIcon />
-          </a>
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white/60 hover:text-white transition-colors duration-200"
-            aria-label="Instagram"
-          >
-            <InstagramIcon />
-          </a>
-          <a
-            href="https://youtube.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white/60 hover:text-white transition-colors duration-200"
-            aria-label="YouTube"
-          >
-            <YouTubeIcon />
-          </a>
-        </div>
-
         {/* Copyright */}
-        <div className="border-t border-white/20 pt-8 text-center">
-          <p className="text-white/50 text-sm">
-            &copy; {new Date().getFullYear()} Christian Living Academy. All rights
-            reserved.
-          </p>
+        <div className="border-t border-white/10 mt-10 pt-6 text-center text-sm text-white/50">
+          <p>&copy; {new Date().getFullYear()} Christian Living Academy. All rights reserved.</p>
         </div>
       </div>
     </footer>
