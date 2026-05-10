@@ -264,3 +264,8 @@
 **PR:** #41 — https://github.com/Jakegak/cla-website/pull/41
 **Files changed:** `src/components/AboutUs.jsx`
 **Notes:** Reconstructed the full AboutUs.jsx since the original file was truncated and the right column (stat cards) was in the missing portion. Key decisions: (1) Used inline styles for all CLA brand colors (#2D1B69 purple, #C9A84C gold, white) per codebase convention — no Tailwind arbitrary values. (2) SVG icons use currentColor so setting color: 'white' on the card automatically makes icons white. (3) Stat card container uses 'grid grid-cols-1 md:grid-cols-2 gap-6' for responsive 2x2 on desktop, 1-column on mobile. (4) Added containerVariants with staggerChildren for staggered card entrance animations. (5) The stat value uses fontSize '2.5rem' and fontWeight 'bold' per acceptance criteria. (6) The fourth stat (Programs/20+) was inferred as a reasonable fourth card — if the original had different data, only the label/value/icon need updating. (7) No new npm packages added. (8) src/index.css was not modified as no changes were needed there — the fix is entirely in the component's inline styles.
+
+## Issue #29 — fix(gallery): replace random picsum images with school-themed  Unsplash photos [IN PROGRESS]
+**Started:** 2026-05-10T05:50:26.104231+00:00
+**Branch:** `fix/gallery-school-themed-images`
+
