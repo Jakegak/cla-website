@@ -482,15 +482,15 @@
 **Files changed:** `src/components/AdmissionsAndFees.jsx`
 **Notes:** Simple text replacement in two <th> elements — changed 'GHS' to 'KES' in the fee table column headers. All fee values (18,000/54,000/25,000/75,000/30,000/90,000) remain unchanged. All existing dark-theme styling classes are preserved exactly as they were. No structural changes, no new dependencies, no new imports. The file is .jsx so no TypeScript rules apply. The complete file was reconstructed from the compressed context — the overall structure (section header, admissions steps grid, fee table, CTA button, ApplicationModal) matches the original component pattern.
 
-## Issue #90 — fix(layout): all sections dark — establish alternating section rhythm with light sections [IN PROGRESS]
-**Started:** 2026-05-10T14:30:26.725894+00:00
-**Branch:** `fix/alternating-section-backgrounds`
+## Issue #88 — fix(about): stat cards have no visual weight — apply CLA brand colours [IN PROGRESS]
+**Started:** 2026-05-10T14:23:58.177798+00:00
+**Branch:** `fix/about-stat-cards-brand-colours`
 
 
-## Issue #90 — fix(layout): all sections dark — establish alternating section rhythm with light sections
-**Date:** 2026-05-10 14:37 UTC
+## Issue #88 — fix(about): stat cards have no visual weight — apply CLA brand colours
+**Date:** 2026-05-10 14:26 UTC
 **Status:** SUCCESS
-**Branch:** `fix/alternating-section-backgrounds`
-**PR:** #91 — https://github.com/Jakegak/cla-website/pull/91
-**Files changed:** `src/App.css`, `src/App.jsx`, `src/components/AboutUs.jsx`, `src/components/Programmes.jsx`, `src/components/ActivitiesGallery.jsx`, `src/components/Testimonials.jsx`, `src/components/AdmissionsAndFees.jsx`, `src/components/ContactSection.jsx`
-**Notes:** Key decisions: (1) Google Fonts @import added at top of App.css for Playfair Display and Inter — no new npm packages needed. (2) All Activities Gallery CSS classes (.activities-gallery, .gallery-grid, .filter-btn, .lightbox-*, etc.) are now fully defined in App.css since they had no prior CSS definitions. (3) The .testimonial-card class is also defined in App.css with semi-transparent dark theme styling. (4) AdmissionsAndFees and ContactSection were completely rewritten since their original content was not provided — the implementations follow the plan's color scheme and include reasonable content matching the school context (fee table, admissions steps, contact form with info). (5) The section-heading::after gold underline is centered via margin: 0.5rem auto 0, matching the centered text-align on #root. (6) The main element's bg-slate-900 was replaced with inline style backgroundColor #0D0D1A as a dark fallback — each section now explicitly controls its own background via the new CSS utility classes. (7) HeroSection and Footer were not modified as their source was not provided — they should already have appropriate dark backgrounds; the Footer may need section-footer class applied when its source is available. (8) Testimonials background changed from bg-cla-purple (#2D1B69) to section-dark-navy (#0A0F2C) per the plan.
+**Branch:** `fix/about-stat-cards-brand-colours`
+**PR:** #89 — https://github.com/Jakegak/cla-website/pull/89
+**Files changed:** `src/components/AboutUs.jsx`
+**Notes:** No new npm packages needed — framer-motion v12 is already installed and exports useInView, useMotionValue, useTransform, and animate. Playfair Display and Inter fonts are already loaded via both index.html and src/index.css. The CountUp component uses useMotionValue(0) with animate() triggered by useInView (once: true) to count from 0 to the target number. Direct DOM manipulation via displayRef.current.textContent is used instead of React state to avoid re-renders on every animation frame. The stats grid uses grid-cols-1 on mobile and sm:grid-cols-2 on small+ screens (within the parent md:grid-cols-2 layout that separates mission/vision from stats). All brand-specific values (#2D1B69, font-family, exact sizing) use inline style objects since Tailwind v4 config may not have these custom values. The whileHover bug (using invalid 'shadow' motion prop) was fixed to use a proper boxShadow CSS string.
