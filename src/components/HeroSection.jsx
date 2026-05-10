@@ -71,29 +71,23 @@ function GraduationCap() {
         strokeWidth="4"
         fill="none"
       />
-      <circle cx="130" cy="40" r="4" fill="white" />
-      <line x1="130" y1="44" x2="130" y2="75" stroke="white" strokeWidth="3" />
-      <rect x="125" y="75" width="10" height="6" rx="2" fill="white" />
+      <circle cx="130" cy="40" r="5" fill="white" />
+      <line x1="130" y1="45" x2="130" y2="75" stroke="white" strokeWidth="3" />
+      <rect x="125" y="75" width="10" height="5" rx="2" fill="white" />
     </svg>
   );
 }
 
 export default function HeroSection({ onOpenModal }) {
-  const handleLearnMore = () => {
-    const aboutSection = document.getElementById("about");
-    if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-cla-purple to-cla-red">
-      {/* Pattern overlay */}
-      <div className="hero-pattern absolute inset-0 z-0 pointer-events-none" />
-
-      {/* Decorative floating cross — top right */}
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      style={{ background: "linear-gradient(to bottom, #2D1B69, #1a1045)" }}
+    >
+      {/* Decorative floating elements */}
       <motion.div
-        className="absolute top-20 right-8 sm:right-16 md:right-24 opacity-10 pointer-events-none hidden sm:block"
+        className="absolute top-20 left-10 opacity-10"
         variants={floatVariants}
         initial="initial"
         animate="animate"
@@ -101,69 +95,86 @@ export default function HeroSection({ onOpenModal }) {
         <DecoativeCross />
       </motion.div>
 
-      {/* Decorative floating graduation cap — bottom left */}
       <motion.div
-        className="absolute bottom-16 left-6 sm:left-16 md:left-24 opacity-10 pointer-events-none hidden sm:block"
+        className="absolute top-32 right-16 opacity-10"
         variants={floatVariants}
         initial="initial"
         animate="animate"
-        style={{ animationDelay: "3s" }}
+        transition={{ delay: 1 }}
       >
         <GraduationCap />
       </motion.div>
 
-      {/* Gradient edge fade at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-900 to-transparent z-0 pointer-events-none" />
+      <motion.div
+        className="absolute bottom-32 left-20 opacity-10"
+        variants={floatVariants}
+        initial="initial"
+        animate="animate"
+        transition={{ delay: 2 }}
+      >
+        <DecoativeCross />
+      </motion.div>
+
+      <motion.div
+        className="absolute bottom-20 right-10 opacity-10"
+        variants={floatVariants}
+        initial="initial"
+        animate="animate"
+        transition={{ delay: 3 }}
+      >
+        <GraduationCap />
+      </motion.div>
+
+      {/* Bottom fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent" />
 
       {/* Main content */}
       <motion.div
-        className="relative z-10 text-center px-6 max-w-5xl mx-auto"
+        className="relative z-10 text-center px-4 max-w-4xl mx-auto"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        {/* Animated badge */}
-        <motion.div variants={childVariants}>
-          <span className="inline-block py-1.5 px-5 rounded-full bg-white/10 text-white/80 border border-white/20 text-sm font-semibold tracking-widest uppercase mb-8 backdrop-blur-sm">
-            Admission In Progress
-          </span>
-        </motion.div>
-
-        {/* School name */}
         <motion.h1
-          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold text-white mb-6 tracking-tight drop-shadow-lg"
+          className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
           variants={childVariants}
         >
-          Christian Living Academy
+          Christian Learners&apos; Academy
         </motion.h1>
 
-        {/* Tagline */}
         <motion.p
-          className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-cla-gold font-semibold mb-12 tracking-wide"
+          className="text-lg md:text-xl lg:text-2xl mb-10 max-w-2xl mx-auto font-medium"
           variants={childVariants}
+          style={{ color: "#FFB800" }}
         >
-          Raising God Fearing Elite Generation
+          Nurturing minds, building character, and shaping futures through
+          faith-based education.
         </motion.p>
 
-        {/* CTA buttons */}
         <motion.div
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
+          className="flex flex-col sm:flex-row gap-4 justify-center"
           variants={childVariants}
         >
           <button
-            type="button"
             onClick={onOpenModal}
-            className="bg-cla-gold text-slate-900 font-bold px-8 py-3.5 rounded-lg text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer w-full sm:w-auto"
+            className="px-8 py-3 rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+            style={{ backgroundColor: "#FFB800", color: "#2D1B69" }}
           >
             Apply Now
           </button>
-          <button
-            type="button"
-            onClick={handleLearnMore}
-            className="border-2 border-white text-white font-bold px-8 py-3.5 rounded-lg text-lg hover:bg-white/10 hover:scale-105 transition-all duration-300 cursor-pointer w-full sm:w-auto"
+          <a
+            href="#about"
+            className="px-8 py-3 bg-white/20 backdrop-blur-sm text-white rounded-lg font-semibold text-lg border-2 border-white/30 hover:bg-white/30 transition-all duration-300 transform hover:scale-105"
+            onClick={(e) => {
+              e.preventDefault();
+              const element = document.getElementById("about");
+              if (element) {
+                element.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
           >
             Learn More
-          </button>
+          </a>
         </motion.div>
       </motion.div>
     </section>
