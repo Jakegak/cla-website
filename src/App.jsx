@@ -24,9 +24,8 @@ export default function App() {
 
       <Programmes />
 
-      <section id="gallery">
-        <ActivitiesGallery />
-      </section>
+      <ActivitiesGallery />
+
       <section id="admissions">
         <AdmissionsAndFees />
       </section>

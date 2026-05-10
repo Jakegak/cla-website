@@ -70,3 +70,8 @@
 **PR:** #18 — https://github.com/Jakegak/cla-website/pull/18
 **Files changed:** `src/components/Programmes.jsx`, `src/App.jsx`
 **Notes:** No new npm packages added — Framer Motion was already a project dependency. The Programmes component owns its own <section id='programmes'> element, so App.jsx renders <Programmes /> directly without a wrapping section to avoid duplicate IDs. Used inline style for the section background color (#F8F8F8) instead of arbitrary Tailwind values to comply with the project's Tailwind v4 @theme convention. Cards use border-l-4 with border-cla-purple for the accent, white backgrounds for contrast against the light section background, and spring-based whileHover animation for the lift effect. The stagger pattern (containerVariants/childVariants) follows the established convention from HeroSection and AboutUs. All SVG icons are 40x40, stroke-based with currentColor, and aria-hidden for accessibility.
+
+## Issue #6 — feat(gallery): activities photo gallery with category filter [IN PROGRESS]
+**Started:** 2026-05-10T02:17:23.643769+00:00
+**Branch:** `feat/activities-gallery-filter-lightbox`
+
