@@ -148,3 +148,41 @@
 **PR:** #25 — https://github.com/Jakegak/cla-website/pull/25
 **Files changed:** `index.html`, `vercel.json`, `public/robots.txt`
 **Notes:** The og:image path is set to '/src/assets/cla-logo.jpg' as specified in the plan. Note that this path will NOT resolve in production since Vite does not serve /src/ — only files in public/ or Vite-processed assets are available in the build output. A follow-up task should copy the logo to public/ and update the og:image path accordingly. The viewport meta tag was NOT duplicated since it already exists. The project uses plain JSX (not TypeScript), so 'npx tsc --noEmit' is not included in test commands as it would fail without a tsconfig. No new npm packages were added.
+
+## Issue #26 — fix(brand): apply CLA colour tokens consistently across all sections [IN PROGRESS]
+**Started:** 2026-05-10T04:10:02.160179+00:00
+**Branch:** `fix/brand-colour-tokens`
+
+
+## Issue #26 — fix(brand): apply CLA colour tokens consistently across all sections
+**Date:** 2026-05-10 04:13 UTC
+**Status:** FAILED
+**Branch:** `fix/brand-colour-tokens`
+**Notes:** RetryError[<Future at 0x270a07915b0 state=finished raised JSONDecodeError>]
+
+## Issue #26 — fix(brand): apply CLA colour tokens consistently across all sections [IN PROGRESS]
+**Started:** 2026-05-10T04:16:19.032266+00:00
+**Branch:** `fix/brand-colour-tokens`
+
+
+## Issue #26 — fix(brand): apply CLA colour tokens consistently across all sections
+**Date:** 2026-05-10 04:19 UTC
+**Status:** FAILED
+**Branch:** `fix/brand-colour-tokens`
+**Notes:** RetryError[<Future at 0x15646dd1350 state=finished raised JSONDecodeError>]
+
+## Issue #26 — fix(brand): apply CLA colour tokens consistently across all sections [IN PROGRESS]
+**Started:** 2026-05-10T04:25:05.253863+00:00
+**Branch:** `fix/brand-colour-tokens`
+
+
+## Issue #26 — fix(brand): apply CLA colour tokens consistently across all sections
+**Date:** 2026-05-10 04:28 UTC
+**Status:** FAILED
+**Branch:** `fix/brand-colour-tokens`
+**Notes:** RetryError[<Future at 0x254e9e616e0 state=finished raised ValueError>]
+
+## Issue #35 — fix(brand): apply CLA colours to Hero section and Navbar button [IN PROGRESS]
+**Started:** 2026-05-10T04:32:18.876078+00:00
+**Branch:** `fix/hero-navbar-cla-colours`
+
