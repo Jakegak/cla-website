@@ -486,3 +486,11 @@
 **Started:** 2026-05-10T14:23:58.177798+00:00
 **Branch:** `fix/about-stat-cards-brand-colours`
 
+
+## Issue #88 — fix(about): stat cards have no visual weight — apply CLA brand colours
+**Date:** 2026-05-10 14:26 UTC
+**Status:** SUCCESS
+**Branch:** `fix/about-stat-cards-brand-colours`
+**PR:** #89 — https://github.com/Jakegak/cla-website/pull/89
+**Files changed:** `src/components/AboutUs.jsx`
+**Notes:** No new npm packages needed — framer-motion v12 is already installed and exports useInView, useMotionValue, useTransform, and animate. Playfair Display and Inter fonts are already loaded via both index.html and src/index.css. The CountUp component uses useMotionValue(0) with animate() triggered by useInView (once: true) to count from 0 to the target number. Direct DOM manipulation via displayRef.current.textContent is used instead of React state to avoid re-renders on every animation frame. The stats grid uses grid-cols-1 on mobile and sm:grid-cols-2 on small+ screens (within the parent md:grid-cols-2 layout that separates mission/vision from stats). All brand-specific values (#2D1B69, font-family, exact sizing) use inline style objects since Tailwind v4 config may not have these custom values. The whileHover bug (using invalid 'shadow' motion prop) was fixed to use a proper boxShadow CSS string.
