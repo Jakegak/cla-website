@@ -442,3 +442,16 @@
 **PR:** #81 — https://github.com/Jakegak/cla-website/pull/81
 **Files changed:** `src/components/Navbar.jsx`, `src/index.css`
 **Notes:** Key decisions: (1) Used inline styles for glass morphism properties (backdrop-filter, rgba backgrounds, box-shadow) and brand colors (#FFB800, #2D1B69) to avoid Tailwind arbitrary values per project rules. (2) Kept useScroll/useMotionValueEvent pattern from framer-motion instead of window.addEventListener for scroll detection. (3) Added .nav-link-gold class in index.css with ::after pseudo-element for the gold underline hover effect since pseudo-elements can't be done inline. (4) Mobile overlay uses position:fixed with inset:0 so it won't be clipped by the header's overflow-x-hidden. (5) Hamburger bars animate to X using framer-motion rotate/translate/opacity — top bar rotates 45deg and translates down 8px, bottom bar rotates -45deg and translates up 8px, middle bar fades out. (6) School name 'Christian Living Academy' is hidden on very small screens (hidden sm:inline) to prevent text overflow but visible on sm+ screens. (7) No new npm packages added. (8) Logo.jsx and App.jsx and package.json are unchanged — only Navbar.jsx and index.css were modified. (9) Playfair Display font was already imported in index.css — no changes needed there. (10) The hamburger button color switches to white when mobile menu is open (over the #2D1B69 overlay) for visibility.
+
+## Issue #82 — fix(gallery): images not loading — broken Unsplash URLs rendering as text [IN PROGRESS]
+**Started:** 2026-05-10T13:33:13.245310+00:00
+**Branch:** `fix/gallery-broken-image-urls`
+
+
+## Issue #82 — fix(gallery): images not loading — broken Unsplash URLs rendering as text
+**Date:** 2026-05-10 13:34 UTC
+**Status:** SUCCESS
+**Branch:** `fix/gallery-broken-image-urls`
+**PR:** #83 — https://github.com/Jakegak/cla-website/pull/83
+**Files changed:** `src/components/ActivitiesGallery.jsx`
+**Notes:** Added a `fullSrc` field to each image object in GALLERY_IMAGES to provide higher-resolution (800x600) images for the lightbox while keeping thumbnails at 400x300. The lightbox `<img>` now references `filteredImages[lightboxIndex].fullSrc` instead of `.src`. All alt text and category values are preserved exactly as they were. The seed keywords follow the specified mapping: id1=classroom1, id2=library1, id3=church1, id4=sports1, id5=art1, id6=playground1, id7=graduation1, id8=science1, id9=music1, id10=garden1, id11=teamwork1, id12=choir1. No new npm packages were added. This is a .jsx file so TypeScript strict rules (no `any`) don't directly apply, but no unsafe patterns were introduced.
