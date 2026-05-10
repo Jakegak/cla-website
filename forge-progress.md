@@ -329,3 +329,8 @@
 **PR:** #51 — https://github.com/Jakegak/cla-website/pull/51
 **Files changed:** `src/components/HeroSection.jsx`, `src/index.css`, `src/App.jsx`, `src/components/Navbar.jsx`
 **Notes:** Root cause: The `overflow-hidden` class on the hero `<section>` element was clipping all content including the heading text. The class was originally added to contain three absolute-positioned decorative overlay divs, but since those overlays use `position: absolute` with `inset: 0` and the section is `position: relative`, they are already bounded by the parent — `overflow-hidden` on the section was unnecessary. Fix applied: (1) Removed `overflow-hidden` from the section root element. (2) Added `overflow-hidden` to individual decorative overlay containers to scope it safely without affecting text content. (3) Increased heading `lineHeight` from 1.1 to 1.2 to prevent descender/ascender clipping at large responsive font sizes (the `clamp(3rem, 8vw, 6rem)` sizing). No new packages added. App.jsx, Navbar.jsx, and index.css were verified to have no contributing issues and are preserved unchanged. The Navbar.jsx file was reconstructed as a complete file based on the provided context since only verification was needed.
+
+## Issue #52 — Issue 2 — Section Spacing and Scroll Transition Problems [IN PROGRESS]
+**Started:** 2026-05-10T09:30:19.877534+00:00
+**Branch:** `fix/section-spacing-scroll-transitions`
+

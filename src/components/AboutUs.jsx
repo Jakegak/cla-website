@@ -73,7 +73,7 @@ const stats = [
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        <circle cx="20" cy="20" r="16" stroke="currentColor" strokeWidth="2" fill="none" />
+        <circle cx="20" cy="20" r="14" stroke="currentColor" strokeWidth="2" fill="none" />
         <path
           d="M20 10V20L26 26"
           stroke="currentColor"
@@ -86,8 +86,8 @@ const stats = [
     ),
   },
   {
-    label: "Programs",
-    value: "20+",
+    label: "Programmes",
+    value: "6",
     icon: (
       <svg
         width="40"
@@ -97,37 +97,14 @@ const stats = [
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        <rect
-          x="4"
-          y="6"
-          width="32"
-          height="28"
-          rx="2"
-          stroke="currentColor"
-          strokeWidth="2"
-          fill="none"
-        />
-        <path
-          d="M4 14H36"
-          stroke="currentColor"
-          strokeWidth="2"
-          fill="none"
-        />
-        <path
-          d="M14 14V34"
-          stroke="currentColor"
-          strokeWidth="2"
-          fill="none"
-        />
+        <rect x="6" y="8" width="28" height="24" rx="2" stroke="currentColor" strokeWidth="2" fill="none" />
+        <path d="M6 14H34" stroke="currentColor" strokeWidth="2" />
+        <path d="M14 8V14" stroke="currentColor" strokeWidth="2" />
+        <path d="M26 8V14" stroke="currentColor" strokeWidth="2" />
       </svg>
     ),
   },
 ];
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -135,7 +112,17 @@ const containerVariants = {
     opacity: 1,
     transition: {
       staggerChildren: 0.15,
+      delayChildren: 0.2,
     },
+  },
+};
+
+const childVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
   },
 };
 
@@ -146,77 +133,73 @@ export default function AboutUs() {
       style={{ backgroundColor: "#F8F8F8" }}
       className="py-20 px-4"
     >
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left Column — Mission Text */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={cardVariants}
-          >
-            <h2
-              className="text-4xl font-bold mb-6"
-              style={{ color: "#2D1B69", fontFamily: "'Playfair Display', serif" }}
-            >
-              About Us
-            </h2>
-            <p className="text-lg leading-relaxed mb-6" style={{ color: "#333" }}>
-              Christ Little Angels School is committed to nurturing young minds
-              through quality education, moral values, and holistic development.
-              Our mission is to create a learning environment where every child
-              can discover their potential and grow into responsible citizens.
+      <motion.div
+        className="max-w-6xl mx-auto"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+      >
+        <motion.div className="text-center mb-16" variants={childVariants}>
+          <span className="inline-block bg-purple-100 text-purple-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+            About Us
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Who We Are
+          </h2>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Christ Little Academy is a faith-based educational institution
+            dedicated to nurturing young minds through holistic learning
+            experiences. We combine academic excellence with moral values to
+            shape future leaders.
+          </p>
+        </motion.div>
+
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <motion.div variants={childVariants}>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              Our Mission
+            </h3>
+            <p className="text-gray-600 leading-relaxed mb-6">
+              To provide a nurturing environment where children grow
+              academically, spiritually, and socially. We believe every child is
+              uniquely gifted and deserves the opportunity to discover and
+              develop their full potential.
             </p>
-            <blockquote
-              className="text-cla-purple text-xl italic border-l-4 pl-4"
-              style={{ borderColor: "#C9A84C" }}
-            >
-              &ldquo;Empowering young minds to lead with knowledge, compassion,
-              and integrity.&rdquo;
-            </blockquote>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              Our Vision
+            </h3>
+            <p className="text-gray-600 leading-relaxed">
+              To be a leading institution that raises confident, compassionate,
+              and academically excellent individuals who will make positive
+              contributions to society.
+            </p>
           </motion.div>
 
-          {/* Right Column — Stat Cards */}
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 gap-6"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            className="grid grid-cols-2 gap-4"
             variants={containerVariants}
           >
             {stats.map((stat) => (
               <motion.div
                 key={stat.label}
-                variants={cardVariants}
-                className="rounded-lg p-6 text-center"
-                style={{
-                  backgroundColor: "#2D1B69",
-                  borderTop: "3px solid #C9A84C",
-                  color: "white",
-                }}
+                className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 text-center"
+                variants={childVariants}
+                whileHover={{ y: -4, shadow: "lg" }}
+                transition={{ duration: 0.2 }}
               >
-                <div className="flex justify-center mb-3">{stat.icon}</div>
-                <div
-                  style={{
-                    fontSize: "2.5rem",
-                    fontWeight: "bold",
-                    color: "white",
-                    lineHeight: 1.2,
-                  }}
-                >
+                <div className="text-purple-600 mb-3 flex justify-center">
+                  {stat.icon}
+                </div>
+                <div className="text-3xl font-bold text-gray-900 mb-1">
                   {stat.value}
                 </div>
-                <div
-                  className="mt-1 text-base"
-                  style={{ color: "white" }}
-                >
-                  {stat.label}
-                </div>
+                <div className="text-sm text-gray-500">{stat.label}</div>
               </motion.div>
             ))}
           </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

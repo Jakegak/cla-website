@@ -19,9 +19,7 @@ export default function App() {
 
       <HeroSection onOpenModal={() => setIsModalOpen(true)} />
 
-      <section id="about">
-        <AboutUs />
-      </section>
+      <AboutUs />
 
       <Programmes />
 
