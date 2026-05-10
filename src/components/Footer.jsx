@@ -69,48 +69,42 @@ function YouTubeIcon() {
   );
 }
 
-const socialLinks = [
-  { label: 'Facebook', icon: FacebookIcon, href: '#' },
-  { label: 'Twitter', icon: TwitterIcon, href: '#' },
-  { label: 'Instagram', icon: InstagramIcon, href: '#' },
-  { label: 'YouTube', icon: YouTubeIcon, href: '#' },
-];
-
 export default function Footer() {
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <footer className="bg-cla-purple text-white py-16">
+    <footer className="w-full max-w-full overflow-hidden bg-cla-purple text-white py-16">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Three-column grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Column 1: Logo & Tagline */}
-          <div>
-            <div className="flex items-center gap-3 mb-4">
-              <Logo className="w-16 h-16" />
-              <h3 className="text-2xl font-extrabold tracking-tight">
-                Christian Living Academy
-              </h3>
+          <div className="min-w-0 text-center md:text-left">
+            <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
+              <Logo className="h-12 w-12" />
+              <span className="text-xl font-bold">Christian Living Academy</span>
             </div>
-            <p className="italic text-white/80 mb-4">
-              &ldquo;Raising a God-fearing, Elite Generation.&rdquo;
-            </p>
-            <p className="text-sm text-white/60">
-              Dedicated to offering the best education and developing positive
-              character that impacts society.
+            <p className="text-white/70 text-sm leading-relaxed">
+              Nurturing young minds and building bright futures through
+              faith-based education since our founding.
             </p>
           </div>
 
           {/* Column 2: Quick Links */}
-          <div>
-            <h4 className="text-lg font-bold uppercase tracking-wider mb-2">
-              Quick Links
-            </h4>
-            <div className="w-12 h-1 bg-cla-gold rounded mb-6" />
-            <ul className="space-y-3">
+          <div className="min-w-0 text-center md:text-left">
+            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <ul className="space-y-2">
               {quickLinks.map((link) => (
-                <li key={link.label}>
+                <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-white/80 hover:text-white transition-colors"
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    className="text-white/70 hover:text-white text-sm transition-colors duration-200"
                   >
                     {link.label}
                   </a>
@@ -119,65 +113,77 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Contact Summary */}
-          <div>
-            <h4 className="text-lg font-bold uppercase tracking-wider mb-2">
-              Contact Us
-            </h4>
-            <div className="w-12 h-1 bg-cla-gold rounded mb-6" />
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <span className="mt-1" aria-hidden="true">📍</span>
-                <span className="text-white/80">
-                  Along Kamiti Road<br />
-                  Near Kahawa West Junction
-                </span>
-              </li>
-              <li className="flex items-center gap-3">
-                <span aria-hidden="true">📞</span>
+          {/* Column 3: Contact Info */}
+          <div className="min-w-0 text-center md:text-left">
+            <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
+            <div className="space-y-3 text-sm text-white/70">
+              <p>123 Academy Drive</p>
+              <p>Lagos, Nigeria</p>
+              <p>
                 <a
-                  href="tel:0798767773"
-                  className="text-white/80 hover:text-white transition-colors"
+                  href="tel:+2341234567890"
+                  className="hover:text-white transition-colors duration-200"
                 >
-                  0798 767 773
+                  +234 123 456 7890
                 </a>
-              </li>
-              <li className="flex items-center gap-3">
-                <span aria-hidden="true">✉️</span>
+              </p>
+              <p className="break-all">
                 <a
                   href="mailto:info@christianlivingacademy.com"
-                  className="text-white/80 hover:text-white transition-colors"
+                  className="hover:text-white transition-colors duration-200"
                 >
                   info@christianlivingacademy.com
                 </a>
-              </li>
-            </ul>
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Social Media Icons */}
-        <div className="flex justify-center gap-6 mt-12">
-          {socialLinks.map((social) => {
-            const IconComponent = social.icon;
-            return (
-              <a
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.label}
-                className="text-white/70 hover:text-white transition-colors"
-              >
-                <IconComponent />
-              </a>
-            );
-          })}
+        {/* Social Icons */}
+        <div className="flex justify-center gap-6 mt-12 mb-8">
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white/60 hover:text-white transition-colors duration-200"
+            aria-label="Facebook"
+          >
+            <FacebookIcon />
+          </a>
+          <a
+            href="https://twitter.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white/60 hover:text-white transition-colors duration-200"
+            aria-label="Twitter"
+          >
+            <TwitterIcon />
+          </a>
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white/60 hover:text-white transition-colors duration-200"
+            aria-label="Instagram"
+          >
+            <InstagramIcon />
+          </a>
+          <a
+            href="https://youtube.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white/60 hover:text-white transition-colors duration-200"
+            aria-label="YouTube"
+          >
+            <YouTubeIcon />
+          </a>
         </div>
 
-        {/* Bottom Copyright Bar */}
-        <div className="border-t border-white/20 mt-10 pt-8 text-center">
-          <p className="text-sm text-white/60">
-            &copy; 2026 Christian Living Academy. All rights reserved.
+        {/* Copyright */}
+        <div className="border-t border-white/20 pt-8 text-center">
+          <p className="text-white/50 text-sm">
+            &copy; {new Date().getFullYear()} Christian Living Academy. All rights
+            reserved.
           </p>
         </div>
       </div>

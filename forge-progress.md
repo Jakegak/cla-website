@@ -381,3 +381,38 @@
 **PR:** #59 — https://github.com/Jakegak/cla-website/pull/59
 **Files changed:** `src/components/Programmes.jsx`, `src/index.css`, `src/App.css`
 **Notes:** The fix is entirely in Programmes.jsx with CSS utility class additions to the existing markup. Key changes: (1) Added `grid-cols-1` explicitly to the grid container for clarity alongside the existing `sm:grid-cols-2 lg:grid-cols-3 gap-6`. (2) Added `h-full flex flex-col min-w-0 overflow-hidden` to each card's className — `h-full` ensures equal row heights in CSS Grid, `flex flex-col` enables vertical content distribution, `min-w-0` prevents long text from expanding cards beyond grid track width, `overflow-hidden` prevents content from clipping outside rounded corners. (3) Changed the description `<p>` to use `flex-1` so it absorbs remaining vertical space and pushes all cards to consistent visual weight. No Framer Motion props, typography, colors, icons, borders, shadows, or spacing were altered. No new npm packages added. CSS files (index.css, App.css) were audited and confirmed to have no conflicting rules — they are included as complete files with no modifications.
+
+## Issue #60 — Issue 6 — Responsive Layout Audit Across Desktop, Tablet, and Mobile [IN PROGRESS]
+**Started:** 2026-05-10T09:59:54.105017+00:00
+**Branch:** `fix/responsive-layout-audit`
+
+
+## Issue #60 — Issue 6 — Responsive Layout Audit Across Desktop, Tablet, and Mobile
+**Date:** 2026-05-10 10:02 UTC
+**Status:** FAILED
+**Branch:** `fix/responsive-layout-audit`
+**Notes:** RetryError[<Future at 0x1ded3a31220 state=finished raised JSONDecodeError>]
+
+## Issue #62 — Issue — Full Responsive QA Pass (Strict Non-Redesign Fixes) [IN PROGRESS]
+**Started:** 2026-05-10T10:08:44.285175+00:00
+**Branch:** `fix/full-responsive-qa-pass`
+
+
+## Issue #62 — Issue — Full Responsive QA Pass (Strict Non-Redesign Fixes)
+**Date:** 2026-05-10 10:11 UTC
+**Status:** FAILED
+**Branch:** `fix/full-responsive-qa-pass`
+**Notes:** RetryError[<Future at 0x225198c0e90 state=finished raised JSONDecodeError>]
+
+## Issue #64 — Global Overflow & Viewport Stability [IN PROGRESS]
+**Started:** 2026-05-10T10:45:10.909692+00:00
+**Branch:** `fix/global-overflow-viewport-stability`
+
+
+## Issue #64 — Global Overflow & Viewport Stability
+**Date:** 2026-05-10 10:47 UTC
+**Status:** SUCCESS
+**Branch:** `fix/global-overflow-viewport-stability`
+**PR:** #76 — https://github.com/Jakegak/cla-website/pull/76
+**Files changed:** `src/index.css`, `src/App.css`, `src/App.jsx`, `src/components/Navbar.jsx`, `src/components/HeroSection.jsx`, `src/components/Footer.jsx`
+**Notes:** No new packages added. Key changes: (1) index.css now has universal box-sizing: border-box reset, html gets overflow-x: hidden + max-width: 100vw, body gets width: 100% + overflow-x: hidden. (2) App.jsx <main> gets overflow-x-hidden + max-w-full. (3) Navbar <header> gets max-w-full + overflow-x-hidden — this won't clip the mobile dropdown since it's inside the header's DOM flow and AnimatePresence handles height animation within the overflow-hidden container. (4) HeroSection gets overflow-hidden on the outermost section as a safety net; decorative circles were already contained by an inner overflow-hidden div but the section-level constraint prevents edge cases. (5) Footer gets w-full + max-w-full + overflow-hidden with min-w-0 on grid children and break-all on the long email. (6) App.css #root gets width: 100% for explicit containment. (7) The ApplicationModal renders at the end of <main> with overflow-x-hidden — since modals typically use fixed positioning with their own z-index stacking, they render independently of parent overflow constraints and won't be clipped.
