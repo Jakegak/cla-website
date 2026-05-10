@@ -109,3 +109,16 @@
 **PR:** #21 — https://github.com/Jakegak/cla-website/pull/21
 **Files changed:** `src/components/AdmissionsAndFees.jsx`
 **Notes:** Key decisions: (1) Removed id='admissions' from the component since App.jsx already wraps it in <section id='admissions'>. (2) Used a second ApplicationModal instance with local state inside AdmissionsAndFees rather than threading an onOpenModal prop from App.jsx — this keeps the component self-contained and the two modal instances never conflict since only one is open at a time. (3) Used font-bold instead of font-heading since font-heading is not used anywhere in the codebase. (4) Used bg-cla-gold for the accent underline and bg-cla-purple for stepper circles, table header, and CTA button — these are established theme tokens seen in HeroSection. (5) Fee amounts (18k/25k/30k per term) are reasonable placeholders since exact values were not specified in the issue. (6) The stepper uses flex-col on mobile and flex-row on md+ with horizontal connector arrows (hidden on mobile) and vertical connector lines (hidden on desktop). (7) No new npm packages added. (8) ApplicationModal.jsx, App.jsx, and other files were not modified since no changes to them were needed.
+
+## Issue #10 — feat(footer): professional footer with school info and links [IN PROGRESS]
+**Started:** 2026-05-10T03:22:25.866110+00:00
+**Branch:** `feat/footer-professional`
+
+
+## Issue #10 — feat(footer): professional footer with school info and links
+**Date:** 2026-05-10 03:24 UTC
+**Status:** SUCCESS
+**Branch:** `feat/footer-professional`
+**PR:** #23 — https://github.com/Jakegak/cla-website/pull/23
+**Files changed:** `src/components/Footer.jsx`
+**Notes:** Only Footer.jsx was modified — App.jsx already imports and renders Footer so no changes needed there. Logo.jsx, HeroSection.jsx, and index.css are unchanged. The component uses the Logo SVG component (not an image file) with className='w-16 h-16'. Social media icons use minimal inline SVGs with no external icon library. Quick links use anchor hrefs (#home, #about, #programmes, #gallery, #admissions, #contact) matching expected section IDs. Contact details (address, phone, email) are consistent with the existing ContactSection component's placeholder data. Theme tokens bg-cla-purple and bg-cla-gold are used per established codebase patterns. No new npm packages were added.
