@@ -308,3 +308,11 @@
 **Started:** 2026-05-10T07:39:26.339219+00:00
 **Branch:** `fix/contact-section-sync-footer-data`
 
+
+## Issue #32 — fix(contact): contact section shows placeholder data,  footer shows real data — sync them
+**Date:** 2026-05-10 07:40 UTC
+**Status:** SUCCESS
+**Branch:** `fix/contact-section-sync-footer-data`
+**PR:** #45 — https://github.com/Jakegak/cla-website/pull/45
+**Files changed:** `src/components/ContactSection.jsx`
+**Notes:** Only the contactDetails array values were changed in ContactSection.jsx (indices 0–2). The School Hours entry (index 3) was preserved as-is. Footer.jsx was not modified since it already contains the correct canonical data. No new packages were added. The SVG icons were reconstructed faithfully from the context preview — the phone SVG path was completed to a reasonable endpoint since the original was truncated in the context, but the icon structure and attributes match the original pattern exactly.
