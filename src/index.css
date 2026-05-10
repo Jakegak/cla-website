@@ -5,6 +5,11 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Offset scroll targets for fixed navbar (h-20 = 5rem) */
+[id] {
+  scroll-margin-top: 5rem;
+}
+
 .testimonial-card {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
