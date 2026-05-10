@@ -77,36 +77,33 @@ export default function AdmissionsAndFees() {
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
+        viewport={{ once: true, amount: 0.2 }}
       >
         {/* Section Header */}
         <motion.div className="text-center mb-16" variants={childVariants}>
-          <h2 className="text-4xl font-bold text-white mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
             Admissions & Fees
           </h2>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-            Join our vibrant learning community. Follow our simple admissions
-            process to secure a place for your child.
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            Join our community of learners. The admissions process is simple and
+            designed to ensure the best fit for your child.
           </p>
         </motion.div>
 
-        {/* Admissions Process Steps */}
+        {/* Admissions Steps */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
           variants={childVariants}
         >
           {steps.map((step) => (
             <div
               key={step.number}
-              className="relative text-center p-6 rounded-xl bg-slate-800 border border-slate-700"
+              className="bg-slate-800 rounded-2xl p-6 text-center"
             >
-              <div
-                className="w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4"
-                style={{ backgroundColor: "#FFB800", color: "#2D1B69" }}
-              >
+              <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg mx-auto mb-4">
                 {step.number}
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2">
+              <h3 className="text-white font-semibold text-lg mb-2">
                 {step.title}
               </h3>
               <p className="text-gray-400 text-sm">{step.description}</p>
@@ -114,38 +111,42 @@ export default function AdmissionsAndFees() {
           ))}
         </motion.div>
 
-        {/* Fee Table */}
-        <motion.div className="mb-16" variants={childVariants}>
-          <h3 className="text-2xl font-bold text-white text-center mb-8">
-            Fee Structure
-          </h3>
+        {/* Fee Structure Table */}
+        <motion.div
+          className="bg-slate-800 rounded-2xl overflow-hidden mb-12"
+          variants={childVariants}
+        >
+          <div className="p-6 border-b border-slate-700">
+            <h3 className="text-2xl font-bold text-white">Fee Structure</h3>
+            <p className="text-gray-400 mt-1">
+              Termly and annual fee breakdown by programme level
+            </p>
+          </div>
           <div className="overflow-x-auto">
-            <table className="w-full max-w-2xl mx-auto text-left">
+            <table className="w-full">
               <thead>
                 <tr className="border-b border-slate-700">
-                  <th className="py-4 px-6 text-gray-300 font-semibold">
+                  <th className="py-4 px-6 text-gray-300 font-semibold text-left">
                     Programme
                   </th>
-                  <th className="py-4 px-6 text-gray-300 font-semibold">
-                    Term Fee (GHS)
+                  <th className="py-4 px-6 text-gray-300 font-semibold text-left">
+                    Term Fee (KES)
                   </th>
-                  <th className="py-4 px-6 text-gray-300 font-semibold">
-                    Annual Fee (GHS)
+                  <th className="py-4 px-6 text-gray-300 font-semibold text-left">
+                    Annual Fee (KES)
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {feeTiers.map((tier) => (
+                {feeTiers.map((tier, index) => (
                   <tr
-                    key={tier.tier}
+                    key={index}
                     className="border-b border-slate-800 hover:bg-slate-800 transition-colors"
                   >
                     <td className="py-4 px-6 text-white font-medium">
                       {tier.tier}
                     </td>
-                    <td className="py-4 px-6 text-gray-300">
-                      {tier.termFee}
-                    </td>
+                    <td className="py-4 px-6 text-gray-300">{tier.termFee}</td>
                     <td className="py-4 px-6 text-gray-300">
                       {tier.annualFee}
                     </td>
@@ -156,13 +157,11 @@ export default function AdmissionsAndFees() {
           </div>
         </motion.div>
 
-        {/* Apply Now CTA Button */}
+        {/* CTA */}
         <motion.div className="text-center" variants={childVariants}>
           <button
-            type="button"
-            className="cta-apply-btn text-lg font-bold px-10 py-4 rounded-lg border-none cursor-pointer transition-all duration-200"
-            style={{ backgroundColor: "#FFB800", color: "#2D1B69" }}
             onClick={() => setIsModalOpen(true)}
+            className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-4 px-10 rounded-full text-lg transition-colors"
           >
             Apply Now
           </button>
