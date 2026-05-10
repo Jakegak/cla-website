@@ -114,3 +114,11 @@
 **Started:** 2026-05-10T03:22:25.866110+00:00
 **Branch:** `feat/footer-professional`
 
+
+## Issue #10 — feat(footer): professional footer with school info and links
+**Date:** 2026-05-10 03:24 UTC
+**Status:** SUCCESS
+**Branch:** `feat/footer-professional`
+**PR:** #23 — https://github.com/Jakegak/cla-website/pull/23
+**Files changed:** `src/components/Footer.jsx`
+**Notes:** Only Footer.jsx was modified — App.jsx already imports and renders Footer so no changes needed there. Logo.jsx, HeroSection.jsx, and index.css are unchanged. The component uses the Logo SVG component (not an image file) with className='w-16 h-16'. Social media icons use minimal inline SVGs with no external icon library. Quick links use anchor hrefs (#home, #about, #programmes, #gallery, #admissions, #contact) matching expected section IDs. Contact details (address, phone, email) are consistent with the existing ContactSection component's placeholder data. Theme tokens bg-cla-purple and bg-cla-gold are used per established codebase patterns. No new npm packages were added.
