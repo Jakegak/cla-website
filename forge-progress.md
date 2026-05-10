@@ -421,3 +421,11 @@
 **Started:** 2026-05-10T11:28:08.960318+00:00
 **Branch:** `fix/navbar-responsive-stability`
 
+
+## Issue #65 — Navbar Responsive Stability
+**Date:** 2026-05-10 11:30 UTC
+**Status:** SUCCESS
+**Branch:** `fix/navbar-responsive-stability`
+**PR:** #77 — https://github.com/Jakegak/cla-website/pull/77
+**Files changed:** `src/components/Navbar.jsx`, `src/index.css`, `src/App.css`, `src/App.jsx`, `src/components/Logo.jsx`
+**Notes:** Key changes to Navbar.jsx: (1) Added `w-full relative` to header element — w-full ensures full width coverage alongside existing left-0/right-0, relative ensures mobile dropdown positions correctly within the header flow. (2) Added `flex-1 flex-wrap justify-end` to desktop nav — flex-1 allows the nav to shrink gracefully when viewport narrows, flex-wrap prevents overflow by wrapping links instead of overflowing, justify-end keeps links right-aligned. (3) Added `w-full` to mobile dropdown motion.div to ensure it spans full width. (4) Added `overflow-y-auto max-h-[80vh]` to mobile nav container to prevent the dropdown from exceeding viewport height on small screens. (5) Changed mobile nav links from `py-2` to `py-3 min-h-[44px] flex items-center` to meet the 44px minimum touch target accessibility guideline. In index.css: Changed `max-width: 100vw` to `max-width: 100%` on html element because 100vw includes scrollbar width which causes subtle horizontal overflow. No Framer Motion animation props, colors, typography, shadows, borders, or gap values were altered. No new npm packages added.
