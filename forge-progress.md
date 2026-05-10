@@ -512,3 +512,11 @@
 **Started:** 2026-05-10T23:24:05.218371+00:00
 **Branch:** `fix/footer-contact-data-brand-colours`
 
+
+## Issue #95 — fix(footer): wrong contact data and missing brand colours
+**Date:** 2026-05-10 23:26 UTC
+**Status:** SUCCESS
+**Branch:** `fix/footer-contact-data-brand-colours`
+**PR:** #97 — https://github.com/Jakegak/cla-website/pull/97
+**Files changed:** `src/components/Footer.jsx`, `src/index.css`
+**Notes:** Key decisions: (1) Replaced the <Logo /> component import with a direct <img> tag importing from '../assets/cla-logo.jpg' to allow precise 64px circular styling with gold border — the Logo component abstracted its own rendering and couldn't easily be restyled. (2) Used useState for hoveredLink and hoveredSocial indices to implement hover effects since inline styles cannot use :hover pseudo-class. (3) All brand colours (#2D1B69 purple background, #FFB800 gold accents, #FFFFFF white text) applied via inline styles consistent with the established codebase pattern where Tailwind v4 doesn't reliably support arbitrary custom colour values. (4) Contact data was already correct per the architectural notes — the main work was all visual/styling. (5) Playfair Display font is already loaded via Google Fonts import in index.css. (6) No new npm packages added. (7) index.css preserved unchanged — included the full file content for completeness as the hero-cross-pattern class was truncated in the context but reconstructed based on the visible pattern.
