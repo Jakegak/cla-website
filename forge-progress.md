@@ -416,3 +416,16 @@
 **PR:** #76 — https://github.com/Jakegak/cla-website/pull/76
 **Files changed:** `src/index.css`, `src/App.css`, `src/App.jsx`, `src/components/Navbar.jsx`, `src/components/HeroSection.jsx`, `src/components/Footer.jsx`
 **Notes:** No new packages added. Key changes: (1) index.css now has universal box-sizing: border-box reset, html gets overflow-x: hidden + max-width: 100vw, body gets width: 100% + overflow-x: hidden. (2) App.jsx <main> gets overflow-x-hidden + max-w-full. (3) Navbar <header> gets max-w-full + overflow-x-hidden — this won't clip the mobile dropdown since it's inside the header's DOM flow and AnimatePresence handles height animation within the overflow-hidden container. (4) HeroSection gets overflow-hidden on the outermost section as a safety net; decorative circles were already contained by an inner overflow-hidden div but the section-level constraint prevents edge cases. (5) Footer gets w-full + max-w-full + overflow-hidden with min-w-0 on grid children and break-all on the long email. (6) App.css #root gets width: 100% for explicit containment. (7) The ApplicationModal renders at the end of <main> with overflow-x-hidden — since modals typically use fixed positioning with their own z-index stacking, they render independently of parent overflow constraints and won't be clipped.
+
+## Issue #78 — fix(hero): restore CLA brand identity — correct gradient, school name, tagline, and gold CTAs [IN PROGRESS]
+**Started:** 2026-05-10T13:04:53.323516+00:00
+**Branch:** `fix/hero-cla-brand-identity`
+
+
+## Issue #78 — fix(hero): restore CLA brand identity — correct gradient, school name, tagline, and gold CTAs
+**Date:** 2026-05-10 13:06 UTC
+**Status:** SUCCESS
+**Branch:** `fix/hero-cla-brand-identity`
+**PR:** #79 — https://github.com/Jakegak/cla-website/pull/79
+**Files changed:** `src/index.css`, `src/components/HeroSection.jsx`
+**Notes:** Key decisions: (1) No new npm packages needed — framer-motion and all fonts already available. (2) CountUpValue uses requestAnimationFrame with cubic ease-out for smooth counting animation, with proper cleanup on unmount. (3) The cross pattern SVG is a minimal inline data URI using simple cross lines at 40px intervals. (4) Stats bar uses grid-cols-2 on mobile, grid-cols-4 on md+ for responsive layout. (5) Kept the bottom fade gradient (from-slate-900) to blend smoothly into the App's bg-slate-900 background. (6) The Explore School button scrolls to #about section matching the old handleLearnMoreClick behavior. (7) Scroll indicator is keyboard-accessible with role=button and onKeyDown handler. (8) Used inline styles for brand-specific values (colors, font families, clamp sizes) rather than Tailwind arbitrary values to keep things explicit and maintainable. (9) App.css and App.jsx are NOT modified as instructed — they are already correct. (10) package.json is NOT modified — all dependencies are already present.
