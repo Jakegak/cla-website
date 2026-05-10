@@ -45,97 +45,115 @@ export default function Navbar({ onOpenModal }) {
   const hamburgerBarColor = isScrolled ? "bg-gray-800" : "bg-white";
 
   return (
-    <motion.header
+    <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${headerClasses}`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a
             href="#home"
-            className="flex items-center gap-2"
             onClick={(e) => handleNavClick(e, "#home")}
+            className="flex items-center gap-3"
           >
             <img
               src={claLogo}
               alt="CLA Logo"
               className="h-10 w-10 rounded-full object-cover"
             />
-            <span className={`font-bold text-lg ${textColor}`}>CLA</span>
+            <span
+              className={`font-bold text-lg ${textColor} transition-colors duration-300`}
+              style={{ fontFamily: "'Playfair Display', serif" }}
+            >
+              CLA
+            </span>
           </a>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-6">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium transition-colors duration-200 ${linkColor}`}
                 onClick={(e) => handleNavClick(e, link.href)}
+                className={`text-sm font-medium transition-colors duration-300 ${linkColor}`}
               >
                 {link.label}
               </a>
             ))}
             <button
               onClick={onOpenModal}
-              className="text-sm font-semibold px-5 py-2 rounded transition-all duration-200 hover:opacity-90"
-              style={{ backgroundColor: "#FFB800", color: "#2D1B69" }}
+              className="px-5 py-2 text-sm font-semibold text-white rounded-full transition-all duration-300"
+              style={{
+                background: "linear-gradient(135deg, #667eea, #764ba2)",
+              }}
             >
               Apply Now
             </button>
-          </nav>
+          </div>
 
-          {/* Hamburger */}
+          {/* Mobile Hamburger */}
           <button
             className="md:hidden flex flex-col gap-1.5 p-2"
             onClick={toggleMobileMenu}
-            aria-label="Toggle mobile menu"
+            aria-label="Toggle navigation menu"
           >
-            <span className={`block w-6 h-0.5 ${hamburgerBarColor} transition-all duration-300 ${mobileMenuOpen ? "rotate-45 translate-y-2" : ""}`} />
-            <span className={`block w-6 h-0.5 ${hamburgerBarColor} transition-all duration-300 ${mobileMenuOpen ? "opacity-0" : ""}`} />
-            <span className={`block w-6 h-0.5 ${hamburgerBarColor} transition-all duration-300 ${mobileMenuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+            <span
+              className={`block w-6 h-0.5 rounded transition-all duration-300 ${hamburgerBarColor} ${
+                mobileMenuOpen ? "rotate-45 translate-y-2" : ""
+              }`}
+            />
+            <span
+              className={`block w-6 h-0.5 rounded transition-all duration-300 ${hamburgerBarColor} ${
+                mobileMenuOpen ? "opacity-0" : ""
+              }`}
+            />
+            <span
+              className={`block w-6 h-0.5 rounded transition-all duration-300 ${hamburgerBarColor} ${
+                mobileMenuOpen ? "-rotate-45 -translate-y-2" : ""
+              }`}
+            />
           </button>
         </div>
-      </div>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            className="md:hidden bg-white shadow-lg"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          >
-            <nav className="flex flex-col px-4 py-4 gap-3">
-              {NAV_LINKS.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-gray-700 hover:text-cla-purple text-sm font-medium py-2 border-b border-gray-100 transition-colors duration-200"
-                  onClick={(e) => handleNavClick(e, link.href)}
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden overflow-hidden"
+            >
+              <div className="py-4 flex flex-col gap-3">
+                {NAV_LINKS.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    className={`text-sm font-medium px-2 py-1 transition-colors duration-300 ${linkColor}`}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenModal();
+                  }}
+                  className="mt-2 px-5 py-2 text-sm font-semibold text-white rounded-full transition-all duration-300"
+                  style={{
+                    background: "linear-gradient(135deg, #667eea, #764ba2)",
+                  }}
                 >
-                  {link.label}
-                </a>
-              ))}
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenModal();
-                }}
-                className="text-sm font-semibold px-5 py-2 rounded mt-2 transition-all duration-200 hover:opacity-90"
-                style={{ backgroundColor: "#FFB800", color: "#2D1B69" }}
-              >
-                Apply Now
-              </button>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.header>
+                  Apply Now
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </nav>
+    </header>
   );
 }

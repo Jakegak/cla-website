@@ -54,55 +54,52 @@ export default function HeroSection({ onOpenModal }) {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{
-        background: "linear-gradient(135deg, #2D1B69 0%, #CC0000 100%)",
-      }}
+      className="relative min-h-screen flex items-center justify-center"
     >
-      {/* White diagonal stripe overlay */}
+      {/* Background gradient */}
       <div
-        aria-hidden="true"
+        className="absolute inset-0"
         style={{
-          position: "absolute",
-          inset: 0,
           background:
-            "repeating-linear-gradient(135deg, transparent, transparent 80px, rgba(255,255,255,0.15) 80px, rgba(255,255,255,0.15) 160px)",
-          pointerEvents: "none",
+            "linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)",
         }}
       />
 
-      {/* Subtle dot grid pattern overlay */}
+      {/* Decorative overlay - diagonal stripes */}
       <div
-        aria-hidden="true"
+        className="absolute inset-0 overflow-hidden"
         style={{
-          position: "absolute",
-          inset: 0,
           backgroundImage:
-            "radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px)",
-          backgroundSize: "30px 30px",
-          pointerEvents: "none",
+            "repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,0.03) 35px, rgba(255,255,255,0.03) 70px)",
         }}
       />
 
-      {/* Bottom fade to white */}
+      {/* Decorative overlay - dot grid */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent"
-        aria-hidden="true"
+        className="absolute inset-0 overflow-hidden"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px)",
+          backgroundSize: "30px 30px",
+        }}
       />
+
+      {/* Bottom fade overlay */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent" />
 
       {/* Main content */}
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0, duration: 0.7, ease: "easeOut" }}
+          transition={{ duration: 0.8, delay: 0 }}
           style={{
-            fontFamily: "'Playfair Display', serif",
-            color: "white",
             fontSize: "clamp(3rem, 8vw, 6rem)",
+            lineHeight: 1.2,
             fontWeight: 700,
-            lineHeight: 1.1,
-            marginBottom: "1.5rem",
+            fontFamily: "'Playfair Display', serif",
+            color: "#ffffff",
+            textShadow: "0 2px 10px rgba(0,0,0,0.3)",
           }}
         >
           Children&apos;s Learning Academy
@@ -111,66 +108,84 @@ export default function HeroSection({ onOpenModal }) {
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.7, ease: "easeOut" }}
-          className="max-w-2xl mx-auto"
+          transition={{ duration: 0.8, delay: 0.2 }}
           style={{
+            fontSize: "clamp(1rem, 2.5vw, 1.5rem)",
+            lineHeight: 1.6,
+            color: "rgba(255,255,255,0.9)",
+            marginTop: "1.5rem",
             fontFamily: "'Inter', sans-serif",
-            color: "#FFB800",
-            fontSize: "1.25rem",
-            fontWeight: 500,
-            marginBottom: "2.5rem",
           }}
         >
-          Nurturing young minds through faith, knowledge, and character
+          Nurturing young minds through play, creativity, and discovery.
+          Where every child&apos;s journey begins with joy.
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.7, ease: "easeOut" }}
+          transition={{ duration: 0.8, delay: 0.4 }}
           style={{
+            marginTop: "2.5rem",
             display: "flex",
+            flexWrap: "wrap",
             gap: "1rem",
             justifyContent: "center",
-            flexWrap: "wrap",
           }}
         >
           <button
             onClick={onOpenModal}
-            className="hover:opacity-90 transition-opacity cursor-pointer"
+            className="cta-apply-btn"
             style={{
-              backgroundColor: "#FFB800",
-              color: "#2D1B69",
-              padding: "0.75rem 2rem",
-              borderRadius: "0.5rem",
-              fontWeight: 700,
-              fontFamily: "'Inter', sans-serif",
-              fontSize: "1rem",
+              padding: "1rem 2.5rem",
+              fontSize: "1.125rem",
+              fontWeight: 600,
+              color: "#764ba2",
+              backgroundColor: "#ffffff",
+              borderRadius: "9999px",
               border: "none",
+              cursor: "pointer",
+              fontFamily: "'Inter', sans-serif",
+              boxShadow: "0 4px 15px rgba(0,0,0,0.2)",
+              transition: "transform 0.2s ease, box-shadow 0.2s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-2px)";
+              e.currentTarget.style.boxShadow = "0 6px 20px rgba(0,0,0,0.3)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow = "0 4px 15px rgba(0,0,0,0.2)";
             }}
           >
             Apply Now
           </button>
-          <a
-            href="#about"
+
+          <button
             onClick={handleLearnMoreClick}
-            className="hover:opacity-90 transition-opacity"
             style={{
-              border: "2px solid white",
-              color: "white",
-              backgroundColor: "transparent",
-              padding: "0.75rem 2rem",
-              borderRadius: "0.5rem",
+              padding: "1rem 2.5rem",
+              fontSize: "1.125rem",
               fontWeight: 600,
+              color: "#ffffff",
+              backgroundColor: "transparent",
+              borderRadius: "9999px",
+              border: "2px solid rgba(255,255,255,0.6)",
+              cursor: "pointer",
               fontFamily: "'Inter', sans-serif",
-              fontSize: "1rem",
-              display: "inline-flex",
-              alignItems: "center",
-              textDecoration: "none",
+              transition: "background-color 0.2s ease, border-color 0.2s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.15)";
+              e.currentTarget.style.borderColor = "#ffffff";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = "transparent";
+              e.currentTarget.style.borderColor = "rgba(255,255,255,0.6)";
             }}
           >
             Learn More
-          </a>
+          </button>
         </motion.div>
       </div>
     </section>
