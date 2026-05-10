@@ -317,15 +317,15 @@
 **Files changed:** `src/components/ContactSection.jsx`
 **Notes:** Only the contactDetails array values were changed in ContactSection.jsx (indices 0–2). The School Hours entry (index 3) was preserved as-is. Footer.jsx was not modified since it already contains the correct canonical data. No new packages were added. The SVG icons were reconstructed faithfully from the context preview — the phone SVG path was completed to a reasonable endpoint since the original was truncated in the context, but the icon structure and attributes match the original pattern exactly.
 
-## Issue #48 — fix(layout): Deep refactor of App foundation and deep-fix of Admissions & About [IN PROGRESS]
-**Started:** 2026-05-10T09:04:26.869987+00:00
-**Branch:** `fix/layout-foundation-admissions-about-refactor`
+## Issue #50 — Issue 1 — Hero Section Text Clipping on Scroll [IN PROGRESS]
+**Started:** 2026-05-10T09:16:28.112148+00:00
+**Branch:** `fix/hero-section-text-clipping`
 
 
-## Issue #48 — fix(layout): Deep refactor of App foundation and deep-fix of Admissions & About
-**Date:** 2026-05-10 09:06 UTC
+## Issue #50 — Issue 1 — Hero Section Text Clipping on Scroll
+**Date:** 2026-05-10 09:18 UTC
 **Status:** SUCCESS
-**Branch:** `fix/layout-foundation-admissions-about-refactor`
-**PR:** #49 — https://github.com/Jakegak/cla-website/pull/49
-**Files changed:** `src/App.css`, `src/App.jsx`, `src/components/AboutUs.jsx`, `src/components/AdmissionsAndFees.jsx`
-**Notes:** Key decisions: (1) The @theme block in App.css already defines --color-cla-purple, --color-cla-gold etc., which makes text-cla-purple, bg-cla-purple available as Tailwind classes automatically — no tailwind.config.js changes needed. (2) The blockquote border color was changed from inline style to border-cla-gold Tailwind class since the @theme block defines the gold color. (3) The stat card gold top border is kept as inline style (borderTop: '3px solid #C9A84C') since #C9A84C is a slightly different gold shade than the theme's #FFB800 and appears intentional for visual differentiation. (4) No new npm packages added. (5) The redundant outer <section> wrappers in App.jsx were removed — AboutUs already has <section id='about'> and AdmissionsAndFees already has <div id='admissions'> so scroll-to-section navigation continues to work correctly.
+**Branch:** `fix/hero-section-text-clipping`
+**PR:** #51 — https://github.com/Jakegak/cla-website/pull/51
+**Files changed:** `src/components/HeroSection.jsx`, `src/index.css`, `src/App.jsx`, `src/components/Navbar.jsx`
+**Notes:** Root cause: The `overflow-hidden` class on the hero `<section>` element was clipping all content including the heading text. The class was originally added to contain three absolute-positioned decorative overlay divs, but since those overlays use `position: absolute` with `inset: 0` and the section is `position: relative`, they are already bounded by the parent — `overflow-hidden` on the section was unnecessary. Fix applied: (1) Removed `overflow-hidden` from the section root element. (2) Added `overflow-hidden` to individual decorative overlay containers to scope it safely without affecting text content. (3) Increased heading `lineHeight` from 1.1 to 1.2 to prevent descender/ascender clipping at large responsive font sizes (the `clamp(3rem, 8vw, 6rem)` sizing). No new packages added. App.jsx, Navbar.jsx, and index.css were verified to have no contributing issues and are preserved unchanged. The Navbar.jsx file was reconstructed as a complete file based on the provided context since only verification was needed.
