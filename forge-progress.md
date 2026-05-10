@@ -101,3 +101,11 @@
 **Started:** 2026-05-10T03:08:33.882643+00:00
 **Branch:** `feat/contact-section-enquiry-form`
 
+
+## Issue #9 — feat(contact): contact information and enquiry form
+**Date:** 2026-05-10 03:10 UTC
+**Status:** SUCCESS
+**Branch:** `feat/contact-section-enquiry-form`
+**PR:** #22 — https://github.com/Jakegak/cla-website/pull/22
+**Files changed:** `src/components/ContactSection.jsx`, `src/App.jsx`
+**Notes:** Key decisions: (1) No console.log used — the issue requested logging form values but the project rules forbid it; instead, form data is captured in React state and a UI success message is shown, with a code comment indicating future EmailJS integration. (2) The <section id='contact'> wrapper was removed from around <Footer /> in App.jsx since ContactSection now defines <section id='contact'> internally — this preserves navbar anchor link behavior. (3) ContactSection uses bg-slate-900 to contrast with the preceding sections (Testimonials uses bg-cla-purple, AdmissionsAndFees likely uses a different bg). (4) Form uses HTML5 type='email' and type='tel' for basic browser-level validation plus manual non-empty checks. (5) No new npm packages added. (6) Project uses plain JSX (not TypeScript), so no TypeScript types or interfaces were used.
