@@ -44,3 +44,8 @@
 **PR:** #16 — https://github.com/Jakegak/cla-website/pull/16
 **Files changed:** `src/App.css`, `src/components/HeroSection.jsx`, `src/App.jsx`
 **Notes:** Key decisions: (1) Removed max-width:1280px and padding:2rem from #root in App.css — these were Vite boilerplate constraints that prevented the hero (and other sections) from being full-width. The site layout relies on individual section components managing their own max-width containers. (2) Used Tailwind v4 @theme token-derived utility classes (bg-cla-purple, from-cla-purple, to-cla-red, text-cla-gold) as confirmed by the @theme --color-* naming convention. (3) The .hero-pattern CSS class uses an inline SVG data URI with a subtle repeating cross pattern at very low opacity (0.08) — kept minimal to avoid CSS bloat. (4) Framer Motion stagger animation uses containerVariants/childVariants pattern with staggerChildren:0.2 which is fully supported in framer-motion v12. (5) Two decorative SVG elements (cross motif and graduation cap) are positioned absolutely with pointer-events-none and opacity-10, hidden on screens smaller than sm breakpoint to avoid layout issues on mobile. (6) The Learn More button uses scrollIntoView({ behavior: 'smooth' }) consistent with the existing Navbar pattern — no offset compensation added to maintain consistency. (7) No new npm packages added — framer-motion was already a dependency. (8) The Navbar.jsx and index.html files did not require changes.
+
+## Issue #4 — feat(about): school mission, values, and key statistics [IN PROGRESS]
+**Started:** 2026-05-10T01:25:20.538832+00:00
+**Branch:** `feat/about-us-mission-and-stats`
+
