@@ -429,3 +429,8 @@
 **PR:** #79 — https://github.com/Jakegak/cla-website/pull/79
 **Files changed:** `src/index.css`, `src/components/HeroSection.jsx`
 **Notes:** Key decisions: (1) No new npm packages needed — framer-motion and all fonts already available. (2) CountUpValue uses requestAnimationFrame with cubic ease-out for smooth counting animation, with proper cleanup on unmount. (3) The cross pattern SVG is a minimal inline data URI using simple cross lines at 40px intervals. (4) Stats bar uses grid-cols-2 on mobile, grid-cols-4 on md+ for responsive layout. (5) Kept the bottom fade gradient (from-slate-900) to blend smoothly into the App's bg-slate-900 background. (6) The Explore School button scrolls to #about section matching the old handleLearnMoreClick behavior. (7) Scroll indicator is keyboard-accessible with role=button and onKeyDown handler. (8) Used inline styles for brand-specific values (colors, font families, clamp sizes) rather than Tailwind arbitrary values to keep things explicit and maintainable. (9) App.css and App.jsx are NOT modified as instructed — they are already correct. (10) package.json is NOT modified — all dependencies are already present.
+
+## Issue #80 — fix(navbar): restore full school name, Apply Now button, and glass morphism on scroll [IN PROGRESS]
+**Started:** 2026-05-10T13:24:17.555390+00:00
+**Branch:** `fix/navbar-full-name-apply-glassmorphism`
+
