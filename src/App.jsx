@@ -6,6 +6,7 @@ import Programmes from "./components/Programmes";
 import ActivitiesGallery from "./components/ActivitiesGallery";
 import Testimonials from "./components/Testimonials";
 import AdmissionsAndFees from "./components/AdmissionsAndFees";
+import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 import ApplicationModal from "./components/ApplicationModal";
 
@@ -32,9 +33,10 @@ export default function App() {
       <section id="admissions">
         <AdmissionsAndFees />
       </section>
-      <section id="contact">
-        <Footer />
-      </section>
+
+      <ContactSection />
+
+      <Footer />
 
       <ApplicationModal
         isOpen={isModalOpen}
