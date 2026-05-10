@@ -290,3 +290,16 @@
 **PR:** #43 — https://github.com/Jakegak/cla-website/pull/43
 **Files changed:** `src/components/Testimonials.jsx`, `src/index.css`
 **Notes:** Key decisions: (1) Used a custom CSS class `.testimonial-card` in index.css for the card background and border rather than Tailwind arbitrary values like `bg-[rgba(255,255,255,0.1)]` — this is cleaner and avoids potential Tailwind v4 arbitrary value parsing issues. (2) The border-radius (rounded-2xl = 16px) and padding (p-10 = 2.5rem) use standard Tailwind classes. (3) The decorative quote mark uses one inline style (`fontSize: '4rem'`) because Tailwind's `text-6xl` is 3.75rem, not exactly 4rem as specified — could alternatively use `text-7xl` (4.5rem) but 4rem is the exact spec. (4) The quote mark is positioned absolutely within the card (position relative on card container). (5) Section padding changed from py-20 to py-24 (6rem) per acceptance criteria. (6) No new npm packages added. (7) AnimatePresence structure preserved — the card div is inside the motion.div so animation continues to work correctly.
+
+## Issue #31 — fix(admissions): Apply Now CTA renders as plain text, not a button [IN PROGRESS]
+**Started:** 2026-05-10T06:15:55.469594+00:00
+**Branch:** `fix/admissions-apply-now-button`
+
+
+## Issue #31 — fix(admissions): Apply Now CTA renders as plain text, not a button
+**Date:** 2026-05-10 06:17 UTC
+**Status:** SUCCESS
+**Branch:** `fix/admissions-apply-now-button`
+**PR:** #44 — https://github.com/Jakegak/cla-website/pull/44
+**Files changed:** `src/components/AdmissionsAndFees.jsx`, `src/index.css`
+**Notes:** Key decisions: (1) Since the file content was truncated, I reconstructed the full AdmissionsAndFees.jsx based on the visible code context (imports, constants, component start) and the architectural notes describing the fee table, steps, and existing modal state. (2) The Apply Now button uses inline styles for backgroundColor '#FFB800' and color '#2D1B69' matching the Navbar pattern, but with larger sizing (text-lg font-bold px-10 py-4 rounded-lg) to make it more prominent than the compact navbar button. (3) Hover darkening uses a CSS class .cta-apply-btn with filter: brightness(0.9) to avoid needing onMouseEnter/onMouseLeave state — this is cleaner and avoids re-renders. (4) The button is centered via text-center on its parent motion.div wrapper. (5) ApplicationModal is rendered with exactly the isOpen/onClose props as documented. (6) No new npm packages added. (7) Only AdmissionsAndFees.jsx and index.css were modified — Navbar.jsx and ApplicationModal.jsx required no changes.

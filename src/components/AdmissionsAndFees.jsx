@@ -71,135 +71,104 @@ export default function AdmissionsAndFees() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="py-24 bg-slate-900">
+    <div className="py-24 bg-slate-900" id="admissions">
       <motion.div
+        className="max-w-6xl mx-auto px-6"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="max-w-7xl mx-auto px-6 lg:px-8"
+        viewport={{ once: true, amount: 0.1 }}
       >
-        {/* Section Heading */}
-        <motion.div variants={childVariants} className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
-            Admissions
+        {/* Section Header */}
+        <motion.div className="text-center mb-16" variants={childVariants}>
+          <h2 className="text-4xl font-bold text-white mb-4">
+            Admissions & Fees
           </h2>
-          <div className="w-24 h-1 bg-cla-gold mx-auto rounded-full" />
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+            Join our vibrant learning community. Follow our simple admissions
+            process to secure a place for your child.
+          </p>
         </motion.div>
 
-        {/* 4-Step Process Stepper */}
-        <motion.div variants={childVariants} className="mb-20">
-          <h3 className="text-xl md:text-2xl font-bold text-white text-center mb-10">
-            Admission Process
-          </h3>
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-center gap-4 md:gap-0">
-            {steps.map((step, index) => (
-              <div key={step.number} className="flex flex-col md:flex-row items-center md:items-start w-full md:w-auto">
-                {/* Step Card */}
-                <div className="flex flex-row md:flex-col items-center md:items-center gap-4 md:gap-3 w-full md:w-48">
-                  {/* Numbered Circle */}
-                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-cla-purple text-white flex items-center justify-center text-lg font-bold shadow-lg shadow-cla-purple/25">
-                    {step.number}
-                  </div>
-                  {/* Text */}
-                  <div className="md:text-center">
-                    <p className="text-white font-bold text-sm md:text-base">
-                      {step.title}
-                    </p>
-                    <p className="text-slate-400 text-xs md:text-sm mt-1 leading-relaxed">
-                      {step.description}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Connector Line / Arrow */}
-                {index < steps.length - 1 && (
-                  <>
-                    {/* Horizontal connector — hidden on mobile */}
-                    <div className="hidden md:flex items-center mx-4 flex-shrink-0">
-                      <div className="w-12 lg:w-20 h-0.5 bg-slate-600" />
-                      <svg
-                        width="12"
-                        height="12"
-                        viewBox="0 0 12 12"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true"
-                        className="flex-shrink-0 -ml-1"
-                      >
-                        <path d="M2 1L10 6L2 11" fill="#475569" />
-                      </svg>
-                    </div>
-                    {/* Vertical connector — visible only on mobile */}
-                    <div className="flex md:hidden items-center justify-center w-12 py-2">
-                      <div className="w-0.5 h-8 bg-slate-600" />
-                    </div>
-                  </>
-                )}
+        {/* Admissions Process Steps */}
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20"
+          variants={childVariants}
+        >
+          {steps.map((step) => (
+            <div
+              key={step.number}
+              className="relative text-center p-6 rounded-xl bg-slate-800 border border-slate-700"
+            >
+              <div
+                className="w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4"
+                style={{ backgroundColor: "#FFB800", color: "#2D1B69" }}
+              >
+                {step.number}
               </div>
-            ))}
-          </div>
+              <h3 className="text-lg font-semibold text-white mb-2">
+                {step.title}
+              </h3>
+              <p className="text-gray-400 text-sm">{step.description}</p>
+            </div>
+          ))}
         </motion.div>
 
         {/* Fee Table */}
-        <motion.div variants={childVariants} className="mb-16">
-          <h3 className="text-xl md:text-2xl font-bold text-white text-center mb-8">
+        <motion.div className="mb-16" variants={childVariants}>
+          <h3 className="text-2xl font-bold text-white text-center mb-8">
             Fee Structure
           </h3>
           <div className="overflow-x-auto">
-            <table className="w-full max-w-2xl mx-auto border-collapse rounded-2xl overflow-hidden">
+            <table className="w-full max-w-2xl mx-auto text-left">
               <thead>
-                <tr className="bg-cla-purple text-white">
-                  <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
-                    Tier
+                <tr className="border-b border-slate-700">
+                  <th className="py-4 px-6 text-gray-300 font-semibold">
+                    Programme
                   </th>
-                  <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
-                    Term Fee (KES)
+                  <th className="py-4 px-6 text-gray-300 font-semibold">
+                    Term Fee (GHS)
                   </th>
-                  <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
-                    Annual Fee (KES)
+                  <th className="py-4 px-6 text-gray-300 font-semibold">
+                    Annual Fee (GHS)
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {feeTiers.map((row, index) => (
+                {feeTiers.map((tier) => (
                   <tr
-                    key={row.tier}
-                    className={index % 2 === 0 ? "bg-slate-800/70" : "bg-slate-800/40"}
+                    key={tier.tier}
+                    className="border-b border-slate-800 hover:bg-slate-800 transition-colors"
                   >
-                    <td className="px-6 py-4 text-white font-bold text-sm">
-                      {row.tier}
+                    <td className="py-4 px-6 text-white font-medium">
+                      {tier.tier}
                     </td>
-                    <td className="px-6 py-4 text-slate-300 text-sm">
-                      {row.termFee}
+                    <td className="py-4 px-6 text-gray-300">
+                      {tier.termFee}
                     </td>
-                    <td className="px-6 py-4 text-slate-300 text-sm">
-                      {row.annualFee}
+                    <td className="py-4 px-6 text-gray-300">
+                      {tier.annualFee}
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <p className="text-slate-500 text-xs text-center mt-4">
-            Fees are subject to review. Contact admissions for the latest schedule.
-          </p>
         </motion.div>
 
-        {/* Apply Now CTA */}
-        <motion.div variants={childVariants} className="text-center">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+        {/* Apply Now CTA Button */}
+        <motion.div className="text-center" variants={childVariants}>
+          <button
+            type="button"
+            className="cta-apply-btn text-lg font-bold px-10 py-4 rounded-lg border-none cursor-pointer transition-all duration-200"
+            style={{ backgroundColor: "#FFB800", color: "#2D1B69" }}
             onClick={() => setIsModalOpen(true)}
-            className="bg-cla-purple text-white rounded-lg px-8 py-3 font-bold text-lg shadow-lg shadow-cla-purple/25 transition-colors hover:brightness-110"
           >
             Apply Now
-          </motion.button>
+          </button>
         </motion.div>
       </motion.div>
 
-      {/* Local ApplicationModal instance */}
       <ApplicationModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
