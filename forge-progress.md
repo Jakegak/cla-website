@@ -194,3 +194,52 @@
 **PR:** #37 — https://github.com/Jakegak/cla-website/pull/37
 **Files changed:** `src/components/HeroSection.jsx`, `src/components/Navbar.jsx`
 **Notes:** Both files are JSX (not TypeScript), so the no-any rule and tsc --noEmit check do not apply. The HeroSection was reconstructed from the truncated preview plus architectural notes — the outermost <section> now uses an inline style for the gradient background (linear-gradient(to bottom, #2D1B69, #1a1045)) instead of Tailwind's bg-gradient-to-br from-cla-purple to-cla-red classes. The tagline <motion.p> element uses style={{ color: '#FFB800' }}. In Navbar, both the desktop and mobile 'Apply Now' buttons had bg-blue-600/hover:bg-blue-500/text-white classes removed and replaced with inline style={{ backgroundColor: '#FFB800', color: '#2D1B69' }}. A hover:opacity-90 class was added for hover feedback since inline styles cannot handle hover states. No new npm packages were added. The file structure was preserved faithfully — decorative SVG components (DecoativeCross, GraduationCap) remain unchanged with the original typo in the function name preserved intentionally to avoid breaking any references.
+
+## Issue #36 — fix(brand): add gold underline accent to all section headings [IN PROGRESS]
+**Started:** 2026-05-10T04:52:36.629445+00:00
+**Branch:** `fix/gold-underline-section-headings`
+
+
+## Issue #36 — fix(brand): add gold underline accent to all section headings
+**Date:** 2026-05-10 04:55 UTC
+**Status:** FAILED
+**Branch:** `fix/gold-underline-section-headings`
+**Notes:** RetryError[<Future at 0x1ea7bd81480 state=finished raised ValueError>]
+
+## Issue #36 — fix(brand): add gold underline accent to all section headings [IN PROGRESS]
+**Started:** 2026-05-10T05:00:21.221099+00:00
+**Branch:** `fix/gold-underline-section-headings`
+
+
+## Issue #36 — fix(brand): add gold underline accent to all section headings
+**Date:** 2026-05-10 05:03 UTC
+**Status:** FAILED
+**Branch:** `fix/gold-underline-section-headings`
+**Notes:** RetryError[<Future at 0x18544911480 state=finished raised ValueError>]
+
+## Issue #36 — fix(brand): add gold underline accent to all section headings [IN PROGRESS]
+**Started:** 2026-05-10T05:12:17.428112+00:00
+**Branch:** `fix/gold-underline-section-headings`
+
+
+## Issue #36 — fix(brand): add gold underline accent to all section headings
+**Date:** 2026-05-10 05:15 UTC
+**Status:** FAILED
+**Branch:** `fix/gold-underline-section-headings`
+**Notes:** RetryError[<Future at 0x294cb191350 state=finished raised ValueError>]
+
+## Issue #36 — fix(brand): add gold underline accent to all section headings [IN PROGRESS]
+**Started:** 2026-05-10T05:20:26.485476+00:00
+**Branch:** `fix/gold-underline-section-headings`
+
+
+## Issue #36 — fix(brand): add gold underline accent to all section headings
+**Date:** 2026-05-10 05:23 UTC
+**Status:** FAILED
+**Branch:** `fix/gold-underline-section-headings`
+**Notes:** RetryError[<Future at 0x1afcbe15350 state=finished raised ValueError>]
+
+## Issue #27 — fix(hero): replace empty dark background with gradient + decorative  elements, add missing Apply Now CTA [IN PROGRESS]
+**Started:** 2026-05-10T05:27:45.396593+00:00
+**Branch:** `fix/hero-gradient-cta-decorative`
+

@@ -17,9 +17,8 @@ export default function App() {
     <main className="min-h-screen bg-slate-900 font-sans selection:bg-blue-500/30">
       <Navbar onOpenModal={() => setIsModalOpen(true)} />
 
-      <section id="home">
-        <HeroSection onOpenModal={() => setIsModalOpen(true)} />
-      </section>
+      <HeroSection onOpenModal={() => setIsModalOpen(true)} />
+
       <section id="about">
         <AboutUs />
       </section>
