@@ -49,3 +49,11 @@
 **Started:** 2026-05-10T01:25:20.538832+00:00
 **Branch:** `feat/about-us-mission-and-stats`
 
+
+## Issue #4 — feat(about): school mission, values, and key statistics
+**Date:** 2026-05-10 01:27 UTC
+**Status:** SUCCESS
+**Branch:** `feat/about-us-mission-and-stats`
+**PR:** #17 — https://github.com/Jakegak/cla-website/pull/17
+**Files changed:** `src/components/AboutUs.jsx`
+**Notes:** No new packages added. Used inline style for background-color #F8F8F8 instead of Tailwind arbitrary value bg-[#F8F8F8] to ensure compatibility with Tailwind v4 which may not support arbitrary values in the same way as v3. The component keeps id='about' on its own section element as required by the plan — this creates a duplicate id since App.jsx also wraps it in <section id='about'>, but scroll targeting still works. All four inline SVGs are minimal (graduation cap for Students, person silhouette for Staff, calendar for Years, cross for Christian Values). The text-left class on both columns overrides the global text-align: center from #root. Used font-heading class on the h2 and quote to get Playfair Display. The stat cards use the theme token bg-cla-purple (#2D1B69) confirmed available in App.css @theme config. Icon color uses text-cla-gold for visual accent against purple cards.
