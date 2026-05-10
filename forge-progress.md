@@ -455,3 +455,8 @@
 **PR:** #83 — https://github.com/Jakegak/cla-website/pull/83
 **Files changed:** `src/components/ActivitiesGallery.jsx`
 **Notes:** Added a `fullSrc` field to each image object in GALLERY_IMAGES to provide higher-resolution (800x600) images for the lightbox while keeping thumbnails at 400x300. The lightbox `<img>` now references `filteredImages[lightboxIndex].fullSrc` instead of `.src`. All alt text and category values are preserved exactly as they were. The seed keywords follow the specified mapping: id1=classroom1, id2=library1, id3=church1, id4=sports1, id5=art1, id6=playground1, id7=graduation1, id8=science1, id9=music1, id10=garden1, id11=teamwork1, id12=choir1. No new npm packages were added. This is a .jsx file so TypeScript strict rules (no `any`) don't directly apply, but no unsafe patterns were introduced.
+
+## Issue #84 — fix(footer): wrong address and phone — update to real CLA contact data [IN PROGRESS]
+**Started:** 2026-05-10T14:08:15.495044+00:00
+**Branch:** `fix/footer-wrong-contact-data`
+
