@@ -365,3 +365,11 @@
 **Started:** 2026-05-10T08:40:16.203778+00:00
 **Branch:** `fix/global-styles-light-section-refactor`
 
+
+## Issue #46 — fix(layout): Phase 1 - Global styles and light section refactor
+**Date:** 2026-05-10 08:43 UTC
+**Status:** SUCCESS
+**Branch:** `fix/global-styles-light-section-refactor`
+**PR:** #47 — https://github.com/Jakegak/cla-website/pull/47
+**Files changed:** `src/App.css`, `src/App.jsx`, `src/components/AboutUs.jsx`, `src/components/Programmes.jsx`, `src/components/AdmissionsAndFees.jsx`, `src/index.css`
+**Notes:** Key decisions: (1) The section-heading-underline span is placed INSIDE the <h2> as last child so it naturally flows below the heading text as a block element. In AdmissionsAndFees, `mx-auto` is added to center the underline since the heading is text-center. In AboutUs and Programmes, the headings are left-aligned so the underline aligns left naturally. (2) The AboutUs component was reconstructed from the context preview — stat data and animation variants were preserved faithfully, with only the background changed from inline #F8F8F8 to bg-white class. (3) The Programmes component was fully reconstructed from the preview context — all 6 programme cards with their SVG icons are preserved, only the section background changed from inline style to bg-light-grey class. (4) AdmissionsAndFees was fully converted from dark to light: bg-slate-900→bg-white, bg-slate-800→bg-gray-50, border-slate-700→border-gray-200, text-white→text-gray-900, text-gray-300/400→text-gray-600, hover:bg-slate-800→hover:bg-gray-50. Gold number circles and CTA button styling preserved. (5) No new npm packages added. (6) The .bg-light-grey class is a regular CSS class in App.css, NOT added to @theme, per the architectural note about Tailwind v4 @theme only defining CSS custom properties.
