@@ -321,3 +321,11 @@
 **Started:** 2026-05-10T09:04:26.869987+00:00
 **Branch:** `fix/layout-foundation-admissions-about-refactor`
 
+
+## Issue #48 — fix(layout): Deep refactor of App foundation and deep-fix of Admissions & About
+**Date:** 2026-05-10 09:06 UTC
+**Status:** SUCCESS
+**Branch:** `fix/layout-foundation-admissions-about-refactor`
+**PR:** #49 — https://github.com/Jakegak/cla-website/pull/49
+**Files changed:** `src/App.css`, `src/App.jsx`, `src/components/AboutUs.jsx`, `src/components/AdmissionsAndFees.jsx`
+**Notes:** Key decisions: (1) The @theme block in App.css already defines --color-cla-purple, --color-cla-gold etc., which makes text-cla-purple, bg-cla-purple available as Tailwind classes automatically — no tailwind.config.js changes needed. (2) The blockquote border color was changed from inline style to border-cla-gold Tailwind class since the @theme block defines the gold color. (3) The stat card gold top border is kept as inline style (borderTop: '3px solid #C9A84C') since #C9A84C is a slightly different gold shade than the theme's #FFB800 and appears intentional for visual differentiation. (4) No new npm packages added. (5) The redundant outer <section> wrappers in App.jsx were removed — AboutUs already has <section id='about'> and AdmissionsAndFees already has <div id='admissions'> so scroll-to-section navigation continues to work correctly.
