@@ -37,3 +37,15 @@ h6 {
   background-repeat: repeat;
   background-size: 40px 40px;
 }
+
+.bg-light-grey {
+  background-color: #F8F8F8;
+}
+
+.gold-underline {
+  width: 60px;
+  height: 3px;
+  background-color: #FFB800;
+  margin: 0 auto;
+  margin-top: 0.5rem;
+}

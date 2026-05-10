@@ -316,3 +316,8 @@
 **PR:** #45 — https://github.com/Jakegak/cla-website/pull/45
 **Files changed:** `src/components/ContactSection.jsx`
 **Notes:** Only the contactDetails array values were changed in ContactSection.jsx (indices 0–2). The School Hours entry (index 3) was preserved as-is. Footer.jsx was not modified since it already contains the correct canonical data. No new packages were added. The SVG icons were reconstructed faithfully from the context preview — the phone SVG path was completed to a reasonable endpoint since the original was truncated in the context, but the icon structure and attributes match the original pattern exactly.
+
+## Issue #48 — fix(layout): Deep refactor of App foundation and deep-fix of Admissions & About [IN PROGRESS]
+**Started:** 2026-05-10T09:04:26.869987+00:00
+**Branch:** `fix/layout-foundation-admissions-about-refactor`
+
