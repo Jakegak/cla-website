@@ -57,3 +57,16 @@
 **PR:** #17 — https://github.com/Jakegak/cla-website/pull/17
 **Files changed:** `src/components/AboutUs.jsx`
 **Notes:** No new packages added. Used inline style for background-color #F8F8F8 instead of Tailwind arbitrary value bg-[#F8F8F8] to ensure compatibility with Tailwind v4 which may not support arbitrary values in the same way as v3. The component keeps id='about' on its own section element as required by the plan — this creates a duplicate id since App.jsx also wraps it in <section id='about'>, but scroll targeting still works. All four inline SVGs are minimal (graduation cap for Students, person silhouette for Staff, calendar for Years, cross for Christian Values). The text-left class on both columns overrides the global text-align: center from #root. Used font-heading class on the h2 and quote to get Playfair Display. The stat cards use the theme token bg-cla-purple (#2D1B69) confirmed available in App.css @theme config. Icon color uses text-cla-gold for visual accent against purple cards.
+
+## Issue #5 — feat(programmes): academic programmes offered at CLA [IN PROGRESS]
+**Started:** 2026-05-10T02:04:28.796074+00:00
+**Branch:** `feat/academic-programmes-section`
+
+
+## Issue #5 — feat(programmes): academic programmes offered at CLA
+**Date:** 2026-05-10 02:06 UTC
+**Status:** SUCCESS
+**Branch:** `feat/academic-programmes-section`
+**PR:** #18 — https://github.com/Jakegak/cla-website/pull/18
+**Files changed:** `src/components/Programmes.jsx`, `src/App.jsx`
+**Notes:** No new npm packages added — Framer Motion was already a project dependency. The Programmes component owns its own <section id='programmes'> element, so App.jsx renders <Programmes /> directly without a wrapping section to avoid duplicate IDs. Used inline style for the section background color (#F8F8F8) instead of arbitrary Tailwind values to comply with the project's Tailwind v4 @theme convention. Cards use border-l-4 with border-cla-purple for the accent, white backgrounds for contrast against the light section background, and spring-based whileHover animation for the lift effect. The stagger pattern (containerVariants/childVariants) follows the established convention from HeroSection and AboutUs. All SVG icons are 40x40, stroke-based with currentColor, and aria-hidden for accessibility.
