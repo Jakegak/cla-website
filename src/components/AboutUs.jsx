@@ -73,7 +73,7 @@ const stats = [
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        <circle cx="20" cy="20" r="16" stroke="currentColor" strokeWidth="2" fill="none" />
+        <circle cx="20" cy="20" r="14" stroke="currentColor" strokeWidth="2" fill="none" />
         <path
           d="M20 10V20L26 26"
           stroke="currentColor"
@@ -86,8 +86,8 @@ const stats = [
     ),
   },
   {
-    label: "Programs",
-    value: "20+",
+    label: "Programmes",
+    value: "6",
     icon: (
       <svg
         width="40"
@@ -97,37 +97,14 @@ const stats = [
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        <rect
-          x="4"
-          y="6"
-          width="32"
-          height="28"
-          rx="2"
-          stroke="currentColor"
-          strokeWidth="2"
-          fill="none"
-        />
-        <path
-          d="M4 14H36"
-          stroke="currentColor"
-          strokeWidth="2"
-          fill="none"
-        />
-        <path
-          d="M14 14V34"
-          stroke="currentColor"
-          strokeWidth="2"
-          fill="none"
-        />
+        <rect x="6" y="6" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="2" fill="none" />
+        <rect x="22" y="6" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="2" fill="none" />
+        <rect x="6" y="22" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="2" fill="none" />
+        <rect x="22" y="22" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="2" fill="none" />
       </svg>
     ),
   },
 ];
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -135,87 +112,74 @@ const containerVariants = {
     opacity: 1,
     transition: {
       staggerChildren: 0.15,
+      delayChildren: 0.2,
     },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
   },
 };
 
 export default function AboutUs() {
   return (
-    <section
-      id="about"
-      style={{ backgroundColor: "#F8F8F8" }}
-      className="py-20 px-4"
-    >
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left Column — Mission Text */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={cardVariants}
-          >
+    <section id="about" className="bg-white py-20 px-4">
+      <div className="max-w-6xl mx-auto">
+        <motion.div
+          className="grid md:grid-cols-2 gap-12 items-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={containerVariants}
+        >
+          <motion.div variants={cardVariants} className="text-left">
             <h2
-              className="text-4xl font-bold mb-6"
-              style={{ color: "#2D1B69", fontFamily: "'Playfair Display', serif" }}
+              className="text-3xl font-bold mb-4"
+              style={{ color: '#2D1B69', fontFamily: "'Playfair Display', serif" }}
             >
               About Us
+              <span className="section-heading-underline"></span>
             </h2>
-            <p className="text-lg leading-relaxed mb-6" style={{ color: "#333" }}>
-              Christ Little Angels School is committed to nurturing young minds
-              through quality education, moral values, and holistic development.
-              Our mission is to create a learning environment where every child
-              can discover their potential and grow into responsible citizens.
+            <p className="text-gray-600 text-lg leading-relaxed mb-4">
+              CLA Schools is a leading educational institution committed to nurturing young minds
+              through innovative teaching methods and a holistic approach to education. Our mission
+              is to provide every child with the tools they need to succeed academically, socially,
+              and emotionally.
             </p>
-            <blockquote
-              className="text-cla-purple text-xl italic border-l-4 pl-4"
-              style={{ borderColor: "#C9A84C" }}
-            >
-              &ldquo;Empowering young minds to lead with knowledge, compassion,
-              and integrity.&rdquo;
-            </blockquote>
+            <p className="text-gray-600 text-lg leading-relaxed">
+              With over 15 years of experience in education, we have built a reputation for
+              excellence, fostering an environment where curiosity thrives and every student is
+              empowered to reach their full potential.
+            </p>
           </motion.div>
 
-          {/* Right Column — Stat Cards */}
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 gap-6"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            className="grid grid-cols-2 gap-4"
             variants={containerVariants}
           >
             {stats.map((stat) => (
               <motion.div
                 key={stat.label}
                 variants={cardVariants}
-                className="rounded-lg p-6 text-center"
+                className="rounded-xl p-6 text-center"
                 style={{
-                  backgroundColor: "#2D1B69",
-                  borderTop: "3px solid #C9A84C",
-                  color: "white",
+                  backgroundColor: '#2D1B69',
+                  borderTop: '3px solid #C9A84C',
+                  color: 'white',
                 }}
               >
                 <div className="flex justify-center mb-3">{stat.icon}</div>
-                <div
-                  style={{
-                    fontSize: "2.5rem",
-                    fontWeight: "bold",
-                    color: "white",
-                    lineHeight: 1.2,
-                  }}
-                >
-                  {stat.value}
-                </div>
-                <div
-                  className="mt-1 text-base"
-                  style={{ color: "white" }}
-                >
-                  {stat.label}
-                </div>
+                <div className="text-3xl font-bold mb-1">{stat.value}</div>
+                <div className="text-sm opacity-80">{stat.label}</div>
               </motion.div>
             ))}
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

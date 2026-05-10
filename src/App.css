@@ -37,3 +37,19 @@ h6 {
   background-repeat: repeat;
   background-size: 40px 40px;
 }
+
+.section-heading-underline {
+  display: block;
+  width: 60px;
+  height: 3px;
+  background-color: #FFB800;
+  margin-top: 0.5rem;
+}
+
+.font-heading {
+  font-family: 'Playfair Display', serif;
+}
+
+.bg-light-grey {
+  background-color: #F8F8F8;
+}

@@ -14,14 +14,12 @@ export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <main className="min-h-screen bg-slate-900 font-sans selection:bg-blue-500/30">
+    <main className="min-h-screen font-sans selection:bg-blue-500/30">
       <Navbar onOpenModal={() => setIsModalOpen(true)} />
 
       <HeroSection onOpenModal={() => setIsModalOpen(true)} />
 
-      <section id="about">
-        <AboutUs />
-      </section>
+      <AboutUs />
 
       <Programmes />
 
@@ -29,9 +27,7 @@ export default function App() {
 
       <Testimonials />
 
-      <section id="admissions">
-        <AdmissionsAndFees />
-      </section>
+      <AdmissionsAndFees />
 
       <ContactSection />
 

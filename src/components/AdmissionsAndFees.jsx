@@ -71,103 +71,107 @@ export default function AdmissionsAndFees() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="py-24 bg-slate-900" id="admissions">
-      <motion.div
-        className="max-w-6xl mx-auto px-6"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
-      >
-        {/* Section Header */}
-        <motion.div className="text-center mb-16" variants={childVariants}>
-          <h2 className="text-4xl font-bold text-white mb-4">
-            Admissions & Fees
-          </h2>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-            Join our vibrant learning community. Follow our simple admissions
-            process to secure a place for your child.
-          </p>
-        </motion.div>
-
-        {/* Admissions Process Steps */}
+    <div className="py-20 bg-white" id="admissions">
+      <div className="max-w-6xl mx-auto px-4">
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20"
-          variants={childVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={containerVariants}
         >
-          {steps.map((step) => (
-            <div
-              key={step.number}
-              className="relative text-center p-6 rounded-xl bg-slate-800 border border-slate-700"
-            >
-              <div
-                className="w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4"
-                style={{ backgroundColor: "#FFB800", color: "#2D1B69" }}
-              >
-                {step.number}
-              </div>
-              <h3 className="text-lg font-semibold text-white mb-2">
-                {step.title}
-              </h3>
-              <p className="text-gray-400 text-sm">{step.description}</p>
-            </div>
-          ))}
-        </motion.div>
+          <motion.div variants={childVariants} className="text-center mb-16">
+            <h2 className="text-3xl font-heading font-bold text-gray-900 mb-4">
+              Admissions & Fees
+              <span className="section-heading-underline mx-auto"></span>
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Join our community of learners. Our admissions process is simple and
+              straightforward.
+            </p>
+          </motion.div>
 
-        {/* Fee Table */}
-        <motion.div className="mb-16" variants={childVariants}>
-          <h3 className="text-2xl font-bold text-white text-center mb-8">
-            Fee Structure
-          </h3>
-          <div className="overflow-x-auto">
-            <table className="w-full max-w-2xl mx-auto text-left">
-              <thead>
-                <tr className="border-b border-slate-700">
-                  <th className="py-4 px-6 text-gray-300 font-semibold">
-                    Programme
-                  </th>
-                  <th className="py-4 px-6 text-gray-300 font-semibold">
-                    Term Fee (GHS)
-                  </th>
-                  <th className="py-4 px-6 text-gray-300 font-semibold">
-                    Annual Fee (GHS)
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {feeTiers.map((tier) => (
-                  <tr
-                    key={tier.tier}
-                    className="border-b border-slate-800 hover:bg-slate-800 transition-colors"
-                  >
-                    <td className="py-4 px-6 text-white font-medium">
-                      {tier.tier}
-                    </td>
-                    <td className="py-4 px-6 text-gray-300">
-                      {tier.termFee}
-                    </td>
-                    <td className="py-4 px-6 text-gray-300">
-                      {tier.annualFee}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </motion.div>
-
-        {/* Apply Now CTA Button */}
-        <motion.div className="text-center" variants={childVariants}>
-          <button
-            type="button"
-            className="cta-apply-btn text-lg font-bold px-10 py-4 rounded-lg border-none cursor-pointer transition-all duration-200"
-            style={{ backgroundColor: "#FFB800", color: "#2D1B69" }}
-            onClick={() => setIsModalOpen(true)}
+          <motion.div
+            className="grid md:grid-cols-4 gap-6 mb-16"
+            variants={containerVariants}
           >
-            Apply Now
-          </button>
+            {steps.map((step) => (
+              <motion.div
+                key={step.number}
+                variants={childVariants}
+                className="relative text-center p-6 rounded-xl bg-gray-50 border border-gray-200"
+              >
+                <div
+                  className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-4 text-sm font-bold"
+                  style={{
+                    backgroundColor: '#FFB800',
+                    color: '#2D1B69',
+                  }}
+                >
+                  {step.number}
+                </div>
+                <h3 className="text-lg font-bold text-gray-900 mb-2">
+                  {step.title}
+                </h3>
+                <p className="text-gray-600 text-sm">{step.description}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div variants={childVariants} className="mb-16">
+            <h3 className="text-2xl font-heading font-bold text-gray-900 mb-8 text-center">
+              Fee Structure
+            </h3>
+            <div className="overflow-x-auto">
+              <table className="w-full max-w-2xl mx-auto">
+                <thead>
+                  <tr className="border-b border-gray-200">
+                    <th className="text-left py-3 px-4 text-gray-600 font-semibold">
+                      Programme
+                    </th>
+                    <th className="text-left py-3 px-4 text-gray-600 font-semibold">
+                      Term Fee
+                    </th>
+                    <th className="text-left py-3 px-4 text-gray-600 font-semibold">
+                      Annual Fee
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {feeTiers.map((fee) => (
+                    <tr
+                      key={fee.tier}
+                      className="border-b border-gray-200 hover:bg-gray-50 transition-colors"
+                    >
+                      <td className="py-3 px-4 text-gray-900 font-medium">
+                        {fee.tier}
+                      </td>
+                      <td className="py-3 px-4 text-gray-600">
+                        ₦{fee.termFee}
+                      </td>
+                      <td className="py-3 px-4 text-gray-600">
+                        ₦{fee.annualFee}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </motion.div>
+
+          <motion.div variants={childVariants} className="text-center">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="cta-apply-btn px-8 py-4 rounded-full text-lg font-bold transition-all"
+              style={{
+                backgroundColor: '#FFB800',
+                color: '#2D1B69',
+              }}
+            >
+              Apply Now
+            </button>
+          </motion.div>
         </motion.div>
-      </motion.div>
+      </div>
 
       <ApplicationModal
         isOpen={isModalOpen}

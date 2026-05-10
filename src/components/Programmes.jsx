@@ -66,7 +66,7 @@ const programmes = [
     name: "Lower Primary",
     subtitle: "Ages 6–8",
     description:
-      "Building strong literacy and numeracy foundations through engaging, interactive lessons and collaborative learning.",
+      "Building strong academic foundations in literacy, numeracy, and science through interactive and engaging lessons.",
     icon: (
       <svg
         width="40"
@@ -76,45 +76,17 @@ const programmes = [
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        <rect
-          x="6"
-          y="6"
-          width="28"
-          height="28"
-          rx="3"
-          stroke="currentColor"
-          strokeWidth="2"
-          fill="none"
-        />
-        <path
-          d="M12 14H28"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          fill="none"
-        />
-        <path
-          d="M12 20H24"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          fill="none"
-        />
-        <path
-          d="M12 26H20"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          fill="none"
-        />
+        <rect x="6" y="8" width="28" height="24" rx="2" stroke="currentColor" strokeWidth="2" fill="none" />
+        <path d="M6 16H34" stroke="currentColor" strokeWidth="2" />
+        <path d="M20 16V32" stroke="currentColor" strokeWidth="2" />
       </svg>
     ),
   },
   {
     name: "Upper Primary",
-    subtitle: "Ages 9–12",
+    subtitle: "Ages 9–11",
     description:
-      "Preparing students for secondary education with advanced academics, critical thinking, and leadership opportunities.",
+      "Advancing critical thinking and problem-solving skills while preparing students for secondary education.",
     icon: (
       <svg
         width="40"
@@ -124,73 +96,16 @@ const programmes = [
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        <path
-          d="M20 4L2 14L20 24L38 14L20 4Z"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinejoin="round"
-          fill="none"
-        />
-        <path
-          d="M8 18V28C8 28 12 34 20 34C28 34 32 28 32 28V18"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-        />
-        <path
-          d="M38 14V26"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          fill="none"
-        />
+        <path d="M8 32L20 8L32 32" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+        <path d="M12 24H28" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
       </svg>
     ),
   },
   {
-    name: "Christian Education",
-    subtitle: "Faith & Values",
+    name: "STEM Programme",
+    subtitle: "All Ages",
     description:
-      "Integrating Biblical principles across the curriculum to nurture character, compassion, and spiritual growth.",
-    icon: (
-      <svg
-        width="40"
-        height="40"
-        viewBox="0 0 40 40"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-      >
-        <rect
-          x="17"
-          y="4"
-          width="6"
-          height="32"
-          rx="1"
-          stroke="currentColor"
-          strokeWidth="2"
-          fill="none"
-        />
-        <rect
-          x="8"
-          y="12"
-          width="24"
-          height="6"
-          rx="1"
-          stroke="currentColor"
-          strokeWidth="2"
-          fill="none"
-        />
-      </svg>
-    ),
-  },
-  {
-    name: "Sports & PE",
-    subtitle: "Physical Development",
-    description:
-      "Developing fitness, teamwork, and sportsmanship through structured physical education and competitive athletics.",
+      "Hands-on science, technology, engineering, and mathematics activities that inspire innovation and curiosity.",
     icon: (
       <svg
         width="40"
@@ -201,38 +116,17 @@ const programmes = [
         aria-hidden="true"
       >
         <circle cx="20" cy="20" r="14" stroke="currentColor" strokeWidth="2" fill="none" />
-        <path
-          d="M20 6V34"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          fill="none"
-        />
-        <path
-          d="M6 20H34"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          fill="none"
-        />
-        <path
-          d="M8 10C14 14 26 14 32 10"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          fill="none"
-        />
-        <path
-          d="M8 30C14 26 26 26 32 30"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          fill="none"
-        />
+        <path d="M20 6V34" stroke="currentColor" strokeWidth="2" />
+        <path d="M6 20H34" stroke="currentColor" strokeWidth="2" />
+        <circle cx="20" cy="20" r="4" stroke="currentColor" strokeWidth="2" fill="none" />
       </svg>
     ),
   },
   {
     name: "Arts & Culture",
-    subtitle: "Creative Expression",
+    subtitle: "All Ages",
     description:
-      "Fostering creativity and cultural appreciation through music, drama, visual arts, and traditional dance.",
+      "Creative expression through visual arts, music, drama, and cultural studies that celebrate diversity.",
     icon: (
       <svg
         width="40"
@@ -242,22 +136,34 @@ const programmes = [
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        <path
-          d="M14 36V12L34 6V30"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-        />
-        <circle cx="10" cy="36" r="4" stroke="currentColor" strokeWidth="2" fill="none" />
-        <circle cx="30" cy="30" r="4" stroke="currentColor" strokeWidth="2" fill="none" />
-        <path
-          d="M14 20L34 14"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          fill="none"
-        />
+        <circle cx="14" cy="14" r="3" stroke="currentColor" strokeWidth="2" fill="none" />
+        <circle cx="26" cy="14" r="3" stroke="currentColor" strokeWidth="2" fill="none" />
+        <circle cx="14" cy="26" r="3" stroke="currentColor" strokeWidth="2" fill="none" />
+        <circle cx="26" cy="26" r="3" stroke="currentColor" strokeWidth="2" fill="none" />
+        <path d="M14 17V23" stroke="currentColor" strokeWidth="2" />
+        <path d="M26 17V23" stroke="currentColor" strokeWidth="2" />
+        <path d="M17 14H23" stroke="currentColor" strokeWidth="2" />
+        <path d="M17 26H23" stroke="currentColor" strokeWidth="2" />
+      </svg>
+    ),
+  },
+  {
+    name: "Sports & Fitness",
+    subtitle: "All Ages",
+    description:
+      "Comprehensive physical education and competitive sports programmes that promote health, teamwork, and discipline.",
+    icon: (
+      <svg
+        width="40"
+        height="40"
+        viewBox="0 0 40 40"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <circle cx="20" cy="20" r="14" stroke="currentColor" strokeWidth="2" fill="none" />
+        <path d="M10 10L30 30" stroke="currentColor" strokeWidth="2" />
+        <path d="M30 10L10 30" stroke="currentColor" strokeWidth="2" />
       </svg>
     ),
   },
@@ -265,55 +171,46 @@ const programmes = [
 
 export default function Programmes() {
   return (
-    <section id="programmes" className="py-20 px-4" style={{ backgroundColor: "#F8F8F8" }}>
+    <section id="programmes" className="py-20 px-4 bg-light-grey">
       <div className="max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-12"
-        >
-          <h2 className="text-3xl font-heading font-bold text-cla-purple mb-4">
-            Our Programmes
-          </h2>
-          <p className="text-slate-600 max-w-2xl mx-auto">
-            Discover the range of academic and extracurricular programmes we
-            offer to nurture every child&apos;s potential.
-          </p>
-        </motion.div>
-
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.2 }}
+          variants={containerVariants}
         >
-          {programmes.map((programme) => (
-            <motion.div
-              key={programme.name}
-              variants={childVariants}
-              whileHover={{
-                y: -8,
-                boxShadow: "0 20px 40px rgba(45, 27, 105, 0.15)",
-              }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="bg-white rounded-xl p-6 border-l-4 border-cla-purple text-left cursor-default"
-              style={{ boxShadow: "0 4px 12px rgba(0, 0, 0, 0.06)" }}
-            >
-              <div className="text-cla-purple mb-4">{programme.icon}</div>
-              <h3 className="text-xl font-heading font-bold text-slate-800 mb-1">
-                {programme.name}
-              </h3>
-              <span className="text-sm font-semibold text-cla-purple mb-2 block">
-                {programme.subtitle}
-              </span>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                {programme.description}
-              </p>
-            </motion.div>
-          ))}
+          <motion.div variants={childVariants} className="mb-12">
+            <h2 className="text-3xl font-heading font-bold text-cla-purple mb-4">
+              Our Programmes
+              <span className="section-heading-underline"></span>
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              We offer a diverse range of programmes designed to develop every aspect of your
+              child&apos;s potential.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="grid md:grid-cols-3 gap-6"
+            variants={containerVariants}
+          >
+            {programmes.map((programme) => (
+              <motion.div
+                key={programme.name}
+                variants={childVariants}
+                className="bg-white rounded-xl p-6 border-l-4 border-cla-purple text-left"
+              >
+                <div className="text-cla-purple mb-3">{programme.icon}</div>
+                <h3 className="text-xl font-bold text-cla-purple mb-1">
+                  {programme.name}
+                </h3>
+                <p className="text-sm text-cla-gold font-semibold mb-2">
+                  {programme.subtitle}
+                </p>
+                <p className="text-gray-600 text-sm">{programme.description}</p>
+              </motion.div>
+            ))}
+          </motion.div>
         </motion.div>
       </div>
     </section>
