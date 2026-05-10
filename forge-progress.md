@@ -507,3 +507,8 @@
 **PR:** #93 — https://github.com/Jakegak/cla-website/pull/93
 **Files changed:** `src/components/Programmes.jsx`
 **Notes:** No new packages added. All icons are hand-crafted inline SVGs matching the existing 40x40 viewBox pattern with stroke='currentColor' and fill='none'. The accent colour bar uses a cycling array indexed by `index % 3` to alternate through the three brand colours. Card hover animation uses Framer Motion whileHover with spring transition — the old CSS hover:shadow-md and transition-shadow classes were removed since Framer Motion now handles the hover shadow effect. The card uses overflow-hidden on the rounded-2xl container so the 6px accent bar clips correctly to the card's rounded top corners. package.json and src/index.css did not require changes — framer-motion was already installed and no new CSS classes were needed.
+
+## Issue #95 — fix(footer): wrong contact data and missing brand colours [IN PROGRESS]
+**Started:** 2026-05-10T23:24:05.218371+00:00
+**Branch:** `fix/footer-contact-data-brand-colours`
+
