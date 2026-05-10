@@ -334,3 +334,11 @@
 **Started:** 2026-05-10T09:30:19.877534+00:00
 **Branch:** `fix/section-spacing-scroll-transitions`
 
+
+## Issue #52 — Issue 2 — Section Spacing and Scroll Transition Problems
+**Date:** 2026-05-10 09:32 UTC
+**Status:** SUCCESS
+**Branch:** `fix/section-spacing-scroll-transitions`
+**PR:** #53 — https://github.com/Jakegak/cla-website/pull/53
+**Files changed:** `src/App.jsx`, `src/components/HeroSection.jsx`, `src/components/AboutUs.jsx`, `src/index.css`, `src/App.css`, `src/components/Programmes.jsx`
+**Notes:** Root causes identified and fixed: (1) **Color seam** — The hero section's bottom fade overlay used Tailwind's `from-white` (#ffffff) but AboutUs has a #F8F8F8 background, creating a visible color jump. Fixed by replacing the Tailwind gradient class with an inline style gradient that fades to #F8F8F8 to seamlessly blend into the About section. (2) **Duplicate ID** — App.jsx wrapped AboutUs in `<section id='about'>` while AboutUs itself already renders `<section id='about'>`, creating nested duplicate IDs. This could cause unpredictable behavior with the smooth-scroll 'Learn More' button in the hero. Fixed by removing the wrapper in App.jsx. (3) **Dead code cleanup** — Removed unused DecoativeCross and GraduationCap SVG components from HeroSection and unused .hero-pattern class from App.css. (4) Added `scroll-behavior: smooth` to the html element in index.css for consistent smooth scrolling. (5) Confirmed AboutUs and Programmes both already use identical py-20 px-4 spacing patterns — no padding changes were needed since the visual 'jump' was caused by the color mismatch, not spacing. No new npm packages added.
