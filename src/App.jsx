@@ -14,7 +14,7 @@ export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <main className="min-h-screen max-w-full overflow-x-hidden font-sans selection:bg-blue-500/30" style={{ backgroundColor: '#0D0D1A' }}>
+    <main className="min-h-screen max-w-full overflow-x-hidden font-sans selection:bg-blue-500/30">
       <Navbar onOpenModal={() => setIsModalOpen(true)} />
 
       {/* Spacer to offset fixed navbar height (h-20 = 5rem) */}
