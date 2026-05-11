@@ -720,3 +720,11 @@
 **Started:** 2026-05-11T04:33:00.971860+00:00
 **Branch:** `fix/gallery-css-grid-and-text-leak`
 
+
+## Issue #133 — fix(gallery): rewrite CSS to fix broken single-column layout and raw text leaking
+**Date:** 2026-05-11 04:34 UTC
+**Status:** SUCCESS
+**Branch:** `fix/gallery-css-grid-and-text-leak`
+**PR:** #137 — https://github.com/Jakegak/cla-website/pull/137
+**Files changed:** `src/App.css`, `src/components/ActivitiesGallery.jsx`
+**Notes:** Key changes: (1) Added .gallery-container with max-width 1200px centering and box-sizing. (2) Added .gallery-grid with CSS grid and responsive media queries at 640px (2-col) and 1024px (3-col). (3) Added .gallery-item with position: relative, aspect-ratio: 4/3, and overflow: hidden — this is the critical fix that prevents alt text and category labels from leaking as visible text since the overflow is clipped and images fill via object-fit: cover. (4) Replaced <motion.div className='gallery-grid' layout> with plain <div className='gallery-grid'> to eliminate Framer Motion layout animations that were conflicting with CSS grid. (5) Kept motion and AnimatePresence imports — motion is still used on individual gallery items (gridItemVariants) and lightbox, AnimatePresence wraps both the gallery items list and lightbox. (6) Added .filter-btn styles (pill-shaped buttons with hover/active states) and .lightbox-overlay/.lightbox-close styles to ensure the full gallery renders correctly. (7) The component JSX was reconstructed to match the patterns from the context — gallery-overlay with category text is inside gallery-item so it only shows on hover. No new dependencies added.
