@@ -25,7 +25,7 @@ const gridItemVariants = {
 function ActivitiesGallery() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [filteredImages, setFilteredImages] = useState(GALLERY_IMAGES);
-  const [lightbox, setLightbox] = useState({ open: false, image: null });
+  const [lightboxImage, setLightboxImage] = useState(null);
 
   useEffect(() => {
     if (activeCategory === "All") {
@@ -38,38 +38,32 @@ function ActivitiesGallery() {
   }, [activeCategory]);
 
   const openLightbox = useCallback((image) => {
-    setLightbox({ open: true, image });
+    setLightboxImage(image);
   }, []);
 
   const closeLightbox = useCallback(() => {
-    setLightbox({ open: false, image: null });
+    setLightboxImage(null);
   }, []);
 
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape" && lightbox.open) {
-        closeLightbox();
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [lightbox.open, closeLightbox]);
-
   return (
-    <section id="gallery" className="gallery-section">
-      <div className="container">
-        <div className="gallery-header">
-          <h2 className="section-title">Activities Gallery</h2>
-          <p className="section-subtitle">
-            Explore the vibrant life at Christian Living Academy
-          </p>
-        </div>
+    <section className="gallery-section section-dark section-padding">
+      <div className="gallery-container">
+        <h2 className="section-heading text-light">Activities Gallery</h2>
 
-        <div className="gallery-filters">
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: "0.75rem",
+            marginTop: "2rem",
+            marginBottom: "2.5rem",
+          }}
+        >
           {CATEGORIES.map((category) => (
             <button
               key={category}
-              className={`filter-btn ${activeCategory === category ? "active" : ""}`}
+              className={`filter-btn${activeCategory === category ? " active" : ""}`}
               onClick={() => setActiveCategory(category)}
             >
               {category}
@@ -77,7 +71,7 @@ function ActivitiesGallery() {
           ))}
         </div>
 
-        <motion.div className="gallery-grid" layout>
+        <div className="gallery-grid">
           <AnimatePresence mode="popLayout">
             {filteredImages.map((image) => (
               <motion.div
@@ -87,63 +81,49 @@ function ActivitiesGallery() {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                layout
                 onClick={() => openLightbox(image)}
               >
                 <img
                   src={image.src}
                   alt={image.alt}
                   loading="lazy"
-                  className="gallery-image"
                 />
                 <div className="gallery-overlay">
-                  <span className="gallery-category">{image.category}</span>
-                  <p className="gallery-alt">{image.alt}</p>
+                  <span>{image.category}</span>
                 </div>
               </motion.div>
             ))}
           </AnimatePresence>
-        </motion.div>
-
-        <AnimatePresence>
-          {lightbox.open && lightbox.image && (
-            <motion.div
-              className="lightbox-backdrop"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={closeLightbox}
-            >
-              <motion.div
-                className="lightbox-content"
-                initial={{ scale: 0.7, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.7, opacity: 0 }}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <button
-                  className="lightbox-close"
-                  onClick={closeLightbox}
-                  aria-label="Close lightbox"
-                >
-                  &times;
-                </button>
-                <img
-                  src={lightbox.image.fullSrc}
-                  alt={lightbox.image.alt}
-                  className="lightbox-image"
-                />
-                <div className="lightbox-info">
-                  <span className="lightbox-category">
-                    {lightbox.image.category}
-                  </span>
-                  <p className="lightbox-description">{lightbox.image.alt}</p>
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        </div>
       </div>
+
+      <AnimatePresence>
+        {lightboxImage && (
+          <motion.div
+            className="lightbox-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={closeLightbox}
+          >
+            <button
+              className="lightbox-close"
+              onClick={closeLightbox}
+              aria-label="Close lightbox"
+            >
+              &times;
+            </button>
+            <motion.img
+              src={lightboxImage.fullSrc}
+              alt={lightboxImage.alt}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

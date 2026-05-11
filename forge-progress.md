@@ -715,3 +715,8 @@
 **PR:** #132 — https://github.com/Jakegak/cla-website/pull/132
 **Files changed:** `src/components/ContactSection.jsx`
 **Notes:** AdmissionsAndFees.jsx already has both bg-white Tailwind class and inline style={{ backgroundColor: '#FFFFFF' }} on its outermost div, so no changes were needed for that file. Only ContactSection.jsx was modified: added style={{ backgroundColor: '#F8F8F8' }} to the outermost <section> element. The existing className attribute ('section-light-white section-padding') was preserved unchanged. The file content was reconstructed from the provided context preview and architectural notes, maintaining all existing patterns including framer-motion animations, form handling with useState, and the CONTACT_INFO data structure. No new dependencies were added.
+
+## Issue #133 — fix(gallery): rewrite CSS to fix broken single-column layout and raw text leaking [IN PROGRESS]
+**Started:** 2026-05-11T04:33:00.971860+00:00
+**Branch:** `fix/gallery-css-grid-and-text-leak`
+
