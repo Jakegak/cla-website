@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 import ApplicationModal from "./ApplicationModal";
 
 const FEE_DATA = [
-  { programme: "Early Years (Ages 3-5)", termFee: "18,000", annualFee: "54,000" },
-  { programme: "Lower Primary (Ages 6-8)", termFee: "25,000", annualFee: "75,000" },
-  { programme: "Upper Primary (Ages 9-12)", termFee: "30,000", annualFee: "90,000" },
+  { programme: "Early Years (Ages 3-5)", termFee: 18000, annualFee: 54000 },
+  { programme: "Lower Primary (Ages 6-8)", termFee: 25000, annualFee: 75000 },
+  { programme: "Upper Primary (Ages 9-12)", termFee: 30000, annualFee: 90000 },
 ];
 
 const STEPS = [
@@ -57,6 +57,7 @@ export default function AdmissionsAndFees() {
   return (
     <div
       className="section-light-white section-padding px-4 bg-white text-gray-900"
+      style={{ backgroundColor: "#FFFFFF", color: "#1a1a1a" }}
     >
       <div className="max-w-6xl mx-auto">
         <motion.div
@@ -75,86 +76,75 @@ export default function AdmissionsAndFees() {
             className="text-dark-body text-center max-w-2xl mx-auto mb-12"
             variants={fadeInUp}
           >
-            Our admissions process is simple and welcoming. Follow the steps below
-            to secure your child&apos;s place.
+            Join our learning community. Follow the simple steps below to secure
+            a place for your child.
           </motion.p>
 
-          {/* Admissions Steps */}
+          {/* Admission Steps */}
           <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
             variants={staggerContainer}
           >
             {STEPS.map((item) => (
               <motion.div
                 key={item.step}
-                className="bg-gray-50 rounded-2xl p-6 text-center shadow-sm"
+                className="bg-gray-50 rounded-2xl p-6 text-center"
                 variants={fadeInUp}
               >
-                <div className="w-12 h-12 rounded-full bg-purple-100 text-purple-700 font-bold text-lg flex items-center justify-center mx-auto mb-4">
+                <div className="w-10 h-10 rounded-full bg-purple-700 text-white flex items-center justify-center mx-auto mb-4 font-bold">
                   {item.step}
                 </div>
-                <h3 className="text-dark-heading font-semibold text-lg mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-dark-body text-sm">{item.description}</p>
+                <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
+                <p className="text-gray-600 text-sm">{item.description}</p>
               </motion.div>
             ))}
           </motion.div>
 
-          {/* Fee Structure */}
-          <motion.h3
-            className="text-dark-heading text-2xl font-bold text-center mb-6"
-            variants={fadeInUp}
-          >
-            Fee Structure
-          </motion.h3>
-
-          <motion.div
-            className="overflow-x-auto mb-6"
-            variants={fadeInUp}
-          >
-            <table className="w-full max-w-3xl mx-auto text-left border-collapse">
-              <thead>
-                <tr className="border-b-2 border-gray-200">
-                  <th className="py-3 px-4 text-dark-heading font-semibold">Programme</th>
-                  <th className="py-3 px-4 text-dark-heading font-semibold">Term Fee (KES)</th>
-                  <th className="py-3 px-4 text-dark-heading font-semibold">Annual Fee (KES)</th>
-                </tr>
-              </thead>
-              <tbody>
-                {FEE_DATA.map((row) => (
-                  <tr key={row.programme} className="border-b border-gray-100">
-                    <td className="py-3 px-4 text-dark-body">{row.programme}</td>
-                    <td className="py-3 px-4 text-dark-body">{`KES ${row.termFee}`}</td>
-                    <td className="py-3 px-4 text-dark-body">{`KES ${row.annualFee}`}</td>
+          {/* Fee Structure Table */}
+          <motion.div variants={fadeInUp}>
+            <h3 className="text-2xl font-bold text-center mb-8">
+              Fee Structure
+            </h3>
+            <div className="overflow-x-auto">
+              <table className="w-full max-w-3xl mx-auto text-left border-collapse">
+                <thead>
+                  <tr className="border-b-2 border-gray-200">
+                    <th className="py-3 px-4 font-semibold">Programme</th>
+                    <th className="py-3 px-4 font-semibold">Term Fee (KES)</th>
+                    <th className="py-3 px-4 font-semibold">Annual Fee (KES)</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {FEE_DATA.map((item) => (
+                    <tr
+                      key={item.programme}
+                      className="border-b border-gray-100 hover:bg-gray-50"
+                    >
+                      <td className="py-3 px-4">{item.programme}</td>
+                      <td className="py-3 px-4">
+                        KES {item.termFee.toLocaleString()}
+                      </td>
+                      <td className="py-3 px-4">
+                        KES {item.annualFee.toLocaleString()}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </motion.div>
 
-          <motion.p
-            className="text-dark-body text-sm text-center max-w-2xl mx-auto mb-8"
-            variants={fadeInUp}
-          >
-            Fees are payable per term. A discount applies when the full annual fee is
-            paid in advance. Additional costs may apply for uniforms, books, and
-            extracurricular activities.
-          </motion.p>
-
-          <motion.div
-            className="text-center"
-            variants={fadeInUp}
-          >
+          {/* Apply Now Button */}
+          <motion.div className="text-center mt-12" variants={fadeInUp}>
             <button
               type="button"
               onClick={() => setIsModalOpen(true)}
-              className="rounded-full px-8 py-3 text-lg"
               style={{
                 backgroundColor: "#FFB800",
                 color: "#2D1B69",
                 fontWeight: "bold",
               }}
+              className="px-8 py-3 rounded-full text-lg transition-transform hover:scale-105"
             >
               Apply Now
             </button>
