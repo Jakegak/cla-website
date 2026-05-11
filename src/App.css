@@ -96,6 +96,21 @@ h6 {
   margin: 0.5rem auto 0;
 }
 
+/* ===== About Us Grid Layout ===== */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 767px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ===== Activities Gallery Styles ===== */
 
 .activities-gallery {
@@ -118,5 +133,4 @@ h6 {
 .activities-gallery .section-title {
   font-family: var(--font-heading);
   font-size: 2.25rem;
-  font-weight: 700;
 }

@@ -637,3 +637,8 @@
 **PR:** #124 — https://github.com/Jakegak/cla-website/pull/124
 **Files changed:** `src/App.css`, `src/components/Programmes.jsx`, `src/App.jsx`
 **Notes:** The root cause is that the parent <main> in App.jsx has an inline style backgroundColor: '#0D0D1A'. While CSS background-color is not inherited, child elements with background-color: transparent (the default) show the parent's background through them. The .section-light-grey class was already defined in App.css with the correct value (#F8F8F8), but it may not have been applied to the Programmes section element (the JSX was truncated so this couldn't be confirmed). The fix has three parts: (1) Added !important to .section-light-grey in App.css to ensure it wins against any competing Tailwind utility or specificity issue — this is defensive since Tailwind CSS v4 can sometimes generate utilities that compete with custom classes. (2) Rewrote Programmes.jsx with the complete section element explicitly using className='section-light-grey section-padding px-4' and all text colors set via inline styles (color: '#2D1B69' for headings, color: '#374151' for body text) to guarantee they render correctly on the light background regardless of any inherited or global dark text color rules. (3) App.jsx is unchanged — no modifications needed there. No new dependencies were added.
+
+## Issue #115 — fix(about): background is lavender not light grey, layout needs left-right split [IN PROGRESS]
+**Started:** 2026-05-11T03:26:17.754717+00:00
+**Branch:** `fix/about-background-and-layout`
+
