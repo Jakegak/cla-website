@@ -40,7 +40,7 @@ const CONTACT_INFO = [
     ),
     label: "Phone",
     value: "0798 767 773",
-    href: "tel:0798767773",
+    href: "tel:+254798767773",
   },
   {
     icon: (
@@ -51,6 +51,7 @@ const CONTACT_INFO = [
     ),
     label: "Location",
     value: "Nairobi, Kenya",
+    href: "https://maps.google.com/?q=Nairobi,Kenya",
   },
 ];
 
@@ -58,7 +59,7 @@ const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    subject: "",
+    phone: "",
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -77,7 +78,7 @@ const ContactSection = () => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 1500));
       setSubmitStatus("success");
-      setFormData({ name: "", email: "", subject: "", message: "" });
+      setFormData({ name: "", email: "", phone: "", message: "" });
     } catch {
       setSubmitStatus("error");
     } finally {
@@ -86,189 +87,158 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="section-light-white section-padding">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+    <section
+      id="contact"
+      className="section-light-white section-padding"
+      style={{ backgroundColor: "#F8F8F8" }}
+    >
+      <div className="max-w-6xl mx-auto px-4">
         <motion.div
-          className="text-center mb-16"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={fadeInUp}
+          viewport={{ once: true, amount: 0.2 }}
+          variants={staggerContainer}
         >
-          <h2 className="section-heading text-3xl sm:text-4xl font-bold text-cla-purple mb-4">
-            Contact Us
-          </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Have questions about admissions or our programmes? We would love to hear from you.
-          </p>
-        </motion.div>
-
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Left Column: Contact Info + Map */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={staggerContainer}
-          >
-            {/* Contact Info Cards */}
-            <div className="space-y-6 mb-8">
-              {CONTACT_INFO.map((info, index) => (
-                <motion.div
-                  key={index}
-                  className="flex items-start gap-4 p-4 rounded-xl bg-gray-50 hover:bg-purple-50 transition-colors duration-300"
-                  variants={fadeInUp}
-                >
-                  <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-cla-purple/10 text-cla-purple flex items-center justify-center">
-                    {info.icon}
-                  </div>
-                  <div className="text-left">
-                    <p className="text-sm font-medium text-gray-500 mb-1">
-                      {info.label}
-                    </p>
-                    {info.href ? (
-                      <a
-                        href={info.href}
-                        className="text-gray-800 font-medium hover:text-cla-purple transition-colors"
-                      >
-                        {info.value}
-                      </a>
-                    ) : (
-                      <p className="text-gray-800 font-medium">{info.value}</p>
-                    )}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Google Maps Embed */}
-            <motion.div
-              className="rounded-xl overflow-hidden shadow-lg h-64 lg:h-72"
-              variants={fadeInUp}
-            >
-              <iframe
-                title="Christian Living Academy Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d255282.35853743783!2d36.68219929687501!3d-1.3028617999999872!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f1172d84d49a7%3A0xf7cf0254b297924c!2sNairobi%2C%20Kenya!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </motion.div>
-          </motion.div>
-
-          {/* Right Column: Contact Form */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+          <motion.h2
+            className="section-heading text-dark-heading text-center mb-4"
             variants={fadeInUp}
           >
-            <form
-              onSubmit={handleSubmit}
-              className="bg-white rounded-2xl shadow-xl p-8 space-y-6"
-            >
-              <div className="grid sm:grid-cols-2 gap-6">
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium text-gray-700 mb-2 text-left"
-                  >
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-cla-purple focus:border-transparent transition-all duration-300 outline-none"
-                    placeholder="Your name"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-gray-700 mb-2 text-left"
-                  >
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-cla-purple focus:border-transparent transition-all duration-300 outline-none"
-                    placeholder="your@email.com"
-                  />
-                </div>
-              </div>
+            Get In Touch
+          </motion.h2>
+          <motion.p
+            className="text-dark-body text-center max-w-2xl mx-auto mb-12"
+            variants={fadeInUp}
+          >
+            Have questions about admissions, programmes, or anything else? We&apos;d
+            love to hear from you.
+          </motion.p>
 
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
+            {CONTACT_INFO.map((info, index) => (
+              <motion.a
+                key={info.label}
+                href={info.href}
+                target={info.label === "Location" ? "_blank" : undefined}
+                rel={info.label === "Location" ? "noopener noreferrer" : undefined}
+                className="flex flex-col items-center text-center p-6 rounded-2xl bg-white shadow-sm hover:shadow-md transition-shadow duration-300"
+                variants={fadeInUp}
+                custom={index}
+              >
+                <div className="w-12 h-12 rounded-full bg-green-100 text-green-700 flex items-center justify-center mb-4">
+                  {info.icon}
+                </div>
+                <h3 className="font-semibold text-gray-900 mb-1">{info.label}</h3>
+                <p className="text-gray-600 text-sm">{info.value}</p>
+              </motion.a>
+            ))}
+          </div>
+
+          <motion.div
+            className="max-w-2xl mx-auto bg-white rounded-2xl shadow-sm p-8"
+            variants={fadeInUp}
+          >
+            <h3 className="text-xl font-semibold text-gray-900 mb-6 text-center">
+              Send Us a Message
+            </h3>
+
+            {submitStatus === "success" && (
+              <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg text-green-800 text-center">
+                Thank you for your message! We&apos;ll get back to you soon.
+              </div>
+            )}
+
+            {submitStatus === "error" && (
+              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 text-center">
+                Something went wrong. Please try again later.
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <label
-                  htmlFor="subject"
-                  className="block text-sm font-medium text-gray-700 mb-2 text-left"
+                  htmlFor="contact-name"
+                  className="block text-sm font-medium text-gray-700 mb-1"
                 >
-                  Subject
+                  Full Name
                 </label>
                 <input
                   type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
+                  id="contact-name"
+                  name="name"
+                  value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-cla-purple focus:border-transparent transition-all duration-300 outline-none"
-                  placeholder="How can we help?"
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors"
+                  placeholder="Your full name"
                 />
               </div>
 
               <div>
                 <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-gray-700 mb-2 text-left"
+                  htmlFor="contact-email"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  id="contact-email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors"
+                  placeholder="your@email.com"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="contact-phone"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  id="contact-phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors"
+                  placeholder="0700 000 000"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="contact-message"
+                  className="block text-sm font-medium text-gray-700 mb-1"
                 >
                   Message
                 </label>
                 <textarea
-                  id="message"
+                  id="contact-message"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  rows="5"
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-cla-purple focus:border-transparent transition-all duration-300 outline-none resize-none"
-                  placeholder="Tell us more..."
+                  rows={5}
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors resize-vertical"
+                  placeholder="How can we help you?"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-3 px-6 rounded-lg bg-cla-purple text-white font-semibold hover:bg-cla-purple/90 focus:ring-4 focus:ring-cla-purple/30 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full py-3 px-6 bg-green-700 hover:bg-green-800 disabled:bg-green-400 text-white font-semibold rounded-lg transition-colors duration-300"
               >
                 {isSubmitting ? "Sending..." : "Send Message"}
               </button>
-
-              {submitStatus === "success" && (
-                <p className="text-green-600 text-sm font-medium text-center">
-                  Thank you! Your message has been sent successfully.
-                </p>
-              )}
-              {submitStatus === "error" && (
-                <p className="text-red-600 text-sm font-medium text-center">
-                  Something went wrong. Please try again later.
-                </p>
-              )}
             </form>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
