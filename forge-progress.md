@@ -551,3 +551,11 @@
 **Started:** 2026-05-11T01:15:13.915906+00:00
 **Branch:** `fix/testimonials-school-name-parent-names`
 
+
+## Issue #101 — fix(testimonials): wrong school name and non-Kenyan parent names
+**Date:** 2026-05-11 01:16 UTC
+**Status:** SUCCESS
+**Branch:** `fix/testimonials-school-name-parent-names`
+**PR:** #108 — https://github.com/Jakegak/cla-website/pull/108
+**Files changed:** `src/components/Testimonials.jsx`
+**Notes:** Only the TESTIMONIALS const array was modified — all component logic, hooks, Framer Motion animations, auto-play interval, dot navigation, and JSX structure remain identical. The abbreviation 'CLA' in testimonials 2 and 4 was kept as-is since 'Christian Living Academy' also abbreviates to CLA. The component body below the TESTIMONIALS array was reconstructed from the context preview and architectural notes describing the carousel structure (AnimatePresence with mode='wait', motion.div with slideVariants, dot navigation buttons). No new dependencies were added.
