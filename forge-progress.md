@@ -572,3 +572,16 @@
 **PR:** #109 — https://github.com/Jakegak/cla-website/pull/109
 **Files changed:** `src/components/Footer.jsx`
 **Notes:** Removed the `import Logo from './Logo'` and replaced with `import claLogo from '../assets/cla-logo.jpg'`. The footer element's className changed from `bg-gray-900 text-white` to just `text-white` with an inline style `backgroundColor: '#2D1B69'`. The `<Logo />` component was replaced with an `<img>` tag using the imported image asset, with `h-11 w-11 rounded-full object-cover` classes and a `2px solid #FFB800` border. The full file was reconstructed from the context preview — the SVG icon components, quickLinks array, handleNavClick, social links, and copyright section are preserved exactly as they were. No new dependencies were added.
+
+## Issue #103 — fix(footer): background should be CLA purple not grey, use real logo image [IN PROGRESS]
+**Started:** 2026-05-11T02:32:11.848664+00:00
+**Branch:** `fix/footer-bg-and-logo`
+
+
+## Issue #103 — fix(footer): background should be CLA purple not grey, use real logo image
+**Date:** 2026-05-11 02:33 UTC
+**Status:** SUCCESS
+**Branch:** `fix/footer-bg-and-logo`
+**PR:** #110 — https://github.com/Jakegak/cla-website/pull/110
+**Files changed:** `src/components/Footer.jsx`
+**Notes:** The architectural notes indicated the fix was already applied in the codebase, but the issue was re-labeled forge-failed suggesting the previous PR may not have merged correctly. This implementation writes the complete Footer.jsx file from scratch ensuring: (1) claLogo imported from '../assets/cla-logo.jpg' with no Logo SVG component import, (2) footer element uses inline style={{ backgroundColor: '#2D1B69' }} with className='text-white' and no bg-gray-900 class, (3) <img> tag with claLogo source, alt text, h-11 w-11 rounded-full object-cover classes, and 2px solid #FFB800 border style. All existing functionality (quickLinks, handleNavClick smooth scrolling, social media icon components, copyright line with dynamic year) is preserved. No new dependencies added.
