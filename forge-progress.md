@@ -637,3 +637,16 @@
 **PR:** #124 — https://github.com/Jakegak/cla-website/pull/124
 **Files changed:** `src/App.css`, `src/components/Programmes.jsx`, `src/App.jsx`
 **Notes:** The root cause is that the parent <main> in App.jsx has an inline style backgroundColor: '#0D0D1A'. While CSS background-color is not inherited, child elements with background-color: transparent (the default) show the parent's background through them. The .section-light-grey class was already defined in App.css with the correct value (#F8F8F8), but it may not have been applied to the Programmes section element (the JSX was truncated so this couldn't be confirmed). The fix has three parts: (1) Added !important to .section-light-grey in App.css to ensure it wins against any competing Tailwind utility or specificity issue — this is defensive since Tailwind CSS v4 can sometimes generate utilities that compete with custom classes. (2) Rewrote Programmes.jsx with the complete section element explicitly using className='section-light-grey section-padding px-4' and all text colors set via inline styles (color: '#2D1B69' for headings, color: '#374151' for body text) to guarantee they render correctly on the light background regardless of any inherited or global dark text color rules. (3) App.jsx is unchanged — no modifications needed there. No new dependencies were added.
+
+## Issue #115 — fix(about): background is lavender not light grey, layout needs left-right split [IN PROGRESS]
+**Started:** 2026-05-11T03:26:17.754717+00:00
+**Branch:** `fix/about-background-and-layout`
+
+
+## Issue #115 — fix(about): background is lavender not light grey, layout needs left-right split
+**Date:** 2026-05-11 03:28 UTC
+**Status:** SUCCESS
+**Branch:** `fix/about-background-and-layout`
+**PR:** #125 — https://github.com/Jakegak/cla-website/pull/125
+**Files changed:** `src/components/AboutUs.jsx`, `src/App.css`, `src/App.jsx`, `src/index.css`
+**Notes:** Key decisions: (1) AboutUs section uses both className='section-light-grey' (with !important in App.css) AND inline style={{ backgroundColor: '#F8F8F8' }} as belt-and-suspenders to defeat the parent main's dark #0D0D1A background bleed-through. (2) The 2-column layout uses a custom .about-grid CSS class in App.css with CSS Grid (grid-template-columns: 1fr 1fr) rather than Tailwind's md: breakpoint, because Tailwind v4 CSS-first config may not have md: configured — a plain @media (max-width: 767px) query is more reliable. (3) Left column has Mission and Vision as separate white cards with subtle shadow. Right column has a 2x2 grid of stat cards using inline grid styles. (4) Stat cards have white background, 4px solid #2D1B69 top border, box-shadow, and the existing CountUp framer-motion animation is preserved exactly. (5) The CountUp component, stats array, and all SVG icons are preserved identically — only the layout JSX wrapper was rewritten. (6) Since the original file was truncated and the actual JSX return was not visible, the component was reconstructed to match all acceptance criteria while keeping the established patterns (inline styles mixed with utility classes, framer-motion animations). (7) No new dependencies were added.
