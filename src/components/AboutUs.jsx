@@ -98,9 +98,16 @@ const stats = [
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        <circle cx="20" cy="12" r="6" stroke="currentColor" strokeWidth="2" fill="none" />
+        <circle
+          cx="20"
+          cy="12"
+          r="8"
+          stroke="currentColor"
+          strokeWidth="2"
+          fill="none"
+        />
         <path
-          d="M8 36C8 28 13 24 20 24C27 24 32 28 32 36"
+          d="M4 36C4 28 11 22 20 22C29 22 36 28 36 36"
           stroke="currentColor"
           strokeWidth="2"
           strokeLinecap="round"
@@ -122,7 +129,14 @@ const stats = [
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        <circle cx="20" cy="20" r="16" stroke="currentColor" strokeWidth="2" fill="none" />
+        <circle
+          cx="20"
+          cy="20"
+          r="16"
+          stroke="currentColor"
+          strokeWidth="2"
+          fill="none"
+        />
         <path
           d="M20 10V20L26 26"
           stroke="currentColor"
@@ -157,8 +171,18 @@ const stats = [
           strokeWidth="2"
           fill="none"
         />
-        <path d="M4 14H36" stroke="currentColor" strokeWidth="2" />
-        <path d="M14 14V34" stroke="currentColor" strokeWidth="2" />
+        <path
+          d="M4 14H36"
+          stroke="currentColor"
+          strokeWidth="2"
+          fill="none"
+        />
+        <path
+          d="M14 14V34"
+          stroke="currentColor"
+          strokeWidth="2"
+          fill="none"
+        />
       </svg>
     ),
   },
@@ -168,9 +192,8 @@ const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
   },
 };
 
@@ -178,165 +201,199 @@ const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeOut" },
+    transition: { staggerChildren: 0.15 },
   },
 };
 
-const iconCircleStyle = {
-  width: "48px",
-  height: "48px",
-  borderRadius: "50%",
-  backgroundColor: "#2D1B69",
-  color: "white",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  margin: "0 auto 0.75rem auto",
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 },
+  },
 };
 
-const cardStyle = {
-  backgroundColor: "#ffffff",
-  borderTop: "4px solid #2D1B69",
-  boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)",
-  borderRadius: "12px",
-  padding: "1.5rem",
-  textAlign: "center",
-  width: "100%",
-};
-
-const labelStyle = {
-  fontFamily: "'Inter', sans-serif",
-  color: "#6B7280",
-  fontSize: "0.875rem",
-  marginTop: "0.25rem",
+const childVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
 };
 
 export default function AboutUs() {
   return (
     <section
       id="about"
-      style={{ backgroundColor: "#F8F8F8" }}
-      className="py-20 px-4"
+      style={{
+        padding: "5rem 1.5rem",
+        background: "linear-gradient(135deg, #f8f6ff 0%, #eee8ff 100%)",
+        minHeight: "100vh",
+      }}
     >
-      <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={containerVariants}
-        >
-          <motion.h2
-            variants={childVariants}
-            className="text-center mb-4"
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        style={{
+          maxWidth: "1200px",
+          margin: "0 auto",
+        }}
+      >
+        <motion.div variants={childVariants} style={{ textAlign: "center", marginBottom: "3rem" }}>
+          <h2
             style={{
-              fontFamily: "'Playfair Display', serif",
+              fontSize: "2.5rem",
               fontWeight: 700,
-              fontSize: "2.25rem",
               color: "#2D1B69",
+              fontFamily: "'Playfair Display', serif",
+              marginBottom: "1rem",
             }}
           >
             About Us
-          </motion.h2>
-
-          <motion.p
-            variants={childVariants}
-            className="text-center max-w-2xl mx-auto mb-12"
+          </h2>
+          <p
             style={{
-              fontFamily: "'Inter', sans-serif",
-              color: "#4B5563",
-              fontSize: "1.05rem",
+              fontSize: "1.15rem",
+              color: "#555",
+              maxWidth: "700px",
+              margin: "0 auto",
               lineHeight: 1.7,
             }}
           >
-            Christian Living Academy is dedicated to raising a God-fearing elite
-            generation through academic excellence and godly character. Our
-            mission is to nurture every child's potential in a supportive,
-            faith-filled environment.
-          </motion.p>
-
-          <div className="grid md:grid-cols-2 gap-10 items-start">
-            {/* Mission & Vision */}
-            <motion.div variants={childVariants}>
-              <div className="mb-8">
-                <h3
-                  className="mb-3"
-                  style={{
-                    fontFamily: "'Playfair Display', serif",
-                    fontWeight: 700,
-                    fontSize: "1.5rem",
-                    color: "#2D1B69",
-                  }}
-                >
-                  Our Mission
-                </h3>
-                <p
-                  style={{
-                    fontFamily: "'Inter', sans-serif",
-                    color: "#4B5563",
-                    fontSize: "0.975rem",
-                    lineHeight: 1.7,
-                  }}
-                >
-                  To provide quality education that develops the whole child —
-                  intellectually, spiritually, socially, and physically — in an
-                  atmosphere of Christian love and discipline.
-                </p>
-              </div>
-              <div>
-                <h3
-                  className="mb-3"
-                  style={{
-                    fontFamily: "'Playfair Display', serif",
-                    fontWeight: 700,
-                    fontSize: "1.5rem",
-                    color: "#2D1B69",
-                  }}
-                >
-                  Our Vision
-                </h3>
-                <p
-                  style={{
-                    fontFamily: "'Inter', sans-serif",
-                    color: "#4B5563",
-                    fontSize: "0.975rem",
-                    lineHeight: 1.7,
-                  }}
-                >
-                  To be a leading institution recognised for producing
-                  well-rounded, God-fearing individuals who excel in all areas of
-                  life and positively impact their communities.
-                </p>
-              </div>
-            </motion.div>
-
-            {/* Stats Grid */}
-            <motion.div
-              variants={containerVariants}
-              className="grid grid-cols-1 sm:grid-cols-2 gap-6"
-            >
-              {stats.map((stat) => (
-                <motion.div
-                  key={stat.label}
-                  variants={childVariants}
-                  whileHover={{
-                    y: -4,
-                    boxShadow:
-                      "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)",
-                  }}
-                  style={cardStyle}
-                >
-                  <div style={iconCircleStyle}>{stat.icon}</div>
-                  <div style={{ marginBottom: "0.25rem" }}>
-                    <CountUp target={stat.value} suffix={stat.suffix} />
-                  </div>
-                  <p style={labelStyle}>{stat.label}</p>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
+            We are dedicated to providing quality education and fostering an
+            environment where every student can thrive and reach their full
+            potential.
+          </p>
         </motion.div>
-      </div>
+
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+            gap: "2rem",
+            marginBottom: "4rem",
+          }}
+        >
+          {stats.map((stat) => (
+            <motion.div
+              key={stat.label}
+              variants={fadeInUp}
+              style={{
+                background: "#fff",
+                borderRadius: "1rem",
+                padding: "2rem 1.5rem",
+                textAlign: "center",
+                boxShadow: "0 4px 24px rgba(45,27,105,0.08)",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "0.75rem",
+              }}
+            >
+              <span style={{ color: "#7C5CFC", marginBottom: "0.5rem" }}>
+                {stat.icon}
+              </span>
+              <CountUp target={stat.value} suffix={stat.suffix} />
+              <span
+                style={{
+                  fontSize: "1rem",
+                  color: "#888",
+                  fontWeight: 500,
+                  letterSpacing: "0.04em",
+                  textTransform: "uppercase",
+                }}
+              >
+                {stat.label}
+              </span>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gap: "2.5rem",
+          }}
+        >
+          <motion.div
+            variants={childVariants}
+            style={{
+              background: "#fff",
+              borderRadius: "1rem",
+              padding: "2.5rem 2rem",
+              boxShadow: "0 4px 24px rgba(45,27,105,0.08)",
+            }}
+          >
+            <h3
+              style={{
+                fontSize: "1.5rem",
+                fontWeight: 700,
+                color: "#2D1B69",
+                fontFamily: "'Playfair Display', serif",
+                marginBottom: "1rem",
+              }}
+            >
+              Our Mission
+            </h3>
+            <p
+              style={{
+                fontSize: "1.05rem",
+                color: "#555",
+                lineHeight: 1.8,
+              }}
+            >
+              To empower students with knowledge, skills, and values that enable
+              them to contribute meaningfully to society while pursuing their
+              passions and dreams.
+            </p>
+          </motion.div>
+
+          <motion.div
+            variants={childVariants}
+            style={{
+              background: "#fff",
+              borderRadius: "1rem",
+              padding: "2.5rem 2rem",
+              boxShadow: "0 4px 24px rgba(45,27,105,0.08)",
+            }}
+          >
+            <h3
+              style={{
+                fontSize: "1.5rem",
+                fontWeight: 700,
+                color: "#2D1B69",
+                fontFamily: "'Playfair Display', serif",
+                marginBottom: "1rem",
+              }}
+            >
+              Our Vision
+            </h3>
+            <p
+              style={{
+                fontSize: "1.05rem",
+                color: "#555",
+                lineHeight: 1.8,
+              }}
+            >
+              To be a leading institution of academic excellence, recognized for
+              nurturing well-rounded individuals who are prepared to meet the
+              challenges of a rapidly changing world.
+            </p>
+          </motion.div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

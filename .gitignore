@@ -23,3 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 .vercel
+
+# Forge agent — never commit these
+*.git-credentials
+*credentials*
+Users*forge*
