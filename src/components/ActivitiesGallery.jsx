@@ -14,64 +14,54 @@ const GALLERY_IMAGES = [
   { id: 8, src: "https://picsum.photos/seed/science1/400/300", fullSrc: "https://picsum.photos/seed/science1/800/600", alt: "Mathematics competition winners", category: "Academics" },
   { id: 9, src: "https://picsum.photos/seed/music1/400/300", fullSrc: "https://picsum.photos/seed/music1/800/600", alt: "Annual prize-giving ceremony", category: "Events" },
   { id: 10, src: "https://picsum.photos/seed/dance1/400/300", fullSrc: "https://picsum.photos/seed/dance1/800/600", alt: "School cultural day celebration", category: "Events" },
-  { id: 11, src: "https://picsum.photos/seed/debate1/400/300", fullSrc: "https://picsum.photos/seed/debate1/800/600", alt: "Inter-house athletics competition", category: "Sports" },
-  { id: 12, src: "https://picsum.photos/seed/choir1/400/300", fullSrc: "https://picsum.photos/seed/choir1/800/600", alt: "School choir performance", category: "Arts" },
 ];
 
 const gridItemVariants = {
   hidden: { opacity: 0, scale: 0.8 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.3 } },
-  exit: { opacity: 0, scale: 0.8, transition: { duration: 0.2 } },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.4 } },
+  exit: { opacity: 0, scale: 0.8, transition: { duration: 0.3 } },
 };
 
-const ActivitiesGallery = () => {
+function ActivitiesGallery() {
   const [activeCategory, setActiveCategory] = useState("All");
-  const [lightboxIndex, setLightboxIndex] = useState(-1);
+  const [filteredImages, setFilteredImages] = useState(GALLERY_IMAGES);
+  const [lightbox, setLightbox] = useState({ open: false, image: null });
 
-  const filteredImages =
-    activeCategory === "All"
-      ? GALLERY_IMAGES
-      : GALLERY_IMAGES.filter((img) => img.category === activeCategory);
+  useEffect(() => {
+    if (activeCategory === "All") {
+      setFilteredImages(GALLERY_IMAGES);
+    } else {
+      setFilteredImages(
+        GALLERY_IMAGES.filter((img) => img.category === activeCategory)
+      );
+    }
+  }, [activeCategory]);
 
-  const openLightbox = useCallback((index) => {
-    setLightboxIndex(index);
+  const openLightbox = useCallback((image) => {
+    setLightbox({ open: true, image });
   }, []);
 
   const closeLightbox = useCallback(() => {
-    setLightboxIndex(-1);
+    setLightbox({ open: false, image: null });
   }, []);
-
-  const goToNext = useCallback(() => {
-    setLightboxIndex((prev) =>
-      prev < filteredImages.length - 1 ? prev + 1 : 0
-    );
-  }, [filteredImages.length]);
-
-  const goToPrev = useCallback(() => {
-    setLightboxIndex((prev) =>
-      prev > 0 ? prev - 1 : filteredImages.length - 1
-    );
-  }, [filteredImages.length]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (lightboxIndex === -1) return;
-      if (e.key === "Escape") closeLightbox();
-      if (e.key === "ArrowRight") goToNext();
-      if (e.key === "ArrowLeft") goToPrev();
+      if (e.key === "Escape" && lightbox.open) {
+        closeLightbox();
+      }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [lightboxIndex, closeLightbox, goToNext, goToPrev]);
+  }, [lightbox.open, closeLightbox]);
 
   return (
-    <section id="gallery" className="activities-gallery">
-      <div className="gallery-container">
+    <section id="gallery" className="gallery-section">
+      <div className="container">
         <div className="gallery-header">
-          <h2 className="section-title">Activities &amp; Gallery</h2>
+          <h2 className="section-title">Activities Gallery</h2>
           <p className="section-subtitle">
-            Explore the vibrant life at our school through sports, arts, worship,
-            and academic excellence.
+            Explore the vibrant life at Christian Living Academy
           </p>
         </div>
 
@@ -79,7 +69,7 @@ const ActivitiesGallery = () => {
           {CATEGORIES.map((category) => (
             <button
               key={category}
-              className={`filter-btn${activeCategory === category ? " active" : ""}`}
+              className={`filter-btn ${activeCategory === category ? "active" : ""}`}
               onClick={() => setActiveCategory(category)}
             >
               {category}
@@ -87,9 +77,9 @@ const ActivitiesGallery = () => {
           ))}
         </div>
 
-        <div className="gallery-grid">
+        <motion.div className="gallery-grid" layout>
           <AnimatePresence mode="popLayout">
-            {filteredImages.map((image, index) => (
+            {filteredImages.map((image) => (
               <motion.div
                 key={image.id}
                 className="gallery-item"
@@ -98,52 +88,64 @@ const ActivitiesGallery = () => {
                 animate="visible"
                 exit="exit"
                 layout
-                onClick={() => openLightbox(index)}
+                onClick={() => openLightbox(image)}
               >
                 <img
-                  className="gallery-image"
                   src={image.src}
                   alt={image.alt}
                   loading="lazy"
+                  className="gallery-image"
                 />
                 <div className="gallery-overlay">
                   <span className="gallery-category">{image.category}</span>
-                  <span className="gallery-alt">{image.alt}</span>
+                  <p className="gallery-alt">{image.alt}</p>
                 </div>
               </motion.div>
             ))}
           </AnimatePresence>
-        </div>
-      </div>
+        </motion.div>
 
-      {lightboxIndex !== -1 && filteredImages[lightboxIndex] && (
-        <div className="lightbox-overlay" onClick={closeLightbox}>
-          <div
-            className="lightbox-content"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button className="lightbox-close" onClick={closeLightbox}>
-              ✕
-            </button>
-            <button className="lightbox-nav lightbox-prev" onClick={goToPrev}>
-              ‹
-            </button>
-            <img
-              className="lightbox-image"
-              src={filteredImages[lightboxIndex].fullSrc}
-              alt={filteredImages[lightboxIndex].alt}
-            />
-            <button className="lightbox-nav lightbox-next" onClick={goToNext}>
-              ›
-            </button>
-            <p className="lightbox-caption">
-              {filteredImages[lightboxIndex].alt}
-            </p>
-          </div>
-        </div>
-      )}
+        <AnimatePresence>
+          {lightbox.open && lightbox.image && (
+            <motion.div
+              className="lightbox-backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={closeLightbox}
+            >
+              <motion.div
+                className="lightbox-content"
+                initial={{ scale: 0.7, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.7, opacity: 0 }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  className="lightbox-close"
+                  onClick={closeLightbox}
+                  aria-label="Close lightbox"
+                >
+                  &times;
+                </button>
+                <img
+                  src={lightbox.image.fullSrc}
+                  alt={lightbox.image.alt}
+                  className="lightbox-image"
+                />
+                <div className="lightbox-info">
+                  <span className="lightbox-category">
+                    {lightbox.image.category}
+                  </span>
+                  <p className="lightbox-description">{lightbox.image.alt}</p>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </section>
   );
-};
+}
 
 export default ActivitiesGallery;

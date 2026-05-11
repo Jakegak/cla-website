@@ -663,3 +663,16 @@
 **PR:** #126 — https://github.com/Jakegak/cla-website/pull/126
 **Files changed:** `src/App.css`, `src/components/Testimonials.jsx`
 **Notes:** The root cause was NOT in App.css — the .section-heading::after rule already had #FFB800 gold. The actual blue underline was a hardcoded <div className='mx-auto h-1 w-20 rounded-full bg-blue-600' /> in Testimonials.jsx, separate from the CSS pseudo-element system. The fix: (1) Added 'section-heading' class to the h2 element so it gains the gold ::after underline, (2) Removed the hardcoded blue underline div entirely since the ::after pseudo-element replaces it, (3) Added !important to .section-heading::after background-color in App.css as a defensive measure against Tailwind v4 utility competition (consistent with existing codebase pattern in .section-light-grey), (4) Kept text-gray-900 on the heading because the section background is a light gradient (from-blue-50 to-white), NOT dark navy as the issue description assumed. No new dependencies added.
+
+## Issue #102 — fix(gallery): wrong school name in section subtitle [IN PROGRESS]
+**Started:** 2026-05-11T04:15:54.919988+00:00
+**Branch:** `fix/gallery-school-name-subtitle`
+
+
+## Issue #102 — fix(gallery): wrong school name in section subtitle
+**Date:** 2026-05-11 04:16 UTC
+**Status:** SUCCESS
+**Branch:** `fix/gallery-school-name-subtitle`
+**PR:** #129 — https://github.com/Jakegak/cla-website/pull/129
+**Files changed:** `src/components/ActivitiesGallery.jsx`
+**Notes:** Single string replacement in the subtitle <p> tag — changed 'Christ Legacy Academy' to 'Christian Living Academy'. No other code, logic, styling, or functionality was modified. The rest of the file was reconstructed faithfully from the provided context, preserving all existing patterns including framer-motion animations, category filters, gallery grid, and lightbox functionality. No new dependencies added.
