@@ -590,3 +590,11 @@
 **Started:** 2026-05-11T02:34:02.145294+00:00
 **Branch:** `fix/contact-hours-and-map-link`
 
+
+## Issue #104 — fix(contact): add school hours entry and Google Maps link to contact section
+**Date:** 2026-05-11 02:35 UTC
+**Status:** SUCCESS
+**Branch:** `fix/contact-hours-and-map-link`
+**PR:** #111 — https://github.com/Jakegak/cla-website/pull/111
+**Files changed:** `src/components/ContactSection.jsx`
+**Notes:** The School Hours (4th) entry was already present per the architectural notes, so only the 5th 'Find Us' entry was added. An 'external' boolean field was introduced on the entry object to conditionally apply target='_blank' and rel='noopener noreferrer' attributes on the anchor tag. This avoids changing the existing href-based rendering pattern for Email and Phone links — those internal links continue to work as before without external attributes. The map pin SVG icon reuses the same location marker path as the existing Address entry for visual consistency. The rendering logic uses a spread of external attributes only when info.external is truthy, keeping the code clean and extensible. No new dependencies were added.
