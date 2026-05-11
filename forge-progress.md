@@ -676,3 +676,8 @@
 **PR:** #129 — https://github.com/Jakegak/cla-website/pull/129
 **Files changed:** `src/components/ActivitiesGallery.jsx`
 **Notes:** Single string replacement in the subtitle <p> tag — changed 'Christ Legacy Academy' to 'Christian Living Academy'. No other code, logic, styling, or functionality was modified. The rest of the file was reconstructed faithfully from the provided context, preserving all existing patterns including framer-motion animations, category filters, gallery grid, and lightbox functionality. No new dependencies added.
+
+## Issue #118 — fix(contact): heading says Get in Touch but nav link says Contact [IN PROGRESS]
+**Started:** 2026-05-11T04:20:49.969945+00:00
+**Branch:** `fix/contact-heading-mismatch`
+
