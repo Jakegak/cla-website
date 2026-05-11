@@ -702,3 +702,8 @@
 **PR:** #131 — https://github.com/Jakegak/cla-website/pull/131
 **Files changed:** `src/App.jsx`
 **Notes:** The only change is removing the entire `style={{ backgroundColor: '#0D0D1A' }}` prop from the <main> element. The className remains exactly as-is. No Tailwind bg-* class was added as a replacement, per the architectural guidance. Each section component (HeroSection, ActivitiesGallery, Testimonials, Footer, etc.) already defines its own background via CSS classes or inline styles, so no visual regression is expected. No new dependencies were added.
+
+## Issue #128 — fix(layout): Admissions and Contact sections need explicit white backgrounds [IN PROGRESS]
+**Started:** 2026-05-11T04:24:16.725313+00:00
+**Branch:** `fix/admissions-contact-white-backgrounds`
+
