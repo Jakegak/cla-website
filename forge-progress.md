@@ -611,3 +611,8 @@
 **PR:** #112 — https://github.com/Jakegak/cla-website/pull/112
 **Files changed:** `index.html`
 **Notes:** No new dependencies added. The title now uses a hyphen instead of an em dash per the plan specification. The og-image.jpg file does not yet exist in public/ — a TODO(#105) HTML comment marks this for follow-up. The canonical URL and og:url use the placeholder domain https://christianlivingacademy.com which should be updated when the domain is confirmed. All existing tags (theme-color, viewport, favicon, Google Fonts preconnects, scroll-smooth class, lang=en) are preserved. The self-closing tag convention with space before slash (' />') is maintained throughout.
+
+## Issue #120 — fix(gallery): images collapse to single narrow column — root cause is missing width on container [IN PROGRESS]
+**Started:** 2026-05-11T03:05:27.150839+00:00
+**Branch:** `fix/gallery-column-layout`
+
