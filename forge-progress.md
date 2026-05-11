@@ -655,3 +655,11 @@
 **Started:** 2026-05-11T03:29:06.642462+00:00
 **Branch:** `fix/testimonials-heading-underline-gold`
 
+
+## Issue #116 — fix(testimonials): section heading underline is blue not gold
+**Date:** 2026-05-11 03:30 UTC
+**Status:** SUCCESS
+**Branch:** `fix/testimonials-heading-underline-gold`
+**PR:** #126 — https://github.com/Jakegak/cla-website/pull/126
+**Files changed:** `src/App.css`, `src/components/Testimonials.jsx`
+**Notes:** The root cause was NOT in App.css — the .section-heading::after rule already had #FFB800 gold. The actual blue underline was a hardcoded <div className='mx-auto h-1 w-20 rounded-full bg-blue-600' /> in Testimonials.jsx, separate from the CSS pseudo-element system. The fix: (1) Added 'section-heading' class to the h2 element so it gains the gold ::after underline, (2) Removed the hardcoded blue underline div entirely since the ::after pseudo-element replaces it, (3) Added !important to .section-heading::after background-color in App.css as a defensive measure against Tailwind v4 utility competition (consistent with existing codebase pattern in .section-light-grey), (4) Kept text-gray-900 on the heading because the section background is a light gradient (from-blue-50 to-white), NOT dark navy as the issue description assumed. No new dependencies added.
