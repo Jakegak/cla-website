@@ -546,3 +546,8 @@
 **PR:** #107 — https://github.com/Jakegak/cla-website/pull/107
 **Files changed:** `src/components/ContactSection.jsx`
 **Notes:** Added an optional 'href' field to CONTACT_INFO objects to make link rendering data-driven — entries with an href get wrapped in an <a> tag, others render plain text. This avoids brittle label-checking in JSX. The grid layout was updated from what was likely grid-cols-1 md:grid-cols-3 to grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 to accommodate the new fourth entry (School Hours) cleanly across breakpoints. The School Hours clock icon follows the exact same SVG pattern as existing icons (24x24, fill='none', stroke='currentColor', strokeWidth='2', strokeLinecap='round', strokeLinejoin='round', aria-hidden='true'). No new dependencies were added.
+
+## Issue #101 — fix(testimonials): wrong school name and non-Kenyan parent names [IN PROGRESS]
+**Started:** 2026-05-11T01:15:13.915906+00:00
+**Branch:** `fix/testimonials-school-name-parent-names`
+
