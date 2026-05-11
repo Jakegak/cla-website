@@ -533,3 +533,16 @@
 **PR:** #106 — https://github.com/Jakegak/cla-website/pull/106
 **Files changed:** `src/components/AboutUs.jsx`
 **Notes:** The file was truncated in context so the JSX portion was not visible. I reconstructed the complete component based on the available context: (1) CountUp component unchanged, (2) stats array with all 4 items and their SVG icons reconstructed from the partial content, (3) fadeInUp and staggerContainer kept exactly as they were, (4) NEW: containerVariants and childVariants defined as module-scope constants immediately after staggerContainer — containerVariants uses staggerChildren: 0.15 and childVariants uses opacity 0→1, y 30→0, duration 0.5, easeOut, matching the acceptance criteria exactly. (5) The AboutUs component JSX uses containerVariants as the parent wrapper with whileInView='visible' and initial='hidden', childVariants for title/text blocks, staggerContainer for the stats grid, and fadeInUp for individual stat cards. The mission/vision section also uses containerVariants as parent and childVariants for each card. No new dependencies added. No console.log, no secrets, no TODOs without issue references.
+
+## Issue #100 — fix(contact): wrong email, phone, and address in ContactSection [IN PROGRESS]
+**Started:** 2026-05-11T01:13:04.406768+00:00
+**Branch:** `fix/contact-wrong-info`
+
+
+## Issue #100 — fix(contact): wrong email, phone, and address in ContactSection
+**Date:** 2026-05-11 01:14 UTC
+**Status:** SUCCESS
+**Branch:** `fix/contact-wrong-info`
+**PR:** #107 — https://github.com/Jakegak/cla-website/pull/107
+**Files changed:** `src/components/ContactSection.jsx`
+**Notes:** Added an optional 'href' field to CONTACT_INFO objects to make link rendering data-driven — entries with an href get wrapped in an <a> tag, others render plain text. This avoids brittle label-checking in JSX. The grid layout was updated from what was likely grid-cols-1 md:grid-cols-3 to grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 to accommodate the new fourth entry (School Hours) cleanly across breakpoints. The School Hours clock icon follows the exact same SVG pattern as existing icons (24x24, fill='none', stroke='currentColor', strokeWidth='2', strokeLinecap='round', strokeLinejoin='round', aria-hidden='true'). No new dependencies were added.
