@@ -106,8 +106,9 @@ h6 {
 
 .gallery-container {
   max-width: 1200px;
-  margin: 0 auto;
   width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .gallery-header {
@@ -124,9 +125,7 @@ h6 {
 
 .activities-gallery .section-subtitle {
   color: #9CA3AF;
-  font-size: 1.1rem;
-  max-width: 600px;
-  margin: 0 auto;
+  font-size: 1.125rem;
 }
 
 /* ===== Gallery Filter Buttons ===== */
@@ -134,30 +133,29 @@ h6 {
 .gallery-filters {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 0.5rem;
+  justify-content: center;
   margin-bottom: 2rem;
 }
 
-.filter-btn {
+.gallery-filter-btn {
   padding: 0.5rem 1.25rem;
   border-radius: 9999px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: transparent;
   color: #D1D5DB;
   font-size: 0.875rem;
-  font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.filter-btn:hover {
+.gallery-filter-btn:hover {
   border-color: #FFB800;
   color: #FFB800;
 }
 
-.filter-btn.active {
-  background-color: #FFB800;
+.gallery-filter-btn.active {
+  background: #FFB800;
   border-color: #FFB800;
   color: #0D0D1A;
   font-weight: 600;
@@ -167,6 +165,7 @@ h6 {
 
 .gallery-grid {
   display: grid;
+  width: 100%;
   grid-template-columns: 1fr;
   gap: 1rem;
   width: 100%;
@@ -194,25 +193,25 @@ h6 {
   aspect-ratio: 4 / 3;
 }
 
-.gallery-image {
+.gallery-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
+  transition: transform 0.5s ease;
 }
 
-.gallery-item:hover .gallery-image {
+.gallery-item:hover img {
   transform: scale(1.05);
 }
 
 .gallery-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 60%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 1rem;
+  padding: 1.25rem;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -221,31 +220,29 @@ h6 {
   opacity: 1;
 }
 
-.gallery-category {
-  font-size: 0.7rem;
+.gallery-overlay h3 {
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #FFB800;
+  color: #FFFFFF;
   margin-bottom: 0.25rem;
 }
 
-.gallery-alt {
-  font-size: 0.85rem;
-  color: #FFFFFF;
-  line-height: 1.3;
+.gallery-overlay p {
+  font-size: 0.875rem;
+  color: #D1D5DB;
 }
 
-/* ===== Lightbox ===== */
+/* ===== Lightbox Styles ===== */
 
-.lightbox-overlay {
+.lightbox-backdrop {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 50;
   padding: 2rem;
 }
 
@@ -255,23 +252,22 @@ h6 {
   max-height: 90vh;
 }
 
-.lightbox-image {
+.lightbox-content img {
   max-width: 100%;
-  max-height: 80vh;
-  border-radius: 0.5rem;
+  max-height: 85vh;
   object-fit: contain;
+  border-radius: 0.5rem;
 }
 
 .lightbox-close {
   position: absolute;
   top: -2.5rem;
   right: 0;
-  background: none;
+  background: transparent;
   border: none;
   color: #FFFFFF;
   font-size: 1.5rem;
   cursor: pointer;
-  padding: 0.5rem;
   transition: color 0.3s ease;
 }
 
@@ -279,35 +275,49 @@ h6 {
   color: #FFB800;
 }
 
+.lightbox-caption {
+  text-align: center;
+  margin-top: 1rem;
+  color: #D1D5DB;
+  font-size: 0.875rem;
+}
+
 .lightbox-nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: none;
   color: #FFFFFF;
-  font-size: 1.25rem;
-  cursor: pointer;
+  font-size: 1.5rem;
   padding: 0.75rem;
-  border-radius: 50%;
+  cursor: pointer;
+  border-radius: 9999px;
   transition: background 0.3s ease;
 }
 
 .lightbox-nav:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.25);
 }
 
-.lightbox-prev {
-  left: -3.5rem;
+.lightbox-nav.prev {
+  left: -3rem;
 }
 
-.lightbox-next {
-  right: -3.5rem;
+.lightbox-nav.next {
+  right: -3rem;
 }
 
-.lightbox-caption {
-  text-align: center;
-  color: #D1D5DB;
-  margin-top: 1rem;
-  font-size: 0.9rem;
+/* ===== Gallery Responsive Grid ===== */
+
+@media (min-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
