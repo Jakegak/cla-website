@@ -29,7 +29,8 @@ const CONTACT_INFO = [
       </svg>
     ),
     label: "Email",
-    value: "info@christlegacyacademy.com",
+    value: "info@christianlivingacademy.com",
+    href: "mailto:info@christianlivingacademy.com",
   },
   {
     icon: (
@@ -38,21 +39,44 @@ const CONTACT_INFO = [
       </svg>
     ),
     label: "Phone",
-    value: "+234 800 CLA SCHOOL",
+    value: "0798 767 773",
+    href: "tel:0798767773",
   },
   {
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="2" fill="none"/>
+        <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
     label: "Address",
-    value: "Lagos, Nigeria",
+    value: "Along Kamiti Road, Kahawa West, Nairobi",
+  },
+  {
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M12 6V12L16 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+    label: "School Hours",
+    value: "Mon - Fri: 7:30 AM - 3:30 PM",
+  },
+  {
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+    label: "Find Us",
+    value: "View on Google Maps",
+    href: "https://www.google.com/maps/search/Along+Kamiti+Road+Kahawa+West+Nairobi",
+    external: true,
   },
 ];
 
-export default function ContactSection() {
+const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -79,138 +103,208 @@ export default function ContactSection() {
   };
 
   return (
-    <section
-      id="contact"
-      className="section-light-grey section-padding px-4"
-    >
-      <div className="max-w-6xl mx-auto">
+    <section id="contact" className="py-20 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={staggerContainer}
+          variants={fadeInUp}
+          className="text-center mb-16"
         >
-          <motion.h2
-            className="section-heading text-3xl sm:text-4xl font-bold mb-4 text-dark-heading"
-            variants={fadeInUp}
-          >
-            Contact Us
-          </motion.h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            Get in Touch
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Have questions about admissions or want to learn more about our
+            programs? We&apos;d love to hear from you.
+          </p>
+        </motion.div>
 
-          <motion.p
-            className="text-lg max-w-2xl mx-auto mb-16 text-dark-body"
-            variants={fadeInUp}
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Contact Information */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
           >
-            We&apos;d love to hear from you. Get in touch with us for enquiries, visits, or more information.
-          </motion.p>
+            <motion.h3
+              variants={fadeInUp}
+              className="text-2xl font-bold text-gray-900 mb-8"
+            >
+              Contact Information
+            </motion.h3>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Info */}
-            <motion.div className="text-left" variants={fadeInUp}>
-              <h3 className="text-xl font-bold mb-6 text-dark-heading">
-                Get In Touch
-              </h3>
-              <div className="space-y-6">
-                {CONTACT_INFO.map((info) => (
-                  <div key={info.label} className="flex items-start gap-4">
-                    <div
-                      className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
-                      style={{ backgroundColor: '#2D1B69', color: '#FFFFFF' }}
-                    >
-                      {info.icon}
-                    </div>
-                    <div>
-                      <p className="font-semibold text-dark-heading">{info.label}</p>
-                      <p className="text-dark-body">{info.value}</p>
-                    </div>
+            <div className="space-y-6">
+              {CONTACT_INFO.map((info) => (
+                <motion.div
+                  key={info.label}
+                  variants={fadeInUp}
+                  className="flex items-start gap-4"
+                >
+                  <div className="bg-purple-100 text-purple-600 rounded-full p-3 shrink-0">
+                    {info.icon}
                   </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Contact Form */}
-            <motion.div className="text-left" variants={fadeInUp}>
-              {submitted ? (
-                <div className="bg-green-50 border border-green-200 rounded-2xl p-8 text-center">
-                  <p className="text-green-700 font-semibold text-lg">Thank you for your message!</p>
-                  <p className="text-green-600 mt-2">We&apos;ll get back to you as soon as possible.</p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label htmlFor="contact-name" className="block text-sm font-medium mb-1 text-dark-heading">
+                    <h4 className="font-semibold text-gray-900">
+                      {info.label}
+                    </h4>
+                    {info.href ? (
+                      <a
+                        href={info.href}
+                        className="text-gray-600 hover:text-purple-600 transition-colors"
+                        {...(info.external
+                          ? { target: "_blank", rel: "noopener noreferrer" }
+                          : {})}
+                      >
+                        {info.value}
+                      </a>
+                    ) : (
+                      <p className="text-gray-600">{info.value}</p>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Contact Form */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fadeInUp}
+          >
+            <div className="bg-white rounded-2xl shadow-lg p-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">
+                Send Us a Message
+              </h3>
+
+              {submitted ? (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-center py-12"
+                >
+                  <div className="bg-green-100 text-green-600 rounded-full p-4 w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                    <svg
+                      width="32"
+                      height="32"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M20 6L9 17L4 12"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <h4 className="text-xl font-semibold text-gray-900 mb-2">
+                    Message Sent!
+                  </h4>
+                  <p className="text-gray-600">
+                    Thank you for reaching out. We&apos;ll get back to you soon.
+                  </p>
+                </motion.div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div>
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                    >
                       Full Name
                     </label>
                     <input
-                      id="contact-name"
-                      name="name"
                       type="text"
-                      required
+                      id="name"
+                      name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-dark-body focus:outline-none focus:ring-2 focus:ring-cla-purple focus:border-transparent"
+                      required
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all outline-none"
                       placeholder="Your full name"
                     />
                   </div>
+
                   <div>
-                    <label htmlFor="contact-email" className="block text-sm font-medium mb-1 text-dark-heading">
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                    >
                       Email Address
                     </label>
                     <input
-                      id="contact-email"
-                      name="email"
                       type="email"
-                      required
+                      id="email"
+                      name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-dark-body focus:outline-none focus:ring-2 focus:ring-cla-purple focus:border-transparent"
-                      placeholder="you@example.com"
+                      required
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all outline-none"
+                      placeholder="your@email.com"
                     />
                   </div>
+
                   <div>
-                    <label htmlFor="contact-subject" className="block text-sm font-medium mb-1 text-dark-heading">
+                    <label
+                      htmlFor="subject"
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                    >
                       Subject
                     </label>
                     <input
-                      id="contact-subject"
-                      name="subject"
                       type="text"
-                      required
+                      id="subject"
+                      name="subject"
                       value={formData.subject}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-dark-body focus:outline-none focus:ring-2 focus:ring-cla-purple focus:border-transparent"
+                      required
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all outline-none"
                       placeholder="How can we help?"
                     />
                   </div>
+
                   <div>
-                    <label htmlFor="contact-message" className="block text-sm font-medium mb-1 text-dark-heading">
+                    <label
+                      htmlFor="message"
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                    >
                       Message
                     </label>
                     <textarea
-                      id="contact-message"
+                      id="message"
                       name="message"
-                      rows="5"
-                      required
                       value={formData.message}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-dark-body focus:outline-none focus:ring-2 focus:ring-cla-purple focus:border-transparent resize-none"
+                      required
+                      rows="4"
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all outline-none resize-none"
                       placeholder="Your message..."
                     />
                   </div>
+
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3 px-6 rounded-lg text-white font-semibold transition-all duration-200 disabled:opacity-60"
-                    style={{ backgroundColor: '#2D1B69' }}
+                    className="w-full bg-purple-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-purple-700 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? "Sending..." : "Send Message"}
                   </button>
                 </form>
               )}
-            </motion.div>
-          </div>
-        </motion.div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
-}
+};
+
+export default ContactSection;
