@@ -53,7 +53,6 @@ export default function Testimonials() {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(1);
   const intervalRef = useRef(null);
-  const isPausedRef = useRef(false);
 
   const goTo = useCallback(
     (index) => {
@@ -63,35 +62,26 @@ export default function Testimonials() {
     [current]
   );
 
-  const goNext = useCallback(() => {
+  const next = useCallback(() => {
     setDirection(1);
     setCurrent((prev) => (prev + 1) % TESTIMONIALS.length);
   }, []);
 
+  const startAutoPlay = useCallback(() => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(next, 6000);
+  }, [next]);
+
   useEffect(() => {
-    const startInterval = () => {
-      intervalRef.current = setInterval(() => {
-        if (!isPausedRef.current) {
-          goNext();
-        }
-      }, 6000);
-    };
-
-    startInterval();
-
+    startAutoPlay();
     return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
+      if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [goNext]);
+  }, [startAutoPlay]);
 
-  const handleMouseEnter = () => {
-    isPausedRef.current = true;
-  };
-
-  const handleMouseLeave = () => {
-    isPausedRef.current = false;
+  const handleDotClick = (index) => {
+    goTo(index);
+    startAutoPlay();
   };
 
   const testimonial = TESTIMONIALS[current];
@@ -99,27 +89,19 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="relative overflow-hidden bg-gradient-to-b from-blue-50 to-white py-20"
+      className="bg-gradient-to-b from-blue-50 to-white px-4 py-20 sm:px-6 lg:px-8"
     >
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-12 text-center"
-        >
-          <h2 className="mb-4 text-3xl font-bold text-gray-900 sm:text-4xl">
-            What Parents Say
-          </h2>
-          <div className="mx-auto h-1 w-20 rounded-full bg-blue-600" />
-        </motion.div>
+      <div className="mx-auto max-w-4xl text-center">
+        <h2 className="section-heading mb-4 text-3xl font-bold text-gray-900 sm:text-4xl">
+          What Parents Say
+        </h2>
 
-        <div
-          className="relative min-h-[280px]"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
+        <p className="mx-auto mb-12 max-w-2xl text-gray-600">
+          Hear from families who have experienced the transformative impact of
+          Christian Living Academy on their children&apos;s lives.
+        </p>
+
+        <div className="relative min-h-[250px] overflow-hidden">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={testimonial.id}
@@ -128,24 +110,20 @@ export default function Testimonials() {
               initial="enter"
               animate="center"
               exit="exit"
-              className="absolute inset-0 flex flex-col items-center justify-center text-center"
+              className="mx-auto max-w-2xl rounded-2xl bg-white p-8 shadow-lg"
             >
-              <svg
-                className="mb-6 h-10 w-10 text-blue-300"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-              </svg>
-              <p className="mb-6 max-w-2xl text-lg leading-relaxed text-gray-700 italic sm:text-xl">
+              <div className="mb-4 text-4xl text-cla-gold">&ldquo;</div>
+              <p className="mb-6 text-lg leading-relaxed text-gray-700 italic">
                 {testimonial.quote}
               </p>
-              <p className="font-semibold text-gray-900">
-                {testimonial.name}
-              </p>
-              <p className="text-sm text-gray-500">
-                {testimonial.relationship}
-              </p>
+              <div>
+                <p className="font-semibold text-gray-900">
+                  {testimonial.name}
+                </p>
+                <p className="text-sm text-gray-500">
+                  {testimonial.relationship}
+                </p>
+              </div>
             </motion.div>
           </AnimatePresence>
         </div>
@@ -154,10 +132,10 @@ export default function Testimonials() {
           {TESTIMONIALS.map((_, index) => (
             <button
               key={index}
-              onClick={() => goTo(index)}
+              onClick={() => handleDotClick(index)}
               className={`h-3 w-3 rounded-full transition-all duration-300 ${
                 index === current
-                  ? "scale-125 bg-blue-600"
+                  ? "scale-125 bg-cla-gold"
                   : "bg-gray-300 hover:bg-gray-400"
               }`}
               aria-label={`Go to testimonial ${index + 1}`}

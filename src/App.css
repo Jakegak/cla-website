@@ -92,7 +92,7 @@ h6 {
   display: block;
   width: 60px;
   height: 3px;
-  background-color: #FFB800;
+  background-color: #FFB800 !important;
   margin: 0.5rem auto 0;
 }
 
@@ -121,16 +121,5 @@ h6 {
 
 .gallery-container {
   max-width: 1200px;
-  width: 100%;
   margin: 0 auto;
-  box-sizing: border-box;
-}
-
-.gallery-header {
-  margin-bottom: 2.5rem;
-}
-
-.activities-gallery .section-title {
-  font-family: var(--font-heading);
-  font-size: 2.25rem;
 }
