@@ -71,8 +71,8 @@ function YouTubeIcon() {
 
 function handleNavClick(e, href) {
   e.preventDefault();
-  const targetId = href.replace('#', '');
-  const element = document.getElementById(targetId);
+  const id = href.replace('#', '');
+  const element = document.getElementById(id);
   if (element) {
     element.scrollIntoView({ behavior: 'smooth' });
   }
@@ -81,34 +81,37 @@ function handleNavClick(e, href) {
 export default function Footer() {
   return (
     <footer className="text-white" style={{ backgroundColor: '#2D1B69' }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="mx-auto max-w-7xl px-6 py-12">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {/* Branding */}
-          <div>
-            <div className="flex items-center space-x-3 mb-4">
+          <div className="flex flex-col items-center md:items-start">
+            <div className="mb-4 flex items-center gap-3">
               <img
                 src={claLogo}
                 alt="Christian Living Academy"
                 className="h-11 w-11 rounded-full object-cover"
                 style={{ border: '2px solid #FFB800' }}
               />
-              <span className="text-xl font-bold">Christian Living Academy</span>
+              <span className="text-lg font-bold">Christian Living Academy</span>
             </div>
-            <p className="text-white/70 text-sm">
-              Nurturing young minds with faith, knowledge, and character for a brighter tomorrow.
+            <p className="text-center text-sm text-white/70 md:text-left">
+              Nurturing young minds with faith, knowledge, and character for a
+              brighter tomorrow.
             </p>
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+          <div className="flex flex-col items-center md:items-start">
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider">
+              Quick Links
+            </h3>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
-                    className="text-white/70 hover:text-white text-sm transition-colors"
+                    className="text-sm text-white/70 transition-colors hover:text-white"
                   >
                     {link.label}
                   </a>
@@ -117,15 +120,17 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Social & Contact */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Connect With Us</h3>
-            <div className="flex space-x-4 mb-4">
+          {/* Social Icons */}
+          <div className="flex flex-col items-center md:items-start">
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider">
+              Follow Us
+            </h3>
+            <div className="flex gap-4">
               <a
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white/70 hover:text-white transition-colors"
+                className="text-white/70 transition-colors hover:text-white"
                 aria-label="Facebook"
               >
                 <FacebookIcon />
@@ -134,7 +139,7 @@ export default function Footer() {
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white/70 hover:text-white transition-colors"
+                className="text-white/70 transition-colors hover:text-white"
                 aria-label="Twitter"
               >
                 <TwitterIcon />
@@ -143,7 +148,7 @@ export default function Footer() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white/70 hover:text-white transition-colors"
+                className="text-white/70 transition-colors hover:text-white"
                 aria-label="Instagram"
               >
                 <InstagramIcon />
@@ -152,22 +157,20 @@ export default function Footer() {
                 href="https://youtube.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white/70 hover:text-white transition-colors"
+                className="text-white/70 transition-colors hover:text-white"
                 aria-label="YouTube"
               >
                 <YouTubeIcon />
               </a>
             </div>
-            <p className="text-white/60 text-sm">
-              Email: info@christianlivingacademy.com
-            </p>
           </div>
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-white/20 mt-8 pt-8 text-center">
-          <p className="text-white/60 text-sm">
-            &copy; {new Date().getFullYear()} Christian Living Academy. All rights reserved.
+        <div className="mt-10 border-t border-white/20 pt-6 text-center">
+          <p className="text-sm text-white/70">
+            &copy; {new Date().getFullYear()} Christian Living Academy. All rights
+            reserved.
           </p>
         </div>
       </div>

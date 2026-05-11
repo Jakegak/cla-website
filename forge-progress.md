@@ -572,3 +572,8 @@
 **PR:** #109 — https://github.com/Jakegak/cla-website/pull/109
 **Files changed:** `src/components/Footer.jsx`
 **Notes:** Removed the `import Logo from './Logo'` and replaced with `import claLogo from '../assets/cla-logo.jpg'`. The footer element's className changed from `bg-gray-900 text-white` to just `text-white` with an inline style `backgroundColor: '#2D1B69'`. The `<Logo />` component was replaced with an `<img>` tag using the imported image asset, with `h-11 w-11 rounded-full object-cover` classes and a `2px solid #FFB800` border. The full file was reconstructed from the context preview — the SVG icon components, quickLinks array, handleNavClick, social links, and copyright section are preserved exactly as they were. No new dependencies were added.
+
+## Issue #103 — fix(footer): background should be CLA purple not grey, use real logo image [IN PROGRESS]
+**Started:** 2026-05-11T02:32:11.848664+00:00
+**Branch:** `fix/footer-bg-and-logo`
+
