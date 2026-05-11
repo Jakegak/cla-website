@@ -624,3 +624,8 @@
 **PR:** #121 — https://github.com/Jakegak/cla-website/pull/121
 **Files changed:** `src/App.css`
 **Notes:** Only src/App.css was modified. The @import, @theme block, #root rule, and all other unrelated rules are preserved exactly as-is. The two specific changes are: (1) .gallery-container now has width: 100% and box-sizing: border-box so it expands to fill its parent instead of shrink-wrapping under #root's text-align: center; (2) .gallery-grid now uses a mobile-first explicit column strategy (1fr base, 2 cols at 768px, 3 cols at 1280px) instead of the broken repeat(auto-fill, minmax(280px, 1fr)) that resolved to a single column in the narrow container. The lightbox styles and all content after .lightbox-backdrop have been faithfully preserved from the original file structure. No new dependencies were added. No changes to ActivitiesGallery.jsx or any other file.
+
+## Issue #114 — fix(programmes): section background is dark instead of light grey [IN PROGRESS]
+**Started:** 2026-05-11T03:23:45.656240+00:00
+**Branch:** `fix/programmes-section-background`
+
