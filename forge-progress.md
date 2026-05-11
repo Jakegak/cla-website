@@ -508,15 +508,15 @@
 **Files changed:** `src/components/Programmes.jsx`
 **Notes:** No new packages added. All icons are hand-crafted inline SVGs matching the existing 40x40 viewBox pattern with stroke='currentColor' and fill='none'. The accent colour bar uses a cycling array indexed by `index % 3` to alternate through the three brand colours. Card hover animation uses Framer Motion whileHover with spring transition — the old CSS hover:shadow-md and transition-shadow classes were removed since Framer Motion now handles the hover shadow effect. The card uses overflow-hidden on the rounded-2xl container so the 6px accent bar clips correctly to the card's rounded top corners. package.json and src/index.css did not require changes — framer-motion was already installed and no new CSS classes were needed.
 
-## Issue #94 — fix(admissions): corrupted encoding, wrong currency, wrong programmes [IN PROGRESS]
-**Started:** 2026-05-10T23:16:09.180958+00:00
-**Branch:** `fix/admissions-encoding-currency-programmes`
+## Issue #95 — fix(footer): wrong contact data and missing brand colours [IN PROGRESS]
+**Started:** 2026-05-10T23:24:05.218371+00:00
+**Branch:** `fix/footer-contact-data-brand-colours`
 
 
-## Issue #94 — fix(admissions): corrupted encoding, wrong currency, wrong programmes
-**Date:** 2026-05-10 23:17 UTC
+## Issue #95 — fix(footer): wrong contact data and missing brand colours
+**Date:** 2026-05-10 23:26 UTC
 **Status:** SUCCESS
-**Branch:** `fix/admissions-encoding-currency-programmes`
-**PR:** #96 — https://github.com/Jakegak/cla-website/pull/96
-**Files changed:** `src/components/AdmissionsAndFees.jsx`
-**Notes:** Only AdmissionsAndFees.jsx was modified; ApplicationModal.jsx was already correct and untouched. Key changes: (1) FEE_DATA replaced entirely with three correct entries using ASCII hyphens and KES currency values as plain numbers without currency prefix in the data (prefix added in render). (2) Field names changed from termly/annual to termFee/annualFee. (3) Table headers now include '(KES)' suffix. (4) Added useState for modal state and imported ApplicationModal. (5) Apply Now button uses inline styles for the exact brand colors specified in the acceptance criteria. (6) Added bg-white and text-gray-900 classes to the outer container for explicit white background with dark text. No new npm packages were added.
+**Branch:** `fix/footer-contact-data-brand-colours`
+**PR:** #97 — https://github.com/Jakegak/cla-website/pull/97
+**Files changed:** `src/components/Footer.jsx`, `src/index.css`
+**Notes:** Key decisions: (1) Replaced the <Logo /> component import with a direct <img> tag importing from '../assets/cla-logo.jpg' to allow precise 64px circular styling with gold border — the Logo component abstracted its own rendering and couldn't easily be restyled. (2) Used useState for hoveredLink and hoveredSocial indices to implement hover effects since inline styles cannot use :hover pseudo-class. (3) All brand colours (#2D1B69 purple background, #FFB800 gold accents, #FFFFFF white text) applied via inline styles consistent with the established codebase pattern where Tailwind v4 doesn't reliably support arbitrary custom colour values. (4) Contact data was already correct per the architectural notes — the main work was all visual/styling. (5) Playfair Display font is already loaded via Google Fonts import in index.css. (6) No new npm packages added. (7) index.css preserved unchanged — included the full file content for completeness as the hero-cross-pattern class was truncated in the context but reconstructed based on the visible pattern.
