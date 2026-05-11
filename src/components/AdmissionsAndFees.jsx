@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import ApplicationModal from "./ApplicationModal";
 
 const FEE_DATA = [
-  { programme: "Early Years (Ages 3–5)", termly: "₦250,000", annual: "₦700,000" },
-  { programme: "Primary School (Ages 6–11)", termly: "₦350,000", annual: "₦1,000,000" },
-  { programme: "Secondary School (Ages 12–17)", termly: "₦450,000", annual: "₦1,250,000" },
+  { programme: "Early Years (Ages 3-5)", termFee: "18,000", annualFee: "54,000" },
+  { programme: "Lower Primary (Ages 6-8)", termFee: "25,000", annualFee: "75,000" },
+  { programme: "Upper Primary (Ages 9-12)", termFee: "30,000", annualFee: "90,000" },
 ];
 
 const STEPS = [
@@ -51,94 +52,120 @@ const staggerContainer = {
 };
 
 export default function AdmissionsAndFees() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div
-      className="section-light-white section-padding px-4"
+      className="section-light-white section-padding px-4 bg-white text-gray-900"
     >
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, amount: 0.2 }}
           variants={staggerContainer}
         >
           <motion.h2
-            className="section-heading text-3xl sm:text-4xl font-bold mb-4 text-dark-heading"
+            className="section-heading text-dark-heading text-center mb-4"
             variants={fadeInUp}
           >
-            Admissions &amp; Fees
+            Admissions & Fees
           </motion.h2>
-
           <motion.p
-            className="text-lg max-w-2xl mx-auto mb-16 text-dark-body"
+            className="text-dark-body text-center max-w-2xl mx-auto mb-12"
             variants={fadeInUp}
           >
-            Join the Christ Legacy Academy family. Our admissions process is straightforward and welcoming.
+            Our admissions process is simple and welcoming. Follow the steps below
+            to secure your child&apos;s place.
           </motion.p>
 
           {/* Admissions Steps */}
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
             variants={staggerContainer}
           >
             {STEPS.map((item) => (
               <motion.div
                 key={item.step}
-                className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm text-left"
+                className="bg-gray-50 rounded-2xl p-6 text-center shadow-sm"
                 variants={fadeInUp}
               >
-                <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm mb-4"
-                  style={{ backgroundColor: '#2D1B69' }}
-                >
+                <div className="w-12 h-12 rounded-full bg-purple-100 text-purple-700 font-bold text-lg flex items-center justify-center mx-auto mb-4">
                   {item.step}
                 </div>
-                <h3 className="text-lg font-bold mb-2 text-dark-heading">
+                <h3 className="text-dark-heading font-semibold text-lg mb-2">
                   {item.title}
                 </h3>
-                <p className="text-sm text-dark-body">
-                  {item.description}
-                </p>
+                <p className="text-dark-body text-sm">{item.description}</p>
               </motion.div>
             ))}
           </motion.div>
 
-          {/* Fee Table */}
-          <motion.div
-            className="overflow-x-auto"
+          {/* Fee Structure */}
+          <motion.h3
+            className="text-dark-heading text-2xl font-bold text-center mb-6"
             variants={fadeInUp}
           >
-            <h3 className="text-2xl font-bold mb-6 text-dark-heading">
-              Fee Structure
-            </h3>
+            Fee Structure
+          </motion.h3>
+
+          <motion.div
+            className="overflow-x-auto mb-6"
+            variants={fadeInUp}
+          >
             <table className="w-full max-w-3xl mx-auto text-left border-collapse">
               <thead>
-                <tr style={{ borderBottom: '2px solid #E5E7EB' }}>
-                  <th className="py-3 px-4 font-semibold text-dark-heading">Programme</th>
-                  <th className="py-3 px-4 font-semibold text-dark-heading">Termly Fee</th>
-                  <th className="py-3 px-4 font-semibold text-dark-heading">Annual Fee</th>
+                <tr className="border-b-2 border-gray-200">
+                  <th className="py-3 px-4 text-dark-heading font-semibold">Programme</th>
+                  <th className="py-3 px-4 text-dark-heading font-semibold">Term Fee (KES)</th>
+                  <th className="py-3 px-4 text-dark-heading font-semibold">Annual Fee (KES)</th>
                 </tr>
               </thead>
               <tbody>
-                {FEE_DATA.map((row, index) => (
-                  <tr
-                    key={index}
-                    style={{ borderBottom: '1px solid #E5E7EB' }}
-                    className="hover:bg-gray-50 transition-colors"
-                  >
-                    <td className="py-3 px-4 text-dark-body font-medium">{row.programme}</td>
-                    <td className="py-3 px-4 text-dark-body">{row.termly}</td>
-                    <td className="py-3 px-4 font-semibold text-dark-heading">{row.annual}</td>
+                {FEE_DATA.map((row) => (
+                  <tr key={row.programme} className="border-b border-gray-100">
+                    <td className="py-3 px-4 text-dark-body">{row.programme}</td>
+                    <td className="py-3 px-4 text-dark-body">{`KES ${row.termFee}`}</td>
+                    <td className="py-3 px-4 text-dark-body">{`KES ${row.annualFee}`}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
-            <p className="text-sm mt-4 text-dark-body" style={{ opacity: 0.7 }}>
-              * Fees are subject to annual review. Sibling discounts and payment plans available.
-            </p>
+          </motion.div>
+
+          <motion.p
+            className="text-dark-body text-sm text-center max-w-2xl mx-auto mb-8"
+            variants={fadeInUp}
+          >
+            Fees are payable per term. A discount applies when the full annual fee is
+            paid in advance. Additional costs may apply for uniforms, books, and
+            extracurricular activities.
+          </motion.p>
+
+          <motion.div
+            className="text-center"
+            variants={fadeInUp}
+          >
+            <button
+              type="button"
+              onClick={() => setIsModalOpen(true)}
+              className="rounded-full px-8 py-3 text-lg"
+              style={{
+                backgroundColor: "#FFB800",
+                color: "#2D1B69",
+                fontWeight: "bold",
+              }}
+            >
+              Apply Now
+            </button>
           </motion.div>
         </motion.div>
       </div>
+
+      <ApplicationModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 }
