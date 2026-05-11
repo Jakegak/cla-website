@@ -128,6 +128,8 @@ h6 {
   font-size: 1.125rem;
 }
 
+/* ===== Gallery Filter Buttons ===== */
+
 .gallery-filters {
   display: flex;
   flex-wrap: wrap;
@@ -159,12 +161,29 @@ h6 {
   font-weight: 600;
 }
 
+/* ===== Gallery Grid ===== */
+
 .gallery-grid {
   display: grid;
   width: 100%;
   grid-template-columns: 1fr;
   gap: 1rem;
+  width: 100%;
 }
+
+@media (min-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ===== Gallery Item ===== */
 
 .gallery-item {
   position: relative;
