@@ -694,3 +694,11 @@
 **Started:** 2026-05-11T04:22:56.840550+00:00
 **Branch:** `fix/app-dark-background-bleed`
 
+
+## Issue #127 — fix(layout): App.jsx dark background bleeds through light sections
+**Date:** 2026-05-11 04:23 UTC
+**Status:** SUCCESS
+**Branch:** `fix/app-dark-background-bleed`
+**PR:** #131 — https://github.com/Jakegak/cla-website/pull/131
+**Files changed:** `src/App.jsx`
+**Notes:** The only change is removing the entire `style={{ backgroundColor: '#0D0D1A' }}` prop from the <main> element. The className remains exactly as-is. No Tailwind bg-* class was added as a replacement, per the architectural guidance. Each section component (HeroSection, ActivitiesGallery, Testimonials, Footer, etc.) already defines its own background via CSS classes or inline styles, so no visual regression is expected. No new dependencies were added.
