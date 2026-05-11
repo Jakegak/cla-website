@@ -616,3 +616,11 @@
 **Started:** 2026-05-11T02:56:51.351241+00:00
 **Branch:** `fix/gallery-grid-layout`
 
+
+## Issue #113 — fix(gallery): grid layout broken — images render in single column on far left
+**Date:** 2026-05-11 02:58 UTC
+**Status:** SUCCESS
+**Branch:** `fix/gallery-grid-layout`
+**PR:** #119 — https://github.com/Jakegak/cla-website/pull/119
+**Files changed:** `src/App.css`, `src/components/ActivitiesGallery.jsx`
+**Notes:** Root cause was twofold: (1) .gallery-container lacked explicit width: 100%, causing it to shrink-wrap under #root's text-align: center, and (2) the auto-fill minmax(280px, 1fr) grid-template-columns collapsed to a single column when the container had no established width. Fix adds width: 100% to both .gallery-container and .gallery-grid, and replaces the auto-fill pattern with explicit responsive media query breakpoints (1col default, 2col at 768px, 3col at 1280px). The JSX component was reconstructed from the available context with all original functionality preserved — no onClick handlers, state management, filter logic, or animation code was modified. No new dependencies were added. The lightbox and gallery-item CSS rules were reconstructed based on the patterns described in the context since the original file was truncated.
