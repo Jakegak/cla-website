@@ -29,7 +29,8 @@ const CONTACT_INFO = [
       </svg>
     ),
     label: "Email",
-    value: "info@christlegacyacademy.com",
+    value: "info@christianlivingacademy.com",
+    href: "mailto:info@christianlivingacademy.com",
   },
   {
     icon: (
@@ -38,21 +39,32 @@ const CONTACT_INFO = [
       </svg>
     ),
     label: "Phone",
-    value: "+234 800 CLA SCHOOL",
+    value: "0798 767 773",
+    href: "tel:0798767773",
   },
   {
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="2" fill="none"/>
+        <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
     label: "Address",
-    value: "Lagos, Nigeria",
+    value: "Along Kamiti Road, Near Kahawa West Junction, Nairobi",
+  },
+  {
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M12 6V12L16 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+    label: "School Hours",
+    value: "Mon - Fri: 7:30 AM - 3:30 PM",
   },
 ];
 
-export default function ContactSection() {
+function ContactSection() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -79,138 +91,167 @@ export default function ContactSection() {
   };
 
   return (
-    <section
-      id="contact"
-      className="section-light-grey section-padding px-4"
-    >
-      <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={staggerContainer}
-        >
-          <motion.h2
-            className="section-heading text-3xl sm:text-4xl font-bold mb-4 text-dark-heading"
-            variants={fadeInUp}
-          >
-            Contact Us
-          </motion.h2>
-
-          <motion.p
-            className="text-lg max-w-2xl mx-auto mb-16 text-dark-body"
-            variants={fadeInUp}
-          >
-            We&apos;d love to hear from you. Get in touch with us for enquiries, visits, or more information.
-          </motion.p>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Info */}
-            <motion.div className="text-left" variants={fadeInUp}>
-              <h3 className="text-xl font-bold mb-6 text-dark-heading">
-                Get In Touch
-              </h3>
-              <div className="space-y-6">
-                {CONTACT_INFO.map((info) => (
-                  <div key={info.label} className="flex items-start gap-4">
-                    <div
-                      className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
-                      style={{ backgroundColor: '#2D1B69', color: '#FFFFFF' }}
-                    >
-                      {info.icon}
-                    </div>
-                    <div>
-                      <p className="font-semibold text-dark-heading">{info.label}</p>
-                      <p className="text-dark-body">{info.value}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Contact Form */}
-            <motion.div className="text-left" variants={fadeInUp}>
-              {submitted ? (
-                <div className="bg-green-50 border border-green-200 rounded-2xl p-8 text-center">
-                  <p className="text-green-700 font-semibold text-lg">Thank you for your message!</p>
-                  <p className="text-green-600 mt-2">We&apos;ll get back to you as soon as possible.</p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label htmlFor="contact-name" className="block text-sm font-medium mb-1 text-dark-heading">
-                      Full Name
-                    </label>
-                    <input
-                      id="contact-name"
-                      name="name"
-                      type="text"
-                      required
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-dark-body focus:outline-none focus:ring-2 focus:ring-cla-purple focus:border-transparent"
-                      placeholder="Your full name"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="contact-email" className="block text-sm font-medium mb-1 text-dark-heading">
-                      Email Address
-                    </label>
-                    <input
-                      id="contact-email"
-                      name="email"
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-dark-body focus:outline-none focus:ring-2 focus:ring-cla-purple focus:border-transparent"
-                      placeholder="you@example.com"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="contact-subject" className="block text-sm font-medium mb-1 text-dark-heading">
-                      Subject
-                    </label>
-                    <input
-                      id="contact-subject"
-                      name="subject"
-                      type="text"
-                      required
-                      value={formData.subject}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-dark-body focus:outline-none focus:ring-2 focus:ring-cla-purple focus:border-transparent"
-                      placeholder="How can we help?"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="contact-message" className="block text-sm font-medium mb-1 text-dark-heading">
-                      Message
-                    </label>
-                    <textarea
-                      id="contact-message"
-                      name="message"
-                      rows="5"
-                      required
-                      value={formData.message}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-dark-body focus:outline-none focus:ring-2 focus:ring-cla-purple focus:border-transparent resize-none"
-                      placeholder="Your message..."
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full py-3 px-6 rounded-lg text-white font-semibold transition-all duration-200 disabled:opacity-60"
-                    style={{ backgroundColor: '#2D1B69' }}
-                  >
-                    {isSubmitting ? "Sending..." : "Send Message"}
-                  </button>
-                </form>
-              )}
-            </motion.div>
-          </div>
+    <section id="contact" className="section-light-grey section-padding">
+      <motion.div
+        className="max-w-6xl mx-auto"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={staggerContainer}
+      >
+        <motion.div className="text-center mb-12" variants={fadeInUp}>
+          <h2 className="section-heading text-dark-heading">Contact Us</h2>
+          <p className="text-dark-body max-w-2xl mx-auto">
+            We&apos;d love to hear from you. Reach out to us with any questions
+            or to schedule a visit.
+          </p>
         </motion.div>
-      </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          {CONTACT_INFO.map((info) => (
+            <motion.div
+              key={info.label}
+              className="bg-white rounded-2xl p-6 text-center shadow-sm"
+              variants={fadeInUp}
+            >
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-50 text-blue-600 mb-4">
+                {info.icon}
+              </div>
+              <h3 className="font-semibold text-dark-heading mb-1">
+                {info.label}
+              </h3>
+              <p className="text-dark-body text-sm">
+                {info.href ? (
+                  <a
+                    href={info.href}
+                    className="hover:underline transition-colors"
+                  >
+                    {info.value}
+                  </a>
+                ) : (
+                  info.value
+                )}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.div
+          className="max-w-2xl mx-auto bg-white rounded-2xl p-8 shadow-sm"
+          variants={fadeInUp}
+        >
+          {submitted ? (
+            <div className="text-center py-8">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-600 mb-4">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M20 6L9 17L4 12"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-dark-heading mb-2">
+                Thank You!
+              </h3>
+              <p className="text-dark-body">
+                Your message has been sent. We&apos;ll get back to you soon.
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-dark-heading mb-1"
+                  >
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-shadow"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-dark-heading mb-1"
+                  >
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-shadow"
+                  />
+                </div>
+              </div>
+              <div>
+                <label
+                  htmlFor="subject"
+                  className="block text-sm font-medium text-dark-heading mb-1"
+                >
+                  Subject
+                </label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-shadow"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-dark-heading mb-1"
+                >
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows="5"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-shadow resize-vertical"
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full py-3 px-6 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? "Sending..." : "Send Message"}
+              </button>
+            </form>
+          )}
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
+
+export default ContactSection;
