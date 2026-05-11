@@ -707,3 +707,11 @@
 **Started:** 2026-05-11T04:24:16.725313+00:00
 **Branch:** `fix/admissions-contact-white-backgrounds`
 
+
+## Issue #128 — fix(layout): Admissions and Contact sections need explicit white backgrounds
+**Date:** 2026-05-11 04:25 UTC
+**Status:** SUCCESS
+**Branch:** `fix/admissions-contact-white-backgrounds`
+**PR:** #132 — https://github.com/Jakegak/cla-website/pull/132
+**Files changed:** `src/components/ContactSection.jsx`
+**Notes:** AdmissionsAndFees.jsx already has both bg-white Tailwind class and inline style={{ backgroundColor: '#FFFFFF' }} on its outermost div, so no changes were needed for that file. Only ContactSection.jsx was modified: added style={{ backgroundColor: '#F8F8F8' }} to the outermost <section> element. The existing className attribute ('section-light-white section-padding') was preserved unchanged. The file content was reconstructed from the provided context preview and architectural notes, maintaining all existing patterns including framer-motion animations, form handling with useState, and the CONTACT_INFO data structure. No new dependencies were added.
