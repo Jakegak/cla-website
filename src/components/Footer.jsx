@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import claLogo from '../assets/cla-logo.jpg';
 
 const quickLinks = [
@@ -12,8 +13,8 @@ const quickLinks = [
 function FacebookIcon() {
   return (
     <svg
-      width="24"
-      height="24"
+      width="20"
+      height="20"
       viewBox="0 0 24 24"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
@@ -27,8 +28,8 @@ function FacebookIcon() {
 function TwitterIcon() {
   return (
     <svg
-      width="24"
-      height="24"
+      width="20"
+      height="20"
       viewBox="0 0 24 24"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
@@ -42,8 +43,8 @@ function TwitterIcon() {
 function InstagramIcon() {
   return (
     <svg
-      width="24"
-      height="24"
+      width="20"
+      height="20"
       viewBox="0 0 24 24"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
@@ -57,8 +58,8 @@ function InstagramIcon() {
 function YouTubeIcon() {
   return (
     <svg
-      width="24"
-      height="24"
+      width="20"
+      height="20"
       viewBox="0 0 24 24"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
@@ -69,110 +70,275 @@ function YouTubeIcon() {
   );
 }
 
-function handleNavClick(e, href) {
-  e.preventDefault();
-  const id = href.replace('#', '');
-  const element = document.getElementById(id);
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth' });
-  }
-}
+const socialLinks = [
+  { icon: FacebookIcon, href: 'https://facebook.com', label: 'Facebook' },
+  { icon: TwitterIcon, href: 'https://twitter.com', label: 'Twitter' },
+  { icon: InstagramIcon, href: 'https://instagram.com', label: 'Instagram' },
+  { icon: YouTubeIcon, href: 'https://youtube.com', label: 'YouTube' },
+];
+
+export default function Footer() {
+  const [hoveredLink, setHoveredLink] = useState(null);
+  const [hoveredSocial, setHoveredSocial] = useState(null);
+
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
 export default function Footer() {
   return (
-    <footer className="text-white" style={{ backgroundColor: '#2D1B69' }}>
-      <div className="mx-auto max-w-7xl px-6 py-12">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-          {/* Branding */}
-          <div className="flex flex-col items-center md:items-start">
-            <div className="mb-4 flex items-center gap-3">
+    <footer
+      className="text-white"
+      style={{ backgroundColor: '#2D1B69' }}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {/* Column 1: Branding + Socials */}
+          <div className="flex flex-col items-start gap-6">
+            <div className="flex items-center gap-4">
               <img
                 src={claLogo}
-                alt="Christian Living Academy"
-                className="h-11 w-11 rounded-full object-cover"
-                style={{ border: '2px solid #FFB800' }}
+                alt="Christian Living Academy Logo"
+                style={{
+                  width: 64,
+                  height: 64,
+                  borderRadius: '50%',
+                  border: '3px solid #FFB800',
+                  objectFit: 'cover',
+                }}
               />
-              <span className="text-lg font-bold">Christian Living Academy</span>
+              <div className="flex flex-col">
+                <span
+                  className="text-xl font-bold"
+                  style={{
+                    fontFamily: "'Playfair Display', serif",
+                    color: '#FFFFFF',
+                  }}
+                >
+                  Christian Living Academy
+                </span>
+                <span
+                  className="text-sm"
+                  style={{
+                    color: '#FFB800',
+                    fontStyle: 'italic',
+                  }}
+                >
+                  Raising God Fearing Elite Generation
+                </span>
+              </div>
             </div>
-            <p className="text-center text-sm text-white/70 md:text-left">
-              Nurturing young minds with faith, knowledge, and character for a
-              brighter tomorrow.
+
+            <p style={{ color: 'rgba(255, 255, 255, 0.7)' }} className="text-sm leading-relaxed">
+              Nurturing young minds with faith, excellence, and purpose.
             </p>
+
+            {/* Social Icons */}
+            <div className="flex items-center gap-3">
+              {socialLinks.map((social, index) => {
+                const IconComponent = social.icon;
+                const isHovered = hoveredSocial === index;
+                return (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    className="flex items-center justify-center transition-colors"
+                    style={{
+                      width: 40,
+                      height: 40,
+                      borderRadius: '50%',
+                      border: isHovered ? '2px solid #FFB800' : '2px solid rgba(255, 255, 255, 0.7)',
+                      color: isHovered ? '#FFB800' : '#FFFFFF',
+                      background: 'transparent',
+                      transition: 'all 0.3s ease',
+                    }}
+                    onMouseEnter={() => setHoveredSocial(index)}
+                    onMouseLeave={() => setHoveredSocial(null)}
+                  >
+                    <IconComponent />
+                  </a>
+                );
+              })}
+            </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="flex flex-col items-center md:items-start">
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider">
+          {/* Column 2: Quick Links */}
+          <div>
+            <h3
+              className="text-lg font-semibold mb-6"
+              style={{
+                fontFamily: "'Playfair Display', serif",
+                color: '#FFFFFF',
+              }}
+            >
               Quick Links
             </h3>
-            <ul className="space-y-2">
-              {quickLinks.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => handleNavClick(e, link.href)}
-                    className="text-sm text-white/70 transition-colors hover:text-white"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
+            <ul className="flex flex-col gap-3">
+              {quickLinks.map((link, index) => {
+                const isHovered = hoveredLink === index;
+                return (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      onClick={(e) => handleNavClick(e, link.href)}
+                      className="text-sm inline-flex items-center"
+                      style={{
+                        color: '#FFFFFF',
+                        paddingLeft: isHovered ? 12 : 0,
+                        transition: 'all 0.3s ease',
+                      }}
+                      onMouseEnter={() => setHoveredLink(index)}
+                      onMouseLeave={() => setHoveredLink(null)}
+                    >
+                      {isHovered && (
+                        <span
+                          style={{
+                            color: '#FFB800',
+                            marginRight: 6,
+                            fontWeight: 600,
+                          }}
+                        >
+                          →
+                        </span>
+                      )}
+                      {link.label}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
-          {/* Social Icons */}
-          <div className="flex flex-col items-center md:items-start">
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider">
-              Follow Us
+          {/* Column 3: Contact Info */}
+          <div>
+            <h3
+              className="text-lg font-semibold mb-6"
+              style={{
+                fontFamily: "'Playfair Display', serif",
+                color: '#FFFFFF',
+              }}
+            >
+              Contact Us
             </h3>
-            <div className="flex gap-4">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/70 transition-colors hover:text-white"
-                aria-label="Facebook"
-              >
-                <FacebookIcon />
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/70 transition-colors hover:text-white"
-                aria-label="Twitter"
-              >
-                <TwitterIcon />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/70 transition-colors hover:text-white"
-                aria-label="Instagram"
-              >
-                <InstagramIcon />
-              </a>
-              <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/70 transition-colors hover:text-white"
-                aria-label="YouTube"
-              >
-                <YouTubeIcon />
-              </a>
+            <div className="flex flex-col gap-4">
+              {/* Address */}
+              <div className="flex items-start gap-3">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  style={{ color: '#FFB800', flexShrink: 0, marginTop: 2 }}
+                  aria-hidden="true"
+                >
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                <span className="text-sm" style={{ color: 'rgba(255, 255, 255, 0.85)' }}>
+                  Along Kamiti Road, Near Kahawa West Junction, Nairobi
+                </span>
+              </div>
+
+              {/* Phone */}
+              <div className="flex items-center gap-3">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  style={{ color: '#FFB800', flexShrink: 0 }}
+                  aria-hidden="true"
+                >
+                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+                </svg>
+                <a
+                  href="tel:0798767773"
+                  className="text-sm transition-colors"
+                  style={{ color: 'rgba(255, 255, 255, 0.85)' }}
+                >
+                  0798 767 773
+                </a>
+              </div>
+
+              {/* Email */}
+              <div className="flex items-center gap-3">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  style={{ color: '#FFB800', flexShrink: 0 }}
+                  aria-hidden="true"
+                >
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
+                <a
+                  href="mailto:info@christianlivingacademy.com"
+                  className="text-sm transition-colors"
+                  style={{ color: 'rgba(255, 255, 255, 0.85)' }}
+                >
+                  info@christianlivingacademy.com
+                </a>
+              </div>
+
+              {/* Hours */}
+              <div className="flex items-center gap-3">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  style={{ color: '#FFB800', flexShrink: 0 }}
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+                <span className="text-sm" style={{ color: 'rgba(255, 255, 255, 0.85)' }}>
+                  Mon – Fri: 7:30 AM – 3:30 PM
+                </span>
+              </div>
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Copyright */}
-        <div className="mt-10 border-t border-white/20 pt-6 text-center">
-          <p className="text-sm text-white/70">
-            &copy; {new Date().getFullYear()} Christian Living Academy. All rights
-            reserved.
-          </p>
-        </div>
+      {/* Copyright Bar */}
+      <div
+        className="border-t py-6"
+        style={{ borderColor: 'rgba(255, 255, 255, 0.15)' }}
+      >
+        <p
+          className="text-center text-sm"
+          style={{ color: 'rgba(255, 255, 255, 0.6)' }}
+        >
+          © {new Date().getFullYear()} Christian Living Academy. All rights reserved.
+        </p>
       </div>
     </footer>
   );

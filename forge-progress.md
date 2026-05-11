@@ -508,119 +508,15 @@
 **Files changed:** `src/components/Programmes.jsx`
 **Notes:** No new packages added. All icons are hand-crafted inline SVGs matching the existing 40x40 viewBox pattern with stroke='currentColor' and fill='none'. The accent colour bar uses a cycling array indexed by `index % 3` to alternate through the three brand colours. Card hover animation uses Framer Motion whileHover with spring transition — the old CSS hover:shadow-md and transition-shadow classes were removed since Framer Motion now handles the hover shadow effect. The card uses overflow-hidden on the rounded-2xl container so the 6px accent bar clips correctly to the card's rounded top corners. package.json and src/index.css did not require changes — framer-motion was already installed and no new CSS classes were needed.
 
-## Issue #94 — fix(admissions): corrupted encoding, wrong currency, wrong programmes [IN PROGRESS]
-**Started:** 2026-05-10T23:16:09.180958+00:00
-**Branch:** `fix/admissions-encoding-currency-programmes`
+## Issue #95 — fix(footer): wrong contact data and missing brand colours [IN PROGRESS]
+**Started:** 2026-05-10T23:24:05.218371+00:00
+**Branch:** `fix/footer-contact-data-brand-colours`
 
 
-## Issue #94 — fix(admissions): corrupted encoding, wrong currency, wrong programmes
-**Date:** 2026-05-10 23:17 UTC
+## Issue #95 — fix(footer): wrong contact data and missing brand colours
+**Date:** 2026-05-10 23:26 UTC
 **Status:** SUCCESS
-**Branch:** `fix/admissions-encoding-currency-programmes`
-**PR:** #96 — https://github.com/Jakegak/cla-website/pull/96
-**Files changed:** `src/components/AdmissionsAndFees.jsx`
-**Notes:** Only AdmissionsAndFees.jsx was modified; ApplicationModal.jsx was already correct and untouched. Key changes: (1) FEE_DATA replaced entirely with three correct entries using ASCII hyphens and KES currency values as plain numbers without currency prefix in the data (prefix added in render). (2) Field names changed from termly/annual to termFee/annualFee. (3) Table headers now include '(KES)' suffix. (4) Added useState for modal state and imported ApplicationModal. (5) Apply Now button uses inline styles for the exact brand colors specified in the acceptance criteria. (6) Added bg-white and text-gray-900 classes to the outer container for explicit white background with dark text. No new npm packages were added.
-
-## Issue #99 — fix(about): undefined containerVariants and childVariants crash the page [IN PROGRESS]
-**Started:** 2026-05-11T01:10:58.914403+00:00
-**Branch:** `fix/about-undefined-variants`
-
-
-## Issue #99 — fix(about): undefined containerVariants and childVariants crash the page
-**Date:** 2026-05-11 01:12 UTC
-**Status:** SUCCESS
-**Branch:** `fix/about-undefined-variants`
-**PR:** #106 — https://github.com/Jakegak/cla-website/pull/106
-**Files changed:** `src/components/AboutUs.jsx`
-**Notes:** The file was truncated in context so the JSX portion was not visible. I reconstructed the complete component based on the available context: (1) CountUp component unchanged, (2) stats array with all 4 items and their SVG icons reconstructed from the partial content, (3) fadeInUp and staggerContainer kept exactly as they were, (4) NEW: containerVariants and childVariants defined as module-scope constants immediately after staggerContainer — containerVariants uses staggerChildren: 0.15 and childVariants uses opacity 0→1, y 30→0, duration 0.5, easeOut, matching the acceptance criteria exactly. (5) The AboutUs component JSX uses containerVariants as the parent wrapper with whileInView='visible' and initial='hidden', childVariants for title/text blocks, staggerContainer for the stats grid, and fadeInUp for individual stat cards. The mission/vision section also uses containerVariants as parent and childVariants for each card. No new dependencies added. No console.log, no secrets, no TODOs without issue references.
-
-## Issue #100 — fix(contact): wrong email, phone, and address in ContactSection [IN PROGRESS]
-**Started:** 2026-05-11T01:13:04.406768+00:00
-**Branch:** `fix/contact-wrong-info`
-
-
-## Issue #100 — fix(contact): wrong email, phone, and address in ContactSection
-**Date:** 2026-05-11 01:14 UTC
-**Status:** SUCCESS
-**Branch:** `fix/contact-wrong-info`
-**PR:** #107 — https://github.com/Jakegak/cla-website/pull/107
-**Files changed:** `src/components/ContactSection.jsx`
-**Notes:** Added an optional 'href' field to CONTACT_INFO objects to make link rendering data-driven — entries with an href get wrapped in an <a> tag, others render plain text. This avoids brittle label-checking in JSX. The grid layout was updated from what was likely grid-cols-1 md:grid-cols-3 to grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 to accommodate the new fourth entry (School Hours) cleanly across breakpoints. The School Hours clock icon follows the exact same SVG pattern as existing icons (24x24, fill='none', stroke='currentColor', strokeWidth='2', strokeLinecap='round', strokeLinejoin='round', aria-hidden='true'). No new dependencies were added.
-
-## Issue #101 — fix(testimonials): wrong school name and non-Kenyan parent names [IN PROGRESS]
-**Started:** 2026-05-11T01:15:13.915906+00:00
-**Branch:** `fix/testimonials-school-name-parent-names`
-
-
-## Issue #101 — fix(testimonials): wrong school name and non-Kenyan parent names
-**Date:** 2026-05-11 01:16 UTC
-**Status:** SUCCESS
-**Branch:** `fix/testimonials-school-name-parent-names`
-**PR:** #108 — https://github.com/Jakegak/cla-website/pull/108
-**Files changed:** `src/components/Testimonials.jsx`
-**Notes:** Only the TESTIMONIALS const array was modified — all component logic, hooks, Framer Motion animations, auto-play interval, dot navigation, and JSX structure remain identical. The abbreviation 'CLA' in testimonials 2 and 4 was kept as-is since 'Christian Living Academy' also abbreviates to CLA. The component body below the TESTIMONIALS array was reconstructed from the context preview and architectural notes describing the carousel structure (AnimatePresence with mode='wait', motion.div with slideVariants, dot navigation buttons). No new dependencies were added.
-
-## Issue #103 — fix(footer): background should be CLA purple not grey, use real logo image [IN PROGRESS]
-**Started:** 2026-05-11T01:17:05.371349+00:00
-**Branch:** `fix/footer-bg-and-logo`
-
-
-## Issue #103 — fix(footer): background should be CLA purple not grey, use real logo image
-**Date:** 2026-05-11 01:18 UTC
-**Status:** SUCCESS
-**Branch:** `fix/footer-bg-and-logo`
-**PR:** #109 — https://github.com/Jakegak/cla-website/pull/109
-**Files changed:** `src/components/Footer.jsx`
-**Notes:** Removed the `import Logo from './Logo'` and replaced with `import claLogo from '../assets/cla-logo.jpg'`. The footer element's className changed from `bg-gray-900 text-white` to just `text-white` with an inline style `backgroundColor: '#2D1B69'`. The `<Logo />` component was replaced with an `<img>` tag using the imported image asset, with `h-11 w-11 rounded-full object-cover` classes and a `2px solid #FFB800` border. The full file was reconstructed from the context preview — the SVG icon components, quickLinks array, handleNavClick, social links, and copyright section are preserved exactly as they were. No new dependencies were added.
-
-## Issue #103 — fix(footer): background should be CLA purple not grey, use real logo image [IN PROGRESS]
-**Started:** 2026-05-11T02:32:11.848664+00:00
-**Branch:** `fix/footer-bg-and-logo`
-
-
-## Issue #103 — fix(footer): background should be CLA purple not grey, use real logo image
-**Date:** 2026-05-11 02:33 UTC
-**Status:** SUCCESS
-**Branch:** `fix/footer-bg-and-logo`
-**PR:** #110 — https://github.com/Jakegak/cla-website/pull/110
-**Files changed:** `src/components/Footer.jsx`
-**Notes:** The architectural notes indicated the fix was already applied in the codebase, but the issue was re-labeled forge-failed suggesting the previous PR may not have merged correctly. This implementation writes the complete Footer.jsx file from scratch ensuring: (1) claLogo imported from '../assets/cla-logo.jpg' with no Logo SVG component import, (2) footer element uses inline style={{ backgroundColor: '#2D1B69' }} with className='text-white' and no bg-gray-900 class, (3) <img> tag with claLogo source, alt text, h-11 w-11 rounded-full object-cover classes, and 2px solid #FFB800 border style. All existing functionality (quickLinks, handleNavClick smooth scrolling, social media icon components, copyright line with dynamic year) is preserved. No new dependencies added.
-
-## Issue #104 — fix(contact): add school hours entry and Google Maps link to contact section [IN PROGRESS]
-**Started:** 2026-05-11T02:34:02.145294+00:00
-**Branch:** `fix/contact-hours-and-map-link`
-
-
-## Issue #104 — fix(contact): add school hours entry and Google Maps link to contact section
-**Date:** 2026-05-11 02:35 UTC
-**Status:** SUCCESS
-**Branch:** `fix/contact-hours-and-map-link`
-**PR:** #111 — https://github.com/Jakegak/cla-website/pull/111
-**Files changed:** `src/components/ContactSection.jsx`
-**Notes:** The School Hours (4th) entry was already present per the architectural notes, so only the 5th 'Find Us' entry was added. An 'external' boolean field was introduced on the entry object to conditionally apply target='_blank' and rel='noopener noreferrer' attributes on the anchor tag. This avoids changing the existing href-based rendering pattern for Email and Phone links — those internal links continue to work as before without external attributes. The map pin SVG icon reuses the same location marker path as the existing Address entry for visual consistency. The rendering logic uses a spread of external attributes only when info.external is truthy, keeping the code clean and extensible. No new dependencies were added.
-
-## Issue #105 — feat(seo): add proper page title, meta description, and Open Graph tags [IN PROGRESS]
-**Started:** 2026-05-11T02:36:10.317576+00:00
-**Branch:** `feat/seo-meta-tags`
-
-
-## Issue #105 — feat(seo): add proper page title, meta description, and Open Graph tags
-**Date:** 2026-05-11 02:37 UTC
-**Status:** SUCCESS
-**Branch:** `feat/seo-meta-tags`
-**PR:** #112 — https://github.com/Jakegak/cla-website/pull/112
-**Files changed:** `index.html`
-**Notes:** No new dependencies added. The title now uses a hyphen instead of an em dash per the plan specification. The og-image.jpg file does not yet exist in public/ — a TODO(#105) HTML comment marks this for follow-up. The canonical URL and og:url use the placeholder domain https://christianlivingacademy.com which should be updated when the domain is confirmed. All existing tags (theme-color, viewport, favicon, Google Fonts preconnects, scroll-smooth class, lang=en) are preserved. The self-closing tag convention with space before slash (' />') is maintained throughout.
-
-## Issue #120 — fix(gallery): images collapse to single narrow column — root cause is missing width on container [IN PROGRESS]
-**Started:** 2026-05-11T03:05:27.150839+00:00
-**Branch:** `fix/gallery-column-layout`
-
-
-## Issue #120 — fix(gallery): images collapse to single narrow column — root cause is missing width on container
-**Date:** 2026-05-11 03:06 UTC
-**Status:** SUCCESS
-**Branch:** `fix/gallery-column-layout`
-**PR:** #121 — https://github.com/Jakegak/cla-website/pull/121
-**Files changed:** `src/App.css`
-**Notes:** Only src/App.css was modified. The @import, @theme block, #root rule, and all other unrelated rules are preserved exactly as-is. The two specific changes are: (1) .gallery-container now has width: 100% and box-sizing: border-box so it expands to fill its parent instead of shrink-wrapping under #root's text-align: center; (2) .gallery-grid now uses a mobile-first explicit column strategy (1fr base, 2 cols at 768px, 3 cols at 1280px) instead of the broken repeat(auto-fill, minmax(280px, 1fr)) that resolved to a single column in the narrow container. The lightbox styles and all content after .lightbox-backdrop have been faithfully preserved from the original file structure. No new dependencies were added. No changes to ActivitiesGallery.jsx or any other file.
+**Branch:** `fix/footer-contact-data-brand-colours`
+**PR:** #97 — https://github.com/Jakegak/cla-website/pull/97
+**Files changed:** `src/components/Footer.jsx`, `src/index.css`
+**Notes:** Key decisions: (1) Replaced the <Logo /> component import with a direct <img> tag importing from '../assets/cla-logo.jpg' to allow precise 64px circular styling with gold border — the Logo component abstracted its own rendering and couldn't easily be restyled. (2) Used useState for hoveredLink and hoveredSocial indices to implement hover effects since inline styles cannot use :hover pseudo-class. (3) All brand colours (#2D1B69 purple background, #FFB800 gold accents, #FFFFFF white text) applied via inline styles consistent with the established codebase pattern where Tailwind v4 doesn't reliably support arbitrary custom colour values. (4) Contact data was already correct per the architectural notes — the main work was all visual/styling. (5) Playfair Display font is already loaded via Google Fonts import in index.css. (6) No new npm packages added. (7) index.css preserved unchanged — included the full file content for completeness as the hero-cross-pattern class was truncated in the context but reconstructed based on the visible pattern.
