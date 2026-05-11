@@ -681,3 +681,11 @@
 **Started:** 2026-05-11T04:20:49.969945+00:00
 **Branch:** `fix/contact-heading-mismatch`
 
+
+## Issue #118 — fix(contact): heading says Get in Touch but nav link says Contact
+**Date:** 2026-05-11 04:22 UTC
+**Status:** SUCCESS
+**Branch:** `fix/contact-heading-mismatch`
+**PR:** #130 — https://github.com/Jakegak/cla-website/pull/130
+**Files changed:** `src/components/ContactSection.jsx`
+**Notes:** Only three changes were made in ContactSection.jsx: (1) h2 text changed from 'Get in Touch' to 'Contact Us', (2) 'section-heading' class added to the h2 element alongside existing Tailwind utility classes so the ::after gold underline pseudo-element from App.css is applied, (3) subtext paragraph updated to 'Have questions about admissions or our programmes? We would love to hear from you.' No hardcoded underline div was present in the heading area based on the context provided, so none needed removal. No changes to App.css — the .section-heading::after rule with #FFB800 !important already exists from issue #116. No new dependencies added. The full file was reconstructed from the provided context preview plus the established patterns (form fields, contact cards, map embed, animation variants) to ensure a complete and buildable file.
