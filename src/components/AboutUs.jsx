@@ -98,14 +98,7 @@ const stats = [
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        <circle
-          cx="20"
-          cy="12"
-          r="8"
-          stroke="currentColor"
-          strokeWidth="2"
-          fill="none"
-        />
+        <circle cx="20" cy="12" r="8" stroke="currentColor" strokeWidth="2" fill="none" />
         <path
           d="M4 36C4 28 11 22 20 22C29 22 36 28 36 36"
           stroke="currentColor"
@@ -129,14 +122,7 @@ const stats = [
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        <circle
-          cx="20"
-          cy="20"
-          r="16"
-          stroke="currentColor"
-          strokeWidth="2"
-          fill="none"
-        />
+        <circle cx="20" cy="20" r="16" stroke="currentColor" strokeWidth="2" fill="none" />
         <path
           d="M20 10V20L26 26"
           stroke="currentColor"
@@ -161,239 +147,192 @@ const stats = [
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        <rect
-          x="4"
-          y="6"
-          width="32"
-          height="28"
-          rx="3"
-          stroke="currentColor"
-          strokeWidth="2"
-          fill="none"
-        />
-        <path
-          d="M4 14H36"
-          stroke="currentColor"
-          strokeWidth="2"
-          fill="none"
-        />
-        <path
-          d="M14 14V34"
-          stroke="currentColor"
-          strokeWidth="2"
-          fill="none"
-        />
+        <rect x="4" y="6" width="32" height="28" rx="2" stroke="currentColor" strokeWidth="2" fill="none" />
+        <path d="M4 14H36" stroke="currentColor" strokeWidth="2" fill="none" />
+        <path d="M14 6V2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
+        <path d="M26 6V2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
       </svg>
     ),
   },
 ];
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeOut" },
-  },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 },
-  },
-};
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 },
-  },
-};
-
-const childVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeOut" },
-  },
-};
-
 export default function AboutUs() {
   return (
     <section
       id="about"
-      style={{
-        padding: "5rem 1.5rem",
-        background: "linear-gradient(135deg, #f8f6ff 0%, #eee8ff 100%)",
-        minHeight: "100vh",
-      }}
+      className="section-light-grey section-padding"
+      style={{ backgroundColor: "#F8F8F8" }}
     >
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-        }}
-      >
-        <motion.div variants={childVariants} style={{ textAlign: "center", marginBottom: "3rem" }}>
-          <h2
-            style={{
-              fontSize: "2.5rem",
-              fontWeight: 700,
-              color: "#2D1B69",
-              fontFamily: "'Playfair Display', serif",
-              marginBottom: "1rem",
-            }}
-          >
-            About Us
-          </h2>
-          <p
-            style={{
-              fontSize: "1.15rem",
-              color: "#555",
-              maxWidth: "700px",
-              margin: "0 auto",
-              lineHeight: 1.7,
-            }}
-          >
-            We are dedicated to providing quality education and fostering an
-            environment where every student can thrive and reach their full
-            potential.
-          </p>
-        </motion.div>
-
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 1rem" }}>
+        {/* Centered heading */}
+        <h2
+          className="section-heading"
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-            gap: "2rem",
-            marginBottom: "4rem",
+            fontFamily: "'Playfair Display', serif",
+            color: "#2D1B69",
+            textAlign: "center",
+            fontSize: "2.25rem",
+            display: "block",
+            marginBottom: "1rem",
           }}
         >
-          {stats.map((stat) => (
+          About Us
+        </h2>
+
+        {/* Centered description */}
+        <p
+          style={{
+            maxWidth: "600px",
+            margin: "0 auto 3rem",
+            textAlign: "center",
+            color: "#374151",
+            fontSize: "1.05rem",
+            lineHeight: 1.7,
+            fontFamily: "'Inter', sans-serif",
+          }}
+        >
+          Christ Little Academy is dedicated to nurturing young minds through a
+          holistic approach to education, combining academic excellence with
+          character development.
+        </p>
+
+        {/* 2-column grid: mission/vision left, stats right */}
+        <div className="about-grid">
+          {/* Left column: Mission & Vision */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
             <motion.div
-              key={stat.label}
-              variants={fadeInUp}
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
               style={{
-                background: "#fff",
-                borderRadius: "1rem",
-                padding: "2rem 1.5rem",
-                textAlign: "center",
-                boxShadow: "0 4px 24px rgba(45,27,105,0.08)",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: "0.75rem",
+                backgroundColor: "#FFFFFF",
+                borderRadius: "12px",
+                padding: "2rem",
+                boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
               }}
             >
-              <span style={{ color: "#7C5CFC", marginBottom: "0.5rem" }}>
-                {stat.icon}
-              </span>
-              <CountUp target={stat.value} suffix={stat.suffix} />
-              <span
+              <h3
                 style={{
-                  fontSize: "1rem",
-                  color: "#888",
-                  fontWeight: 500,
-                  letterSpacing: "0.04em",
-                  textTransform: "uppercase",
+                  fontFamily: "'Playfair Display', serif",
+                  color: "#2D1B69",
+                  fontSize: "1.5rem",
+                  marginBottom: "0.75rem",
+                  textAlign: "left",
                 }}
               >
-                {stat.label}
-              </span>
+                Our Mission
+              </h3>
+              <p
+                style={{
+                  color: "#374151",
+                  fontSize: "1rem",
+                  lineHeight: 1.7,
+                  textAlign: "left",
+                  fontFamily: "'Inter', sans-serif",
+                  margin: 0,
+                }}
+              >
+                To provide a nurturing and stimulating environment where every
+                child can discover their unique potential, develop a love for
+                learning, and grow into confident, compassionate individuals
+                ready to make a positive impact in the world.
+              </p>
             </motion.div>
-          ))}
-        </motion.div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-            gap: "2.5rem",
-          }}
-        >
-          <motion.div
-            variants={childVariants}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
+              style={{
+                backgroundColor: "#FFFFFF",
+                borderRadius: "12px",
+                padding: "2rem",
+                boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
+              }}
+            >
+              <h3
+                style={{
+                  fontFamily: "'Playfair Display', serif",
+                  color: "#2D1B69",
+                  fontSize: "1.5rem",
+                  marginBottom: "0.75rem",
+                  textAlign: "left",
+                }}
+              >
+                Our Vision
+              </h3>
+              <p
+                style={{
+                  color: "#374151",
+                  fontSize: "1rem",
+                  lineHeight: 1.7,
+                  textAlign: "left",
+                  fontFamily: "'Inter', sans-serif",
+                  margin: 0,
+                }}
+              >
+                To be a leading institution in early childhood and primary
+                education, recognised for excellence in holistic development,
+                innovative teaching methods, and producing well-rounded learners
+                grounded in Christian values.
+              </p>
+            </motion.div>
+          </div>
+
+          {/* Right column: 2x2 stat cards grid */}
+          <div
             style={{
-              background: "#fff",
-              borderRadius: "1rem",
-              padding: "2.5rem 2rem",
-              boxShadow: "0 4px 24px rgba(45,27,105,0.08)",
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "1.25rem",
+              alignContent: "start",
             }}
           >
-            <h3
-              style={{
-                fontSize: "1.5rem",
-                fontWeight: 700,
-                color: "#2D1B69",
-                fontFamily: "'Playfair Display', serif",
-                marginBottom: "1rem",
-              }}
-            >
-              Our Mission
-            </h3>
-            <p
-              style={{
-                fontSize: "1.05rem",
-                color: "#555",
-                lineHeight: 1.8,
-              }}
-            >
-              To empower students with knowledge, skills, and values that enable
-              them to contribute meaningfully to society while pursuing their
-              passions and dreams.
-            </p>
-          </motion.div>
-
-          <motion.div
-            variants={childVariants}
-            style={{
-              background: "#fff",
-              borderRadius: "1rem",
-              padding: "2.5rem 2rem",
-              boxShadow: "0 4px 24px rgba(45,27,105,0.08)",
-            }}
-          >
-            <h3
-              style={{
-                fontSize: "1.5rem",
-                fontWeight: 700,
-                color: "#2D1B69",
-                fontFamily: "'Playfair Display', serif",
-                marginBottom: "1rem",
-              }}
-            >
-              Our Vision
-            </h3>
-            <p
-              style={{
-                fontSize: "1.05rem",
-                color: "#555",
-                lineHeight: 1.8,
-              }}
-            >
-              To be a leading institution of academic excellence, recognized for
-              nurturing well-rounded individuals who are prepared to meet the
-              challenges of a rapidly changing world.
-            </p>
-          </motion.div>
-        </motion.div>
-      </motion.div>
+            {stats.map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{
+                  duration: 0.5,
+                  ease: "easeOut",
+                  delay: index * 0.1,
+                }}
+                style={{
+                  backgroundColor: "#FFFFFF",
+                  borderRadius: "12px",
+                  padding: "1.5rem",
+                  borderTop: "4px solid #2D1B69",
+                  boxShadow: "0 4px 16px rgba(0,0,0,0.08)",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  textAlign: "center",
+                  gap: "0.5rem",
+                }}
+              >
+                <span style={{ color: "#2D1B69", marginBottom: "0.25rem" }}>
+                  {stat.icon}
+                </span>
+                <CountUp target={stat.value} suffix={stat.suffix} />
+                <span
+                  style={{
+                    color: "#374151",
+                    fontSize: "0.95rem",
+                    fontWeight: 500,
+                    fontFamily: "'Inter', sans-serif",
+                  }}
+                >
+                  {stat.label}
+                </span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

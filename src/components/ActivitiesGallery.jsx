@@ -14,68 +14,52 @@ const GALLERY_IMAGES = [
   { id: 8, src: "https://picsum.photos/seed/science1/400/300", fullSrc: "https://picsum.photos/seed/science1/800/600", alt: "Mathematics competition winners", category: "Academics" },
   { id: 9, src: "https://picsum.photos/seed/music1/400/300", fullSrc: "https://picsum.photos/seed/music1/800/600", alt: "Annual prize-giving ceremony", category: "Events" },
   { id: 10, src: "https://picsum.photos/seed/dance1/400/300", fullSrc: "https://picsum.photos/seed/dance1/800/600", alt: "School cultural day celebration", category: "Events" },
-  { id: 11, src: "https://picsum.photos/seed/debate1/400/300", fullSrc: "https://picsum.photos/seed/debate1/800/600", alt: "Inter-house athletics competition", category: "Sports" },
-  { id: 12, src: "https://picsum.photos/seed/choir1/400/300", fullSrc: "https://picsum.photos/seed/choir1/800/600", alt: "School choir performance", category: "Arts" },
 ];
 
 const gridItemVariants = {
   hidden: { opacity: 0, scale: 0.8 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.3 } },
-  exit: { opacity: 0, scale: 0.8, transition: { duration: 0.2 } },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.4 } },
+  exit: { opacity: 0, scale: 0.8, transition: { duration: 0.3 } },
 };
 
-const ActivitiesGallery = () => {
+function ActivitiesGallery() {
   const [activeCategory, setActiveCategory] = useState("All");
-  const [lightboxIndex, setLightboxIndex] = useState(-1);
+  const [filteredImages, setFilteredImages] = useState(GALLERY_IMAGES);
+  const [lightboxImage, setLightboxImage] = useState(null);
 
-  const filteredImages =
-    activeCategory === "All"
-      ? GALLERY_IMAGES
-      : GALLERY_IMAGES.filter((img) => img.category === activeCategory);
+  useEffect(() => {
+    if (activeCategory === "All") {
+      setFilteredImages(GALLERY_IMAGES);
+    } else {
+      setFilteredImages(
+        GALLERY_IMAGES.filter((img) => img.category === activeCategory)
+      );
+    }
+  }, [activeCategory]);
 
-  const openLightbox = useCallback((index) => {
-    setLightboxIndex(index);
+  const openLightbox = useCallback((image) => {
+    setLightboxImage(image);
   }, []);
 
   const closeLightbox = useCallback(() => {
-    setLightboxIndex(-1);
+    setLightboxImage(null);
   }, []);
 
-  const goToNext = useCallback(() => {
-    setLightboxIndex((prev) =>
-      prev < filteredImages.length - 1 ? prev + 1 : 0
-    );
-  }, [filteredImages.length]);
-
-  const goToPrev = useCallback(() => {
-    setLightboxIndex((prev) =>
-      prev > 0 ? prev - 1 : filteredImages.length - 1
-    );
-  }, [filteredImages.length]);
-
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (lightboxIndex === -1) return;
-      if (e.key === "Escape") closeLightbox();
-      if (e.key === "ArrowRight") goToNext();
-      if (e.key === "ArrowLeft") goToPrev();
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [lightboxIndex, closeLightbox, goToNext, goToPrev]);
-
   return (
-    <section id="gallery" className="activities-gallery">
+    <section className="gallery-section section-dark section-padding">
       <div className="gallery-container">
-        <div className="gallery-header">
-          <h2 className="section-title">Activities &amp; Gallery</h2>
-          <p className="section-subtitle">
-            Explore the vibrant life at our school through sports, arts, worship,
-            and academic excellence.
-          </p>
-        </div>
+        <h2 className="section-heading text-light">Activities Gallery</h2>
 
-        <div className="gallery-filters">
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: "0.75rem",
+            marginTop: "2rem",
+            marginBottom: "2.5rem",
+          }}
+        >
           {CATEGORIES.map((category) => (
             <button
               key={category}
@@ -89,7 +73,7 @@ const ActivitiesGallery = () => {
 
         <div className="gallery-grid">
           <AnimatePresence mode="popLayout">
-            {filteredImages.map((image, index) => (
+            {filteredImages.map((image) => (
               <motion.div
                 key={image.id}
                 className="gallery-item"
@@ -97,18 +81,15 @@ const ActivitiesGallery = () => {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                layout
-                onClick={() => openLightbox(index)}
+                onClick={() => openLightbox(image)}
               >
                 <img
-                  className="gallery-image"
                   src={image.src}
                   alt={image.alt}
                   loading="lazy"
                 />
                 <div className="gallery-overlay">
-                  <span className="gallery-category">{image.category}</span>
-                  <span className="gallery-alt">{image.alt}</span>
+                  <span>{image.category}</span>
                 </div>
               </motion.div>
             ))}
@@ -116,34 +97,35 @@ const ActivitiesGallery = () => {
         </div>
       </div>
 
-      {lightboxIndex !== -1 && filteredImages[lightboxIndex] && (
-        <div className="lightbox-overlay" onClick={closeLightbox}>
-          <div
-            className="lightbox-content"
-            onClick={(e) => e.stopPropagation()}
+      <AnimatePresence>
+        {lightboxImage && (
+          <motion.div
+            className="lightbox-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={closeLightbox}
           >
-            <button className="lightbox-close" onClick={closeLightbox}>
-              ✕
+            <button
+              className="lightbox-close"
+              onClick={closeLightbox}
+              aria-label="Close lightbox"
+            >
+              &times;
             </button>
-            <button className="lightbox-nav lightbox-prev" onClick={goToPrev}>
-              ‹
-            </button>
-            <img
-              className="lightbox-image"
-              src={filteredImages[lightboxIndex].fullSrc}
-              alt={filteredImages[lightboxIndex].alt}
+            <motion.img
+              src={lightboxImage.fullSrc}
+              alt={lightboxImage.alt}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.3 }}
             />
-            <button className="lightbox-nav lightbox-next" onClick={goToNext}>
-              ›
-            </button>
-            <p className="lightbox-caption">
-              {filteredImages[lightboxIndex].alt}
-            </p>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
-};
+}
 
 export default ActivitiesGallery;
