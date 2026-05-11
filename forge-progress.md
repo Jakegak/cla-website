@@ -525,3 +525,11 @@
 **Started:** 2026-05-11T00:33:39.745217+00:00
 **Branch:** `fix/admissions-encoding-currency`
 
+
+## Issue #94 — fix(admissions): corrupted encoding, wrong currency, wrong programmes
+**Date:** 2026-05-11 00:35 UTC
+**Status:** SUCCESS
+**Branch:** `fix/admissions-encoding-currency`
+**PR:** #98 — https://github.com/Jakegak/cla-website/pull/98
+**Files changed:** `src/components/AdmissionsAndFees.jsx`
+**Notes:** Key changes: (1) FEE_DATA termFee/annualFee changed from pre-formatted strings ('18,000') to numbers (18000) so toLocaleString() can be called in the JSX for proper thousands formatting. (2) Table headers use exact text 'Programme', 'Term Fee (KES)', 'Annual Fee (KES)'. (3) Table body renders fees as 'KES {number.toLocaleString()}'. (4) Apply Now button uses inline styles { backgroundColor: '#FFB800', color: '#2D1B69', fontWeight: 'bold' } and triggers setIsModalOpen(true). (5) Section outer div has both Tailwind classes (bg-white text-gray-900) AND inline style fallback ({ backgroundColor: '#FFFFFF', color: '#1a1a1a' }) to guard against Tailwind v4 purging. (6) All string literals use only ASCII characters - hyphens are U+002D, no special dashes or non-ASCII currency symbols. (7) ApplicationModal.jsx was not modified as it already has the correct interface ({ isOpen, onClose } props). No new dependencies added.
